@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="description" content="A WEB application for share Lab informations">
+        <meta name="author" content="Lázaro Henrique">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="assets/img/favicon.ico">
+        <title>NCA - Núcleo de Computação Aplicada</title>
+        <!-- Bootstrap CSS-->
+        <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+        <!-- NCA CSS-->
+        <link href="assets/css/nca.css" rel="stylesheet" type="text/css">
+
+        <link type="text/css" rel="stylesheet" href="assets/font-awesome-4.1.0/css/font-awesome.min.css">
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <header id="top" class="navbar navbar-inverse navbar-static-top bs-docs-nav" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+                    <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">
+                        <img  id="imgLogo" src="assets/img/nca.png" alt="">
+                    </a>
+                </div>
+                <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="index.html">Início</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Laboratórios<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="blog-home-1.html">LabMint</a>
+                                </li>
+                                <li>
+                                    <a href="blog-home-2.html">LabPai</a>
+                                </li>
+                                <li>
+                                    <a href="blog-post.html">Laws</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="projetos.html">Projetos</a>
+                        </li>
+                        <li>
+                            <a href="#">Publicações</a>
+                        </li>
+                        <li>
+                            <a href="membros.html">Membros</a>
+                        </li>
+                        <li>
+                            <a href="agendar.html">Agendar</a>
+                        </li>
+                        <li>
+                            <a href="contato.html">Contato</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Page Content -->
+        <div class="container">
+
+            <!-- Page Heading/Breadcrumbs -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Contato
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="index.html">Inicio</a>
+                        </li>
+                        <li class="active">contato</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- /.row -->
+
+            <!-- Content Row -->
+            <div class="row">
+                <!-- Map Column -->
+                <div class="col-md-8">
+                    <!-- Embedded Google Map -->
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d1660.7667714945103!2d-44.3069379!3d-2.5587821!3m2!1i1024!2i768!4f13.1!5e1!3m2!1spt-BR!2s!4v1413670340653" width="600" height="450" frameborder="0" style="border:0"></iframe>
+                </div>
+                <!-- Contact Details Column -->
+                <div class="col-md-4">
+                    <h3>Informações de Contato</h3>
+                    <p>
+                        Av. dos Portugueses, 1966, <br>Baganga - CEP 65080-805<br> 
+                    </p>
+                    <p><i class="fa fa-phone"></i> 
+                        <abbr title="Phone">T</abbr>: (98) 3272-8000</p>
+                    <p><i class="fa fa-envelope-o"></i> 
+                        <abbr title="Email">E</abbr>: <a href="mailto:nca@ufma.br   ">nca@ufma.br</a>
+                    </p>
+                    <p><i class="fa fa-clock-o"></i> 
+                        <abbr title="Hours">H</abbr>: Segunda - Sexta: 8:00 AM to 18:00 PM</p>
+                    <ul class="list-unstyled list-inline list-social-icons">
+                        <li>
+                            <a href="#"><i class="fa fa-facebook-square fa-2x"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-linkedin-square fa-2x"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-twitter-square fa-2x"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-google-plus-square fa-2x"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.row -->
+
+            <!-- Contact Form -->
+            <!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
+            <div class="row">
+                <div class="col-md-8">
+                    <h3>Envie-nos uma mensagem</h3>
+                    <form name="sentMessage" id="contactForm" novalidate>
+                        <div class="control-group form-group">
+                            <div class="controls">
+                                <label>Nome Completo:</label>
+                                <input type="text" class="form-control" id="name" required data-validation-required-message="Por favor, informe seu nome">
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+                        <div class="control-group form-group">
+                            <div class="controls">
+                                <label>Número de Telefone:</label>
+                                <input type="tel" class="form-control" id="phone" required data-validation-required-message="Por favor, informe seu telefone">
+                            </div>
+                        </div>
+                        <div class="control-group form-group">
+                            <div class="controls">
+                                <label>Endereço de Email:</label>
+                                <input type="email" class="form-control" id="email" required data-validation-required-message="Por favor, informe seu endereço">
+                            </div>
+                        </div>
+                        <div class="control-group form-group">
+                            <div class="controls">
+                                <label>Menssagem:</label>
+                                <textarea rows="10" cols="100" class="form-control" id="message" required data-validation-required-message="Por favor, escreva uma mensagem" maxlength="999" style="resize:none"></textarea>
+                            </div>
+                        </div>
+                        <div id="success"></div>
+                        <!-- For success/fail messages -->
+                        <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                    </form>
+                </div>
+
+            </div>
+            <!-- /.row -->
+
+            <hr>
+
+            <!-- Footer -->
+            <footer>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>Copyright &copy; Núcleo de Computação Aplicada 2014</p>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+        <!-- /.container -->
+
+        <!-- jQuery Version 1.11.0 -->
+        <script src="assets/js/jquery-2.1.1.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="assets/js/bootstrap.js"></script>
+
+        <!-- Contact Form JavaScript -->
+        <!-- Do not edit these files! In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
+        <script src="assets/js/jqBootstrapValidation.js"></script>
+        <script src="assets/js/contact_me.js"></script>
+
+    </body>
+
+</html>
