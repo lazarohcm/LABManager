@@ -67,7 +67,7 @@ class DAOGenericImpl {
             throw new DAOException($exc->getMessage(), $exc->getCode(), $exc->getPrevious());
         }
 
-        return TRUE;
+        return $object;
     }
 
     /**
