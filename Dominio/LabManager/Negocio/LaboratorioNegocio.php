@@ -1,16 +1,59 @@
 <?php
+namespace LabManager\Negocio;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+use LabManager\DAO\DAOGenericImpl;
+use LabManager\Bean\Laboratorio;
 /**
  * Description of Laboratorio
  *
  * @author lazaro
  */
 class LaboratorioNegocio {
-    //put your code here
+    
+    private $dao;
+    
+    function __construct() {
+        $this->dao = new DAOGenericImpl();
+    }
+    public function salvar($laboratorio){
+        try{
+            return $this->dao->save($laboratorio);
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
+        }
+    }
+    
+    public function buscarPorID($id){
+        try{
+            return $this->dao->findById(get_class(new Laboratorio()), $id);
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
+        }
+    }
+    
+    public function atualizar($laboratorio){
+        try{
+            $this->dao->update($laboratorio);
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
+        }
+    }
+    
+    public function buscarTodos(){
+        try{
+            return $this->dao->findAll(get_class(new Laboratorio()));
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
+        }
+    }
+    
+    public function excluir($laboratorio){
+        try{
+            $labToRemove = $this->buscarPorID($laboratorio->getId());
+            $this->dao->delete($labToRemove);
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
+        }
+    }
+    
 }

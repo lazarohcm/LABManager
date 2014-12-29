@@ -1,19 +1,18 @@
 <?php
 /**
- * UNA-SUS/UFMA - SigUSeguranca 
- * @copyright 2014 CTI UNA-SUS/UFMA
- * @author sit-unasus <lateds.unasus@gmail.com>   
+ * UFMA - LabManager 
+
+ * @author Lázaro Henrique <lazarohcm@gmail.com>   
  * @version 1.0
- * @link: http://www.unasus.ufma.br/sigu/
+ 
  */
 
-namespace SigUSeguranca\DAO;
+namespace LabManager\DAO;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\ORMInvalidArgumentException;
 use InfraEstrutura\Exception\DAOException;
-use SigUSeguranca\DAO\InterfaceDAO\IDAOGeneric;
 use Zend\Form\Annotation\Object;
 use Zend\XmlRpc\Value\String;
 
@@ -22,7 +21,7 @@ use Zend\XmlRpc\Value\String;
  * 
  * @package SigUSeguranca\DAO
  */
-class DAOGenericImpl implements IDAOGeneric {
+class DAOGenericImpl {
 
     /**
      * @var EntityManager Gerencia conexão e permite

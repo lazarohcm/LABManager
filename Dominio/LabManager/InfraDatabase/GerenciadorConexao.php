@@ -1,16 +1,16 @@
 <?php
 /**
- * UNA-SUS/UFMA - SigUSeguranca 
- * @copyright 2014 CTI UNA-SUS/UFMA
- * @author sit-unasus <lateds.unasus@gmail.com>   
+ * UFMA - LabManager 
+
+ * @author Lázaro Henrique <lazarohcm@gmail.com>   
  * @version 1.0
- * @link: http://www.unasus.ufma.br/sigu/
+ 
  */
 
-namespace SigUSeguranca\InfraDatabase;
+namespace LabManager\InfraDatabase;
 
-use SigUSeguranca\InfraDatabase\InterfaceInfraDatabase\IGerenciadorConexaoDAO;
-use SigUSeguranca\DAO\DAOGenericImpl;
+use LabManager\InfraDatabase\InterfaceInfraDatabase\IGerenciadorConexaoDAO;
+use LabManager\DAO\DAOGenericImpl;
 use InfraEstrutura\BancodeDados\AtributosConexaoDoctrine;
 use InfraEstrutura\BancodeDados\FabricaConexao\AbstractFabricaConexao;
 use InfraEstrutura\BancodeDados\EnumTipoConexao;

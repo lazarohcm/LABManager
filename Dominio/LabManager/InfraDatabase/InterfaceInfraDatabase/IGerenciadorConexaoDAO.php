@@ -1,13 +1,13 @@
 <?php
 /**
- * UNA-SUS/UFMA - SigUSeguranca 
- * @copyright 2014 CTI UNA-SUS/UFMA
- * @author sit-unasus <lateds.unasus@gmail.com>   
+ * UFMA - LabManager 
+
+ * @author Lázaro Henrique <lazarohcm@gmail.com>   
  * @version 1.0
- * @link: http://www.unasus.ufma.br/sigu/
+ 
  */
 
-namespace SigUSeguranca\InfraDatabase\InterfaceInfraDatabase;
+namespace LabManager\InfraDatabase\InterfaceInfraDatabase;
 
 /**
  * Camada InfraDatabase

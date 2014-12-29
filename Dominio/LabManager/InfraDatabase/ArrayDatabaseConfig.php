@@ -1,12 +1,12 @@
 <?php
 /**
  * LabManager
- * @author sit-unasus <lateds.unasus@gmail.com>   
+ * @author Lázaro Henrique <lazarohcm@gmail.com>   
  * @version 1.0
- * @link: http://www.unasus.ufma.br/sigu/
+ 
  */
 
-namespace SigUSeguranca\InfraDatabase;
+namespace LabManager\InfraDatabase;
 
 /**
  * Camada InfraDatabase

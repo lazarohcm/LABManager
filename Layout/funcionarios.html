@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>.: SigU - UNA-SUS :.</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="assets/css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+        <!-- Timeline CSS -->
+        <link href="assets/css/plugins/timeline.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="assets/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Morris Charts CSS -->
+        <link href="assets/css/plugins/morris.css" rel="stylesheet">
+
+        <!-- DatePicker for Bootstrap -->
+        <link href="assets/css/datepicker.css" rel="stylesheet" type="text/css" />
+
+        <!-- Custom Fonts -->
+        <link href="assets/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        <!-- Google Fonts -->
+        <!--<link href="http://fonts.googleapis.com/css?family=Ubuntu:400,500" rel="stylesheet" type="text/css">-->
+
+        <!-- Switch Bootstrap -->
+        <link href="assets/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+
+        <!-- Switch Bootstrap -->
+        <link href="assets/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+
+        <!-- Tokenfield for Bootstrap -->
+        <link href="assets/css/bootstrap-tokenfield.min.css" rel="stylesheet" type="text/css" />
+
+        <!-- Style CSS SigU -->
+        <link href="assets/css/sigu-style.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/sigu-seguranca-style.css" rel="stylesheet" type="text/css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <!-- JS -->
+        <!-- jQuery Version 1.11.0 -->
+        <script src="assets/js/jquery-1.11.0.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="assets/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="assets/js/plugins/metisMenu/metisMenu.min.js"></script>
+
+        <!-- Data Table Jquery -->
+        <script src="assets/js/plugins/dataTables/jquery.dataTables.js"></script>
+        <script src="assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+
+        <!-- Morris Charts JavaScript -->
+        <script src="assets/js/plugins/morris/raphael.min.js"></script>
+        <script src="assets/js/plugins/morris/morris.min.js"></script>
+
+        <!-- Jquery MaskEdit -->
+        <script src="assets/js/jquery.maskedinput.min.js"></script>
+
+        <!-- DatePicker for Bootstrap -->
+        <script src="assets/js/bootstrap-datepicker.js"></script>        
+
+        <!-- Switch Bootstrap -->
+        <script src="assets/js/bootstrap-switch.min.js"></script>
+
+        <!-- Tokenfield for Bootstrap -->
+        <script src="assets/js/bootstrap-tokenfield.min.js"></script>
+
+        <!-- Holder.js -->
+        <script src="assets/js/holder.js"></script>
+
+        <!-- Nestable JS -->
+        <script src="assets/js/jquery.nestable.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="assets/js/sb-admin-2.js"></script>
+
+        <style type="text/css">
+            .div-input-switch-ativo {
+                padding-right: 10px;
+            }
+
+            .foto-funcionario img {
+                width: 100%;
+                height: 200px;
+            }
+
+            .funcionario-ativo {
+                margin-right: 10px;
+            }
+
+            .nestable {
+                max-height: 300px;
+                overflow-y: auto;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div id="wrapper">
+
+            <!-- Navigation -->
+            <nav class="navbar navbar-sigu navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <ul class="dropdown-login">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle dropdown-user-sigu" data-toggle="dropdown" href="#">
+                                <span class="usuario-info dspl-none-505 hidden-xs">
+                                    <small>Bem Vindo,</small>
+                                    Usuário...
+                                </span>
+                                <img class="nav-user-foto" src="assets/images/foto.png" alt=""> 
+                                <i class="fa fa-caret-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                                </li>
+                                <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                                </li>
+                            </ul>
+                            <!-- /.dropdown-user -->
+                        </li>
+                        <!-- /.dropdown -->
+                    </ul>
+
+                    <a class="navbar-brand" href="index.html">
+                        <img src="assets/images/logo.png" />
+
+                        <span class="hidden-sm hidden-xs">Sistema Integrado de Gerenciamento da UNA-SUS</span>
+                    </a>
+                </div>
+                <!-- /.navbar-header -->
+
+                <div class="navbar-default sidebar" role="navigation">
+                    <div class="sidebar-nav navbar-collapse">
+                        <ul class="nav" id="side-menu">
+                            <li class="active">
+                                <a href="#"><i class="fa fa-bars fa-fw"></i> Menu-Principal<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="#">Empresa</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Setores</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Funcionários</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Projetos</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Perfil de Acesso</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.sidebar-collapse -->
+                </div>
+                <!-- /.navbar-static-side -->
+            </nav>
+
+            <!-- Page Content -->
+            <div id="page-wrapper">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Funcionários</h1>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Digite o nome do funcionário...">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button">Pesquisar</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group btn-block">
+                                        <select name="" class="form-control">
+                                            <option selected="selected">Busca em ordem alfabética</option>
+                                            <option>A</option>
+                                            <option>B</option>
+                                            <option>C</option>
+                                            <option>D</option>
+                                            <option>E</option>
+                                            <option>F</option>
+                                            <option>G</option>
+                                            <option>H</option>
+                                            <option>I</option>
+                                            <option>J</option>
+                                            <option>K</option>
+                                            <option>L</option>
+                                            <option>M</option>
+                                            <option>N</option>
+                                            <option>O</option>
+                                            <option>P</option>
+                                            <option>Q</option>
+                                            <option>R</option>
+                                            <option>S</option>
+                                            <option>T</option>
+                                            <option>U</option>
+                                            <option>V</option>
+                                            <option>W</option>
+                                            <option>X</option>
+                                            <option>Y</option>
+                                            <option>Z</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-primary btn-block" id="btnAdicionarFuncionario"><i class="glyphicon glyphicon-plus"></i> Adicionar Funcionário</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <ul class="chat">
+                            <li class="left clearfix">
+                                <span class="chat-img pull-left">
+                                    <img src="assets/images/foto.png" alt="User Avatar" class="img-circle" />
+                                </span>
+                                <div class="chat-body clearfix">
+                                    <div class="header">
+                                        <strong class="primary-font">Aldrea Malheiros Oliveira Rabelo</strong> 
+                                        <small class="pull-right text-muted visible-lg visible-md">
+                                            <i class="fa fa-clock-o fa-fw"></i> Ultimo acesso: 50 dias atrás
+                                        </small>
+
+                                        <div>
+                                            <small class="hidden-xs">
+                                                Setor: Inovação e Pesquisa, Administrativo  
+                                            </small>                                            
+                                            <div class="btn-group action pull-right">
+                                                <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                                                    Ação&nbsp;&nbsp;&nbsp; <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li>
+                                                        <a href="#" data-toggle="modal" data-target="#modalNewEdit">
+                                                            <span class="glyphicon glyphicon-pencil"></span> Editar
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" data-toggle="modal" data-target="#modalDelete">
+                                                            <span class="glyphicon glyphicon-remove-circle"></span> Excluir
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="div-input-switch-ativo pull-right">
+                                                <input type="checkbox" data-on-color="success" data-off-color="danger" class="input-switch-ativo" name="switch-enable" checked="checked" data-label-text data-size="normal" data-animate="false" data-on-text=" Ativo " data-off-text=" Inativo ">
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="left clearfix">
+                                <span class="chat-img pull-left">
+                                    <img src="assets/images/foto.png" alt="User Avatar" class="img-circle" />
+                                </span>
+                                <div class="chat-body clearfix">
+                                    <div class="header">
+                                        <strong class="primary-font">Romulo Martins França</strong> 
+                                        <small class="pull-right text-muted visible-lg visible-md">
+                                            <i class="fa fa-clock-o fa-fw"></i> Ultimo acesso: 50 dias atrás
+                                        </small>
+
+                                        <div>
+                                            <small class="hidden-xs">
+                                                Setor: Inovação e Pesquisa, Administrativo  
+                                            </small>                                            
+                                            <div class="btn-group action pull-right">
+                                                <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                                                    Ação&nbsp;&nbsp;&nbsp; <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li>
+                                                        <a href="#" data-toggle="modal" data-target="#modalNewEdit">
+                                                            <span class="glyphicon glyphicon-pencil"></span> Editar
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" data-toggle="modal" data-target="#modalDelete">
+                                                            <span class="glyphicon glyphicon-remove-circle"></span> Excluir
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="div-input-switch-ativo pull-right">
+                                                <input type="checkbox" data-on-color="success" data-off-color="danger" class="input-switch-ativo" name="switch-enable" checked="checked" data-label-text data-size="normal" data-animate="false" data-on-text=" Ativo " data-off-text=" Inativo ">
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="left clearfix">
+                                <span class="chat-img pull-left">
+                                    <img src="assets/images/foto.png" alt="User Avatar" class="img-circle" />
+                                </span>
+                                <div class="chat-body clearfix">
+                                    <div class="header">
+                                        <strong class="primary-font">Dilson José Lins Rabêlo Júnior</strong> 
+                                        <small class="pull-right text-muted visible-lg visible-md">
+                                            <i class="fa fa-clock-o fa-fw"></i> Ultimo acesso: 50 dias atrás
+                                        </small>
+
+                                        <div>
+                                            <small class="hidden-xs">
+                                                Setor: Inovação e Pesquisa, Administrativo  
+                                            </small>                                            
+                                            <div class="btn-group action pull-right">
+                                                <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                                                    Ação&nbsp;&nbsp;&nbsp; <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li>
+                                                        <a href="#" data-toggle="modal" data-target="#modalNewEdit">
+                                                            <span class="glyphicon glyphicon-pencil"></span> Editar
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" data-toggle="modal" data-target="#modalDelete">
+                                                            <span class="glyphicon glyphicon-remove-circle"></span> Excluir
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="div-input-switch-ativo pull-right">
+                                                <input type="checkbox" data-on-color="success" data-off-color="danger" class="input-switch-ativo" name="switch-enable" checked="checked" data-label-text data-size="normal" data-animate="false" data-on-text=" Ativo " data-off-text=" Inativo ">
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="left clearfix">
+                                <span class="chat-img pull-left">
+                                    <img src="assets/images/foto.png" alt="User Avatar" class="img-circle" />
+                                </span>
+                                <div class="chat-body clearfix">
+                                    <div class="header">
+                                        <strong class="primary-font">Clidenor Gonçalves de Moraes Neto</strong> 
+                                        <small class="pull-right text-muted visible-lg visible-md">
+                                            <i class="fa fa-clock-o fa-fw"></i> Ultimo acesso: 50 dias atrás
+                                        </small>
+
+                                        <div>
+                                            <small class="hidden-xs">
+                                                Setor: Inovação e Pesquisa, Administrativo  
+                                            </small>                                            
+                                            <div class="btn-group action pull-right">
+                                                <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                                                    Ação&nbsp;&nbsp;&nbsp; <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li>
+                                                        <a href="#" data-toggle="modal" data-target="#modalNewEdit">
+                                                            <span class="glyphicon glyphicon-pencil"></span> Editar
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" data-toggle="modal" data-target="#modalDelete">
+                                                            <span class="glyphicon glyphicon-remove-circle"></span> Excluir
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="div-input-switch-ativo pull-right">
+                                                <input type="checkbox" data-on-color="success" data-off-color="danger" class="input-switch-ativo" name="switch-enable" checked="checked" data-label-text data-size="normal" data-animate="false" data-on-text=" Ativo " data-off-text=" Inativo ">
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>                                                
+
+                        <div id="pagination-funcionario" class="pull-right">
+                            <ul class="pagination">
+                                <li><a href="#">&laquo;</a></li>
+                                <li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#">&raquo;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /#page-wrapper -->
+
+            <footer>
+                <div class="container-fluid">
+                    <div class="logo-footer"><img src="assets/images/logo-footer.png" /></div>
+                    <p><small>® 2014 Una-Sus - Universidade Aberta do Sus . Todos os Direitos Reservados.</small></p>
+                    <p><small>Rua Viana Vaz, Nº 41, Centro, CEP: 65020-660, São Luis - MA, Brasil.</small></p>
+                </div>
+            </footer>
+        </div>
+        <!-- /#wrapper -->
+
+        <div class="modal fade" id="modalNewEdit" tabindex="-1" role="dialog" aria-labelledby="modalNewEdit" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">                        
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <div class="funcionario-ativo form-group pull-right">
+                            <label>Ativo:</label>
+                            <input type="checkbox" data-on-color="success" data-off-color="danger" class="input-switch-ativo" name="switch-enable" checked="checked" data-label-text data-size="normal" data-animate="false" data-on-text=" Ativo " data-off-text=" Inativo ">
+                        </div>
+                        <h4 class="modal-title">Cadastro de funcionário</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <a href="#" class="thumbnail foto-funcionario">
+                                            <img data-src="holder.js/100%x200" src="assets/images/foto.png" alt="Clique para alerar foto">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <button type="button" class="btn btn-primary btn-block" id="btnAlterarFoto"><i class="fa fa-picture-o"></i> Alterar Foto</button> 
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="form-group">
+                                    <label>Nome:</label>
+                                    <input type="text" class="form-control" value="" placeholder=""/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email:</label>
+                                    <input type="email" class="form-control" value="" placeholder=""/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Data de Admissão:</label>
+                                    <input type="text" class="datepicker form-control" value="" placeholder=""/>
+                                </div>                                
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <hr>
+                            </div>
+                        </div>
+
+                        <ul class="nav nav-tabs nav-tabs-sigu">
+                            <li class="active"><a href="#setores" data-toggle="tab">Setores</a></li>
+                            <li><a href="#perfil-de-acesso" data-toggle="tab">Perfil de Acesso</a></li>
+                        </ul>
+
+                        <div class="tab-content tab-content-sigu">
+                            <div class="tab-pane fade in active" id="setores">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <button type="button" class="btn btn-sm btn-primary btn-block" id="btnAdicionarSetor"><i class="glyphicon glyphicon-plus"></i> Adicionar Setore(s)</button>
+                                            </div><!-- /input-group -->
+                                        </div>
+
+
+                                        <ul class="task-list">
+                                            <li>
+                                                <span class="text-setor">AVA</span>
+                                                <button type="button" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            </li>
+                                            <li><span class="text-setor">SIT</span>
+                                                <button type="button" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></li>
+                                            <li>
+                                                <span class="text-setor">Comunicação e Arte Visual</span>
+                                                <button type="button" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="perfil-de-acesso">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <button type="button" class="btn btn-sm btn-primary btn-block" id="btnAdicionarPerfilAcesso"><i class="glyphicon glyphicon-plus"></i> Adicionar Perfil</button>
+                                            </div><!-- /input-group -->
+                                        </div>
+
+
+                                        <ul class="task-list">
+                                            <li>
+                                                <span class="text-setor">Perfil SECRETARIA</span>
+                                                <button type="button" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary">Salvar</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+        <div class="modal fade" id="modalSelecionaSetores" tabindex="-1" role="dialog" aria-labelledby="modalSelecionaSetores" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">                        
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Selecione o setor que o funcionário fará parte...</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <h5>Empresa: UNA-SUS/UFMA</h5>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="Digite aqui a palavra chave...">
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default" type="button">Pesquisar</button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="dd nestable" id="nestable">
+                                        <ol class="dd-list">
+                                            <li class="dd-item dd-item" data-id="1">
+                                                <div class="dd-handle dd-nodrag">&nbsp;</div>
+                                                <div class="dd-content">
+                                                    Setor 1
+                                                    <div class="checkbox pull-right">
+                                                        <input type="checkbox">
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="dd-item dd-item" data-id="2">
+                                                <div class="dd-handle dd-nodrag">&nbsp;</div>
+                                                <div class="dd-content">
+                                                    Setor 2
+                                                    <div class="checkbox pull-right">
+                                                        <input type="checkbox">
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="dd-item dd-item" data-id="3">
+                                                <div class="dd-handle dd-nodrag">&nbsp;</div>
+                                                <div class="dd-content">
+                                                    NTI
+                                                    <div class="checkbox pull-right">
+                                                        <input type="checkbox">
+                                                    </div>
+                                                </div>
+                                                <ol class="dd-list">
+                                                    <li class="dd-item dd-item" data-id="4">
+                                                        <div class="dd-handle dd-nodrag">&nbsp;</div>
+                                                        <div class="dd-content">
+                                                            SIT - Setor de Inovação e Pesquisa
+                                                            <div class="checkbox pull-right">
+                                                                <input type="checkbox">
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="dd-item dd-item" data-id="5">
+                                                        <div class="dd-handle dd-nodrag">&nbsp;</div>
+                                                        <div class="dd-content">
+                                                            AVA - Ambiente Virtual de Aprendizagem
+                                                            <div class="checkbox pull-right">
+                                                                <input type="checkbox">
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="dd-item dd-item" data-id="6">
+                                                        <div class="dd-handle dd-nodrag">&nbsp;</div>
+                                                        <div class="dd-content">
+                                                            Manutenção de Sistemas
+                                                            <div class="checkbox pull-right">
+                                                                <input type="checkbox">
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="dd-item dd-item" data-id="6">
+                                                        <div class="dd-handle dd-nodrag">&nbsp;</div>
+                                                        <div class="dd-content">
+                                                            Manutenção de Sistemas
+                                                            <div class="checkbox pull-right">
+                                                                <input type="checkbox">
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="dd-item dd-item" data-id="6">
+                                                        <div class="dd-handle dd-nodrag">&nbsp;</div>
+                                                        <div class="dd-content">
+                                                            Manutenção de Sistemas
+                                                            <div class="checkbox pull-right">
+                                                                <input type="checkbox">
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ol>
+                                            </li>
+                                        </ol>
+                                    </div>                            
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" id="btn-close-modal-setores">Fechar</button>
+                        <button type="button" class="btn btn-primary">Adicionar</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+        <div class="modal fade" id="modalSelecionaPerfilAcesso" tabindex="-1" role="dialog" aria-labelledby="modalSelecionaPerfilAcesso" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">                        
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Selecione um perfil para o funcionário...</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="Digite aqui a palavra chave...">
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default" type="button">Pesquisar</button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="dd nestable" id="nestable">
+                                        <ol class="dd-list">
+                                            <li class="dd-item dd-item" data-id="1">
+                                                <div class="dd-handle dd-nodrag">&nbsp;</div>
+                                                <div class="dd-content">
+                                                    Perfis
+                                                </div>
+                                                <ol class="dd-list">
+                                                    <li class="dd-item dd-item" data-id="4">
+                                                        <div class="dd-handle dd-nodrag">&nbsp;</div>
+                                                        <div class="dd-content">
+                                                            Perfil de Professor
+                                                            <div class="radio pull-right">
+                                                                <input type="radio" name="radioperfil">
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="dd-item dd-item" data-id="5">
+                                                        <div class="dd-handle dd-nodrag">&nbsp;</div>
+                                                        <div class="dd-content">
+                                                            Perfil de Administrador
+                                                            <div class="radio pull-right">
+                                                                <input type="radio" name="radioperfil">
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="dd-item dd-item" data-id="6">
+                                                        <div class="dd-handle dd-nodrag">&nbsp;</div>
+                                                        <div class="dd-content">
+                                                            Perfil de Tumbalacatumbadá
+                                                            <div class="radio pull-right">
+                                                                <input type="radio" name="radioperfil">
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ol>
+                                            </li>
+                                        </ol>
+                                    </div>                            
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" id="btn-close-modal-perfil">Fechar</button>
+                        <button type="button" class="btn btn-primary">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+
+
+        <script>
+            $(document).ready(function() {
+                $('.nestable').nestable();
+                $('.nestable').nestable('expandAll');
+
+                $(".input-switch-ativo").bootstrapSwitch();
+                $(".datepicker").datepicker({format: 'dd/mm/yyyy'});
+                $(".tokenfield").tokenfield();
+                $(".tokenfield").tokenfield('writeable');
+
+                $("#btnAdicionarSetor").click(function() {
+                    $("#modalNewEdit").modal('hide');
+                    $("#modalSelecionaSetores").modal('show');
+                });
+
+                $("#btn-close-modal-setores").click(function() {
+                    $("#modalSelecionaSetores").modal('hide');
+                    $("#modalNewEdit").modal('show');
+                });
+
+                $("#btnAdicionarPerfilAcesso").click(function() {
+                    $("#modalNewEdit").modal('hide');
+                    $("#modalSelecionaPerfilAcesso").modal('show');
+                });
+
+                $("#btn-close-modal-perfil").click(function() {
+                    $("#modalSelecionaPerfilAcesso").modal('hide');
+                    $("#modalNewEdit").modal('show');
+                });
+            });
+        </script>
+    </body>
+</html>
+
