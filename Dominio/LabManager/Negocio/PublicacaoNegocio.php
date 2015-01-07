@@ -1,24 +1,30 @@
 <?php
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 namespace LabManager\Negocio;
 
 use LabManager\DAO\DAOGenericImpl;
-use LabManager\Bean\Laboratorio;
+use LabManager\Bean\Publicacao;
 /**
- * Description of Laboratorio
+ * Description of PublicacaoNegocio
  *
- * @author lazaro
+ * @author Lázaro Henrique <lazarohcm@gmail.com>
+ * @version string
  */
-class LaboratorioNegocio {
-    
+class PublicacaoNegocio {
     private $dao;
     
     function __construct() {
         $this->dao = new DAOGenericImpl();
     }
     
-    public function salvar($laboratorio){
+    public function salvar($publicacaoNeogcio){
         try{
-            return $this->dao->save($laboratorio);
+            return $this->dao->save($publicacaoNeogcio);
         } catch (\Exception $ex) {
             throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
         }
@@ -26,15 +32,15 @@ class LaboratorioNegocio {
     
     public function buscarPorID($id){
         try{
-            return $this->dao->findById(get_class(new Laboratorio()), $id);
+            return $this->dao->findById(get_class(new Publicacao()), $id);
         } catch (\Exception $ex) {
             throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
         }
     }
     
-    public function atualizar($laboratorio){
+    public function atualizar($publicacaoNeogcio){
         try{
-            $this->dao->update($laboratorio);
+            $this->dao->update($publicacaoNeogcio);
         } catch (\Exception $ex) {
             throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
         }
@@ -42,19 +48,18 @@ class LaboratorioNegocio {
     
     public function buscarTodos(){
         try{
-            return $this->dao->findAll(get_class(new Laboratorio()));
+            return $this->dao->findAll(get_class(new Publicacao()));
         } catch (\Exception $ex) {
             throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
         }
     }
     
-    public function excluir($laboratorio){
+    public function excluir($publicacaoNeogcio){
         try{
-            $labToRemove = $this->buscarPorID($laboratorio->getId());
-            $this->dao->delete($labToRemove);
+            $publicacaoNeogcioToRemove = $this->buscarPorID($publicacaoNeogcio->getId());
+            $this->dao->delete($$publicacaoNeogcioToRemove);
         } catch (\Exception $ex) {
             throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
         }
     }
-    
 }
