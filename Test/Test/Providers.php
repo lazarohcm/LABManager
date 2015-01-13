@@ -9,6 +9,7 @@
 namespace Test;
 
 use LabManager\Bean\Laboratorio;
+use LabManager\Bean\Membro;
 class Providers {
     
     public function laboratorioProvider(){
@@ -19,9 +20,20 @@ class Providers {
         $laboratorio = new Laboratorio($id, $nome, $descricao, $telefone);
         return $laboratorio;
     }
-    
-    public function membroProvider(){
+    public function MembroProvider(){
         $id = NULL;
+        $nome = "Lázaro";
+        $laboratorio = $this->laboratorioProvider();
+        $ativo = TRUE;
+        $tipo = 'Graduando';
+        $data_entrada = new \DateTime();
+        $data_saida = new \DateTime();
         
+        $membro = new Membro($id,$laboratorio,$nome ,$ativo ,$tipo ,$email = 'lazarohcm@gmail.com' ,$telefone = NULL ,
+            $facebook = NULL ,$twitter = NULL ,$linkdl = NULL ,$data_entrada,$data_saida ,$biografia = 'Legal' ,
+            $area_interesse = NULL ,$admin = TRUE ,$senha = md5('123456') ,$usuario = 'lazarohcm' ,$lattes = '...' ,$foto = '...');
+        $membro->setLaboratorio($laboratorio);
+        return $membro;
     }
+    
 }

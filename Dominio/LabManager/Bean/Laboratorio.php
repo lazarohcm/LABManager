@@ -7,6 +7,7 @@
 namespace LabManager\Bean;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Table(name="LABORATORIO")
@@ -39,11 +40,19 @@ class Laboratorio {
      */
     private $telefone;
     
+    /**
+     * Propriedade privada
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Membro", mappedBy="laboratorio", cascade={"all"}, orphanRemoval=true, fetch="LAZY") 
+     */
+    private $membro;
+    
     function __construct($id = NULL,$nome = NULL,$descricao = NULL,$telefone = NULL) {
         $this->id = $id;
         $this->nome = $nome;
         $this->descricao = $descricao;
         $this->telefone = $telefone;
+        $this->membro = new ArrayCollection();
     }
     
     public function __toString() {
@@ -79,6 +88,15 @@ class Laboratorio {
 
     function setTelefone($telefone) {
         $this->telefone = $telefone;
+    }
+    
+    function getMembro() {
+        return $this->membro;
+    }
+
+    function setMembro(ArrayCollection $membro) {
+        $membro->setFuncionario($this);
+        $this->membro->add($membro);
     }
 
 

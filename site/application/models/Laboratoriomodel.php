@@ -20,6 +20,32 @@ class Laboratoriomodel extends CI_Model {
 
         return $arrayLaboratorios;
     }
+    
+    public function buscarPorNome($nome){
+        $facade = new LaboratorioFacade();
+        try {
+            $laboratorio = $facade->buscarPorNome($nome);
+        } catch (Exception $ex) {
+            throw new Exception($ex->getMessage());
+        }
+
+        return $laboratorio[0];
+    }
+    
+    public function buscarTodosArray(){
+        $facade = new LaboratorioFacade();
+        try {
+            $arrayLaboratorios = $facade->buscarTodos();
+        } catch (Exception $ex) {
+            throw new Exception($ex->getMessage());
+        }
+        $array = array();
+        foreach ($arrayLaboratorios as $laboratorio){
+            $array[$laboratorio->getId()] = $laboratorio->getNome();
+        }
+
+        return $array;
+    }
 
     public function salvar($arrayLaboratorio) {
         $facade = new LaboratorioFacade();

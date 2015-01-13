@@ -10,6 +10,6 @@ class home extends CI_Controller{
     public function index(){
         $this->load->model('laboratoriomodel');
         $arrayLabs = $this->laboratoriomodel->buscarTodos();
-        $this->load->view('portal/home', array('laboratorios' => $arrayLabs));
+        $this->templateadmin->load('portal/home', TITULO_SITE, '', TRUE, array('laboratorios' => $arrayLabs));
     }
 }

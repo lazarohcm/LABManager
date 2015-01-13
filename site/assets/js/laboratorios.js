@@ -23,6 +23,7 @@ $(document).ready(function () {
             $(element).remove();
         });
         $("#modalRemover").modal('hide');
+        location.reload();
     });
 });
 

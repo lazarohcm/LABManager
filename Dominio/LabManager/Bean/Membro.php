@@ -1,6 +1,7 @@
 <?php
 namespace LabManager\Bean;
-use Doctrine\ORM\Mappingas as ORM;
+
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Description of Membro
@@ -11,120 +12,123 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Table(name="MEMBRO")
- * @Entity(repositoryClass="MEMBRO")
+ * @ORM\Entity()
  */
 class Membro {
     
     /**
-     * @Column(type="bigint", unique=true, nullable=false)
+     * @ORM\Column(type="bigint", unique=true, nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @var type 
      */
     private $id;
     
     /**
-     * @ManyToMany(targetEntity="Laboratorio", mappedBy="laboratorio")
+     * @ORM\ManyToOne(targetEntity="Laboratorio", inversedBy="membro", cascade={"persist"},fetch="EAGER")
+     * @ORM\JoinColumn(name="laboratorio_id", referencedColumnName="id")
      * @var type 
      */
     private $laboratorio;
     
     /**
-     *@Column(type="string", length=100, nullable=false)
+     * @ORM\Column(type="string", length=100, nullable=false)
      * @var type 
      */
     private $nome;
     
     /**
-     * @Column(type="boolean", nullable=false)
+     * @ORM\Column(type="boolean", nullable=false)
      * @var type 
      */
     private $ativo;
     
     /**
-     * @Column(type="string", length=32, nullable=false)
+     * @ORM\Column(type="string", length=32, nullable=false)
      * @var type 
      */
     private $tipo;
     
     /**
-     * @Column(type="string", length=45, unique=true)
+     * @ORM\Column(type="string", length=45, unique=true)
      * @var type 
      */
     private $email;
     
     /**
-     * @Column(type="string", length=45)
+     * @ORM\Column(type="string", length=45)
      * @var type 
      */
     private $telefone;
     
     /**
-     *@Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50)
      * @var type 
      */
     private $facebook;
     
     /**
-     * @Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50)
      * @var type 
      */
     private $twitter;
     
     /**
-     * @Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50)
      * @var type 
      */
     private $linkdl;
     
     /**
-     * @Column(type="date", nullable=false)
+     * @ORM\Column(type="datetime", nullable=false)
      * @var type 
      */
     private $data_entrada;
     
     /**
-     * @Column(type="date", nullable=false)
+     * @ORM\Column(type="datetime", nullable=false)
      * @var type 
      */
     private $data_saida;
     
     /**
-     * @Column(type="text")
+     * @ORM\Column(type="text")
      * @var type 
      */
     private $biografia;
     
     /**
-     * @Column(type="string", length=300)
+     * @ORM\Column(type="string", length=300)
      * @var type 
      */
     private $area_interesse;
     
     /**
-     * @Column(type="boolean", nullable=false)
+     * @ORM\Column(type="boolean", nullable=false)
      * @var type 
      */
     private $admin;
     
     /**
-     * @Column(type="string", length=45)
+     * @ORM\Column(type="string", length=45)
      * @var type 
      */
     private $senha;
     
     /**
-     * @Column(type="string", length=45)
+     * @ORM\Column(type="string", length=45)
      * @var type 
      */
     private $usuario;
     
     /**
-     * @Column(type="string", length=45, nullable=false)
+     * @ORM\Column(type="string", length=45, nullable=false)
      * @var type 
      */
     private $lattes;
     
     /**
-     * @Column(type="blob")
+     * @ORM\Column(type="blob")
      * @var type 
      */
     private $foto;
@@ -133,7 +137,6 @@ class Membro {
             $facebook = NULL ,$twitter = NULL ,$linkdl = NULL ,$data_entrada = NULL ,$data_saida = NULL ,$biografia = NULL ,
             $area_interesse = NULL ,$admin = NULL ,$senha = NULL ,$usuario = NULL ,$lattes = NULL ,$foto = NULL ) {
         $this->id = $id;
-        $this->laboratorio = new ArrayCollection();
         $this->nome = $nome;
         $this->ativo = $ativo;
         $this->tipo = $tipo;
@@ -151,6 +154,10 @@ class Membro {
         $this->usuario = $usuario;
         $this->lattes = $lattes;
         $this->foto = $foto;
+    }
+    
+    public function __toString() {
+        return "Nome: ".$this->getNome()."\n";
     }
     
     function getId() {

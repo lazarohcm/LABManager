@@ -10,6 +10,7 @@ namespace LabManager\Negocio;
 
 use LabManager\DAO\DAOGenericImpl;
 use LabManager\Bean\Membro;
+use LabManager\Negocio\LaboratorioNegocio;
 
 /**
  * Description of MembroNegocio
@@ -20,11 +21,39 @@ use LabManager\Bean\Membro;
 class MembroNegocio {
     private $dao;
     
+    private $labNegocio;
     function __construct() {
         $this->dao = new DAOGenericImpl();
+        $this->labNegocio = new LaboratorioNegocio();
     }
     
-    public function salvar($membro){
+    public function salvar($membroData){
+        $lab = $this->labNegocio->buscarPorID($membroData['idLab']);
+        $membro = $membroData['membro'];
+        $membro->setLaboratorio($lab);
+        $membro->setBiografia('...');
+        $membro->setLattes('...');
+        $membro->setData_saida($membro->getData_entrada());
+        $tipo = (int)$membroData['tipo'];
+        switch ($tipo){
+            case 1:
+                $membro->setTipo('Professor');
+                break;
+            case 2:
+                $membro->setTipo('Pesquisador');
+                break;
+            case 3:
+                $membro->setTipo('Doutoranto');
+                break;
+            case 4:
+                $membro->setTipo('Mestrando');
+                break;
+            case 5:
+                $membro->setTipo('Graduando');
+                break;
+            default :
+                throw new \Exception('O tipo selecionado é inválido');
+        }
         try{
             return $this->dao->save($membro);
         } catch (\Exception $ex) {
@@ -56,12 +85,13 @@ class MembroNegocio {
         }
     }
     
-    public function excluir($membro){
+    public function excluir($id){
         try{
-            $$membroToRemove = $this->buscarPorID($membro->getId());
-            $this->dao->delete($$membroToRemove);
+            $membroToRemove = $this->buscarPorID($id);
+            $this->dao->delete($membroToRemove);
         } catch (\Exception $ex) {
             throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
         }
+        return TRUE;
     }
 }

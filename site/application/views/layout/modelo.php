@@ -14,52 +14,120 @@
 
         <!-- Custom styles for this template -->
         <link href="<?php echo base_url(); ?>assets/css/dashboard.css" rel="stylesheet">
+
+        <link href="<?php echo base_url(); ?>assets/jquery-ui/jquery-ui.css" rel="stylesheet">
+        <link href="<?php echo base_url(); ?>assets/DataTables/dataTables.bootstrap.css" rel="stylesheet">
+
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-        
+
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="<?php echo base_url(); ?>assets/js/jquery-2.1.1.js"></script>
         <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/js/nca.js"></script>
+        <script src="<?php echo base_url(); ?>assets/js/holder.js"></script>
         <script src="<?php echo base_url(); ?>assets/js/bootstrap-growl.js"></script>
         <script src="<?php echo base_url(); ?>assets/js/plugins/jquery.blockUI.js"></script>
+        <script src="<?php echo base_url(); ?>assets/jquery-ui/jquery-ui.js"></script>
+        <script src="<?php echo base_url(); ?>assets/DataTables/jquery.dataTables.js"></script>
+
+        <script src="<?php echo base_url(); ?>assets/DataTables/dataTables.bootstrap.js"></script>
+        <script>
+            $(document).ready(function () {
+                $(document).ajaxStop($.unblockUI);
+                $('.modal').on('show.bs.modal', function () {
+                    $('.modal').find('input').each(function () {
+                        $(this).val('');
+                    });
+                    $('.modal').find('img').each(function () {
+                        $(this).attr('src', '');
+                        Holder.run({});
+                    });
+                    $('.modal').find('select').each(function () {
+                        $(this).prop('selectedIndex', 0);
+                    });
+                    $('.modal').find('input:checkbox').each(function () {
+                        $(this).attr('checked', false);
+                    });
+                });
+            });
+
+        </script>
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     </head>
 
-    <body>
-
-        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.html">
-                        <img  id="imgLogo" src="<?php echo base_url(); ?>assets/img/nca.png" alt="">
-                    </a>
-                </div>
-                <form class="navbar-form navbar-right" role="search">
-                    <a type="button" class="btn btn-default" href="login.html">Sair</a>
-                </form> 
+    <body style="height: 100%">
+        <header class="navbar navbar-default navbar-static-top bs-docs-nav" id="top" role="banner">
+            <div class="container">
+                <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="<?php echo site_url() . "/home"; ?>">
+                    <img  id="imgLogo" src="<?php echo base_url(); ?>assets/img/nca.png" alt="">
+                </a>
+                <nav class="collapse navbar-collapse bs-navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="<?php echo site_url() . "/home"; ?>">Notícias</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Laboratórios<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <?php foreach ($laboratorios as $laboratorio) { ?>
+                                    <li>
+                                        <a href="<?php
+                                        echo site_url() . "/laboratorios/lab/";
+                                        echo strtolower($laboratorio->getNome());
+                                        ?>">
+                                    <?php echo $laboratorio->getNome(); ?></a>
+                                    </li> 
+                                    <?php } ?>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="projetos.html">Projetos</a>
+                        </li>
+                        <li>
+                            <a href="#">Publicações</a>
+                        </li>
+                        <li>
+                            <a href="membros.html">Membros</a>
+                        </li>
+                        <li>
+                            <a href="agendar.html">Agendar</a>
+                        </li>
+                        <li>
+                            <a href="contato.html">Contato</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
-        </div>
+        </header>
 
-        <div class="container-fluid">
+        <div class="container-fluid" style="min-height:100%;">
             <?php
             if (isset($menu)) {
                 echo $menu;
             }
             ?>
-            <?php echo $contents; ?>
+<?php echo $contents; ?>
+            <hr>
+
+            <!-- Footer -->
+            <footer>
+                <div class="container-fluid">
+                    <p class="pull-right">Copyright &copy; Núcleo de Computação Aplicada 2014</p>
+                </div>
+            </footer>
         </div>
     </body>
 </html>

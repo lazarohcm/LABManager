@@ -1,4 +1,0 @@
-LABManager
-==========
-
-Gerenciador de laboratórios

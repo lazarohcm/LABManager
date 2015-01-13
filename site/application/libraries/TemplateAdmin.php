@@ -23,7 +23,9 @@ class TemplateAdmin {
         $this->CI->template->set('title', $title);
         $this->CI->template->set('menu', $menu);        
         $this->CI->template->set('bIncluirButtonMenuResponsivo', $bIncluirButtonMenuResponsivo);
-        
+        $this->CI->load->model('laboratoriomodel');
+        $arrayLaboratorios = $this->CI->laboratoriomodel->buscarTodos();
+        $view_data['laboratorios'] = $arrayLaboratorios;
         $this->CI->template->load('layout/modelo', $contents, $view_data);  
     }
 }

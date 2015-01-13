@@ -48,6 +48,15 @@ class LaboratorioNegocio {
         }
     }
     
+    public function buscarPorNome($nome){
+        $query = "SELECT laboratorio FROM LabManager\Bean\Laboratorio laboratorio WHERE LOWER(laboratorio.nome) = :nome";
+        try{
+            return $this->dao->findByParam($query, array('nome' => $nome));
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
+        }
+    }
+    
     public function excluir($laboratorio){
         try{
             $labToRemove = $this->buscarPorID($laboratorio->getId());
