@@ -85,6 +85,16 @@ class MembroNegocio {
         }
     }
     
+    public function buscarPorUsuario($usuario){
+        $query = "SELECT membro FROM LabManager\Bean\Membro membro WHERE membro.usuario = :usuario";
+        try{
+            $membro = $this->dao->findByParam($query, array('usuario' => $usuario));
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
+        }
+        return $membro;
+    }
+    
     public function excluir($id){
         try{
             $membroToRemove = $this->buscarPorID($id);

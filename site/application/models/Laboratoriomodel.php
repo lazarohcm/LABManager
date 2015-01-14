@@ -28,8 +28,7 @@ class Laboratoriomodel extends CI_Model {
         } catch (Exception $ex) {
             throw new Exception($ex->getMessage());
         }
-
-        return $laboratorio[0];
+        return isset($laboratorio[0]) ? $laboratorio[0] : NULL;
     }
     
     public function buscarTodosArray(){

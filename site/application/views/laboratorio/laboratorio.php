@@ -1,5 +1,18 @@
 <!-- Page Content -->
 <div class="container page-content">
+    <!-- Page Heading/Breadcrumbs -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header"><?php echo $laboratorio->getNome(); ?></h1>
+            <ol class="breadcrumb">
+                <li><a href="<?php echo site_url() . "/home"; ?>">Home</a>
+                </li>
+                <li>Laboratórios</li>
+                <li class="active"><?php echo $laboratorio->getNome(); ?></li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.row -->
     <!-- Marketing Icons Section -->
     <div class="row">
         <div class="col-lg-12">

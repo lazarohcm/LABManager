@@ -14,13 +14,7 @@ $(document).ready(function () {
         });
     });
 
-    $('.tdUsuario').hover(function () {
-        $(this).append('<p class="editar"><a href="#">Editar</a></p>');
-    }, function () {
-        $(this).children('.editar').remove();
-    });
-
-    $('.username, .editar').on('click', function () {
+    $('.username').on('click', function () {
         var id, dataPost;
         id = $('.username').data('id');
         dataPost = {idUsuario: id};

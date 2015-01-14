@@ -26,7 +26,7 @@
 </style>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="top: -40px">
             <div class="page-header">
                 <button id="btnModal" class='btn btn-primary pull-right' data-target='#modalNewEdit' data-toggle='modal'>
                     <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
@@ -81,10 +81,22 @@
                                         <input disabled="" type="checkbox">
                                     <?php } ?>
                                 </td>
-                                <td>
-                                    <button type="button" class="btn btn-danger remover" aria-label="">
-                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                <td style="position:relative;">
+                                    <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                                        Ação&nbsp;&nbsp;&nbsp; <span class="caret"></span>
                                     </button>
+                                    <ul style="top: 70%" class="dropdown-menu" role="menu">
+                                        <li>
+                                            <a href="#" data-toggle="modal" data-target="#modalNewEdit">
+                                                <span class="glyphicon glyphicon-pencil"></span> Editar
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="remover" href="#" data-toggle="modal" data-target="#modalDelete">
+                                                <span class="glyphicon glyphicon-remove-circle"></span> Excluir
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </td>
                             </tr>
                         <?php } ?>

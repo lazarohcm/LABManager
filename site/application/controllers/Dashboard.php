@@ -8,7 +8,7 @@
 class dashboard extends CI_Controller {
     
     public function index(){
-        redirect('dashboard/laboratorios');
+        redirect('dashboard/publicacoes');
     }
     
     public function laboratorios(){
@@ -25,11 +25,21 @@ class dashboard extends CI_Controller {
         $this->templateadmin->load('dashboard/membros',TITULO_SITE, $sidebar, TRUE, array('membros' => $arrayMembros));
     }
     
+    public function perfil(){
+        $this->load->model('membrosmodel');
+        $arrayMembros = $this->membrosmodel->buscarTodos();
+        $sidebar = $this->load->view('layout/sidebar', '', true);
+        $this->templateadmin->load('dashboard/perfil',TITULO_SITE, $sidebar, TRUE, array('membros' => $arrayMembros));
+    }
+    
     public function publicacoes(){
+        if (!$this->sessioncontrol->isLoggedIn()) {
+            redirect('/acesso/index');
+        }
         $this->load->model('noticiasmodel');
         $arrayNoticias = $this->noticiasmodel->buscarTodos();
         $sidebar = $this->load->view('layout/sidebar', '', true);
-        $this->templateadmin->load('dashboard/publicacoes',TITULO_SITE, $sidebar, TRUE, array('noticias' => $arrayNoticias));
+        $this->templateadmin->load('dashboard/noticias',TITULO_SITE, $sidebar, TRUE, array('noticias' => $arrayNoticias));
     }
     
 }

@@ -5,6 +5,7 @@
         <li><a href="<?php echo site_url()."/dashboard/laboratorios"; ?>">Projetos</a></li>
         <li><a href="<?php echo site_url()."/dashboard/laboratorios"; ?>">Publicacoes</a></li>
         <li><a href="<?php echo site_url()."/dashboard/membros"; ?>">Membros</a></li>
+        <li><a href="<?php echo site_url()."/dashboard/perfil"; ?>">Perfil</a></li>
     </ul>
     <ul class="nav nav-sidebar">
         <li class="active"><a  href="">Materiais</a></li>

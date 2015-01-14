@@ -24,7 +24,8 @@ class MembrosModel extends CI_Model {
         $membro->setUsuario($arrayMembro['usuario']);
         $membro->setEmail($arrayMembro['email']);
         $membro->setSenha(md5('123456'));
-        $membro->setData_entrada(new \DateTime($arrayMembro['entrada']));
+        $membro->setData_entrada(DateTime::createFromFormat('d/m/Y', $arrayMembro['entrada']));
+
         $membro->setAtivo($arrayMembro['ativo'] === 'true' ? true : false);
         $membro->setAdmin($arrayMembro['admin'] === 'true' ? true : false);
         $membro->setFoto($arrayMembro['foto']);
@@ -49,6 +50,26 @@ class MembrosModel extends CI_Model {
         return $arrayMembros;
     }
 
+    public function autentica($usuario, $senha) {
+        $facade = new MembroFacade();
+        try {
+            $membro = $facade->buscarPorUsuario($usuario);
+            if (isset($membro[0])) {
+                if (md5($senha) == $membro[0]->getSenha()) {
+                    $dadosSessao['id'] = $membro[0]->getId();
+                    $dadosSessao['usuario'] = $membro[0]->getUsuario();
+                    $dadosSessao['admin'] = $membro[0]->getAdmin();
+                    $dadosSessao['nome'] = $membro[0]->getNome();
+                    $this->sessioncontrol->setVarSession('id_user_labmanager', $dadosSessao);
+                    return TRUE;
+                }
+            }
+        } catch (Exception $ex) {
+            throw new Exception($ex->getMessage());
+        }
+        return FALSE;
+    }
+
     public function buscarTodos() {
         $facade = new MembroFacade();
         try {
@@ -59,8 +80,8 @@ class MembrosModel extends CI_Model {
 
         return $arrayMembros;
     }
-    
-    public function remover($id){
+
+    public function remover($id) {
         $facade = new MembroFacade();
         try {
             $retorno = $facade->excluir($id);

@@ -13,6 +13,16 @@
  * @version string
  */
 class Membros extends CI_Controller {
+    public function index(){
+        $this->load->model('laboratoriomodel');
+        try{
+            $lab = $this->laboratoriomodel->buscarPorNome('algo');
+        } catch (Exception $ex) {
+            throw new Exception($ex->getMessage());
+        }
+        $this->templateadmin->load('membros/membros',TITULO_SITE, '', TRUE, array());
+    }
+    
     public function cadastrar(){
         $arrayRequest = $this->input->post();
         $this->load->model('membrosmodel'); 

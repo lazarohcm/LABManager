@@ -112,7 +112,7 @@ $autoload['libraries'] = array('TemplateAdmin', 'Template');
 |	$autoload['drivers'] = array('session', 'cache');
 */
 
-$autoload['drivers'] = array();
+$autoload['drivers'] = array('session');
 
 
 /*
@@ -173,7 +173,7 @@ $autoload['language'] = array();
 |	$autoload['model'] = array('first_model' => 'first');
 */
 
-$autoload['model'] = array();
+$autoload['model'] = array('sessioncontrol');
 
 
 /* End of file autoload.php */

@@ -88,27 +88,30 @@
                                         echo site_url() . "/laboratorios/lab/";
                                         echo strtolower($laboratorio->getNome());
                                         ?>">
-                                    <?php echo $laboratorio->getNome(); ?></a>
+                                            <?php echo $laboratorio->getNome(); ?></a>
                                     </li> 
-                                    <?php } ?>
+                                <?php } ?>
                             </ul>
                         </li>
                         <li>
-                            <a href="projetos.html">Projetos</a>
+                            <a href="<?php echo site_url() . "/projetos"; ?>">Projetos</a>
                         </li>
                         <li>
-                            <a href="#">Publicações</a>
+                            <a href="<?php echo site_url() . "/publicacoes"; ?>">Publicações</a>
                         </li>
                         <li>
-                            <a href="membros.html">Membros</a>
+                            <a href="<?php echo site_url() . "/membros"; ?>">Membros</a>
                         </li>
                         <li>
                             <a href="agendar.html">Agendar</a>
                         </li>
                         <li>
-                            <a href="contato.html">Contato</a>
+                            <a href="<?php echo site_url() . "/home/contato"; ?>">Contato</a>
                         </li>
                     </ul>
+                    <?php if (isset($usuario) && $usuario != NULL) { ?>
+                    <a style="margin-top: 10px;" href="<?php echo site_url() . "/acesso/sair"; ?>" type="button" class="btn btn-danger navbar-btn pull-right">Sair</a>
+                    <?php } ?>
                 </nav>
             </div>
         </header>
@@ -119,7 +122,7 @@
                 echo $menu;
             }
             ?>
-<?php echo $contents; ?>
+            <?php echo $contents; ?>
             <hr>
 
             <!-- Footer -->
