@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $('#editor').cleanHtml();
-    
+    $('#id-image-preview').imagepreview();
     $('#modalNewEdit').on('show.bs.modal', function () {
         ajaxMessage();
         $.post(js_site_url('index.php/laboratorios/buscartodosarray'), function (response) {
@@ -11,6 +11,21 @@ $(document).ready(function () {
                 }
             }
         });
+    });
+    
+    $('#btnSalvar').on('click', function(){
+        var titulo, capa, lab, projeto, conteudo, dataPost;
+        titulo = $('#titulo').val();
+        lab = $('laboratorios').val();
+        projeto = $('#projetos').val();
+        conteudo = $('#editor').html();
+        capa = $('#capa').attr('src');
+        dataPost = {titulo: titulo, lab: lab, projeto: projeto, capa: capa,conteudo: conteudo};
+        ajaxMessage();
+        $.post(js_site_url('index.php/noticias/cadastrar'), dataPost, function (response) {
+            if (response.sucesso) {
+            }
+        });        
     });
     
     function initToolbarBootstrapBindings() {

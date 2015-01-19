@@ -47,12 +47,19 @@ class Laboratorio {
      */
     private $membro;
     
+     /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Projeto", mappedBy="laboratorio", cascade={"all"}, orphanRemoval=true, fetch="LAZY") 
+     */
+    private $projeto;
+    
     function __construct($id = NULL,$nome = NULL,$descricao = NULL,$telefone = NULL) {
         $this->id = $id;
         $this->nome = $nome;
         $this->descricao = $descricao;
         $this->telefone = $telefone;
         $this->membro = new ArrayCollection();
+        $this->projeto = new ArrayCollection();
     }
     
     public function __toString() {
@@ -94,10 +101,21 @@ class Laboratorio {
         return $this->membro;
     }
 
-    function setMembro(ArrayCollection $membro) {
+    function setMembro(Membro $membro) {
         $membro->setFuncionario($this);
         $this->membro->add($membro);
     }
+    
+    function getProjeto() {
+        return $this->projeto;
+    }
+
+    function setProjeto(Projeto $projeto) {
+        $projeto->setLaboratorio($this);
+        $this->projeto->add($projeto);
+    }
+
+
 
 
 

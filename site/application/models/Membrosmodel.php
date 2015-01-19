@@ -80,6 +80,81 @@ class MembrosModel extends CI_Model {
 
         return $arrayMembros;
     }
+    
+    public function buscarCoordenadores() {
+        $facade = new MembroFacade();
+        try {
+            $arrayMembros = $facade->buscarCoordenadores();
+        } catch (Exception $ex) {
+            throw new Exception($ex->getMessage());
+        }
+        
+        $array = array();
+        foreach ($arrayMembros as $membro){
+            $array[$membro->getId()] = $membro->getNome();
+        }
+
+        return $array;
+    }
+    
+    public function atualizar($arrayMembro){
+        $facedeMembro = new MembroFacade();
+        $membro = $facedeMembro->buscarPorId($arrayMembro['id']);
+        $membro->setNome($arrayMembro['nome']);
+        $membro->setUsuario($arrayMembro['usuario']);
+        $membro->setEmail($arrayMembro['email']);
+        $membro->setData_entrada(DateTime::createFromFormat('d/m/Y', $arrayMembro['entrada']));
+        $membro->setAtivo($arrayMembro['ativo'] === 'true' ? true : false);
+        $membro->setAdmin($arrayMembro['admin'] === 'true' ? true : false);
+        $membro->setFoto($arrayMembro['foto']);
+        $idLab = $arrayMembro['laboratorio'];
+        $tipo = (int)$arrayMembro['tipo'];
+        
+        switch ($tipo){
+            case 1:
+                $membro->setTipo('Professor');
+                break;
+            case 2:
+                $membro->setTipo('Pesquisador');
+                break;
+            case 3:
+                $membro->setTipo('Doutoranto');
+                break;
+            case 4:
+                $membro->setTipo('Mestrando');
+                break;
+            case 5:
+                $membro->setTipo('Graduando');
+                break;
+            default :
+                throw new \Exception('O tipo selecionado é inválido');
+        }
+        
+        if($arrayMembro['saida'] != null && $arrayMembro['saida'] != ''){
+            $membro->setData_saida(DateTime::createFromFormat('d/m/Y', $arrayMembro['saida']));
+        }else{
+            $membro->setData_saida(NULL);
+        }
+        
+        if(!isset($arrayMembro['biografia']) && $arrayMembro['biografia'] == ''){
+            $membro->setBiografia('...');
+        }else{
+            $membro->setBiografia($arrayMembro['biografia']);
+        }
+        
+        if(!isset($arrayMembro['lattes']) && $arrayMembro['lattes'] == ''){
+            $membro->setLattes('...');
+        }else{
+            $membro->setLattes($arrayMembro['lattes']);
+        }
+        
+        try {
+            $retorno = $facedeMembro->atualizar(array('membro' => $membro, 'idLab' => $idLab, 'tipo' => $tipo));
+        } catch (Exception $ex) {
+            throw new Exception($ex->getMessage());
+        }
+        return $retorno;
+    }
 
     public function remover($id) {
         $facade = new MembroFacade();

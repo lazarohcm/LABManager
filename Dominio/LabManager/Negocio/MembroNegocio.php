@@ -69,12 +69,16 @@ class MembroNegocio {
         }
     }
     
-    public function atualizar($membro){
+    public function atualizar($membroData){
+        $lab = $this->labNegocio->buscarPorID($membroData['idLab']);
+        $membro = $membroData['membro'];
+        
         try{
             $this->dao->update($membro);
         } catch (\Exception $ex) {
             throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
         }
+        return TRUE;
     }
     
     public function buscarTodos(){
@@ -89,6 +93,16 @@ class MembroNegocio {
         $query = "SELECT membro FROM LabManager\Bean\Membro membro WHERE membro.usuario = :usuario";
         try{
             $membro = $this->dao->findByParam($query, array('usuario' => $usuario));
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
+        }
+        return $membro;
+    }
+    
+    public function buscarCoordenadores($usuario){
+        $query = "SELECT membro FROM LabManager\Bean\Membro membro WHERE membro.tipo = 'Professor' OR membro.tipo = 'Pesquisador'";
+        try{
+            $membro = $this->dao->findByParam($query);
         } catch (\Exception $ex) {
             throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
         }

@@ -40,26 +40,31 @@
                         <tr>
                             <th>Título</th>
                             <th>Laboratório</th>
-                            <th>Publicação</th>
                             <th>Projeto</th>
                             <th>Data</th>
                             <th>Remover</th>
                         </tr>
                     </thead>
                     <tbody>
-
-                        <tr>
-                            <td>Titulo</td>
-                            <td>Lab</td>
-                            <td>Publicacao</td>
-                            <td>Projeto</td>
-                            <td>Data</td>
-                            <td>
-                                <button type="button" class="btn btn-danger remover" aria-label="">
-                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                </button>
-                            </td>
-                        </tr>
+                        <?php foreach ($noticias as $noticia) { ?>
+                            <tr>
+                                <td><?php echo $noticia->getTitulo(); ?></td>
+                                <td><?php //echo $noticia->getLaboratorio();   ?></td>
+                                <td><?php //echo $noticia->getProjeto();   ?></td>
+                                <td><?php
+                                    if ($noticia->getData() != NULL) {
+                                        echo $noticia->getData()->format('d/m/Y');
+                                    } else {
+                                        echo 'Sem data';
+                                    }
+                                    ?></td>
+                                <td>
+                                    <button type="button" class="btn btn-danger remover" aria-label="">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
@@ -77,77 +82,101 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <form class="form-horizontal">
-                        <div class="form-group" style="margin-right:0px;margin-left: 10px">
-                            <label for="titulo" class="col-sm-1 control-label">Título: </label>
-                            <div class="col-sm-10">
-                                <input id="titulo" type="text" class="form-control" placeholder="Título da Notícia">
+                    <div class="col-lg-4">
+                        <div class="image-preview" id="id-image-preview" style="margin-left: 50px;">
+                            <div class="image-wrap" data-image-width="320" data-image-height="200" data-img-name="capa">
+                                <div class="image-default">
+                                    <img class="img-responsive" id="capa" data-src="holder.js/320x200" alt="..." />
+                                </div>
+                            </div>
+
+                            <div class="message"></div>
+
+                            <div class="action">
+                                <button type="button" class="btn btn-primary btn-block btn-image-preview">
+                                    <i class="fa fa-cloud-upload"></i> Carregar imagem
+                                </button>
                             </div>
                         </div>
-                    </form>
-                    <label>Laboratorio:</label>
-                    <div class="form-group has-feedback">
-                        <select id="laboratorios" style="width:100%;">
-                            <option value="">Selecione um laboratório</option>
-                        </select>
                     </div>
-
-                    <div id="alerts"></div>
-                    <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
-                        <div class="btn-group">
-                            <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="icon-font"></i><b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                            </ul>
+                    <div class="col-lg-7">
+                        <div class="form-group has-feedback">
+                            <label>Título:</label>
+                            <input id="titulo" type="text" class="form-control" placeholder="Título da Notícia">
                         </div>
-                        <div class="btn-group">
-                            <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font Size"><i class="icon-text-height"></i>&nbsp;<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a data-edit="fontSize 5"><font size="5">Huge</font></a></li>
-                                <li><a data-edit="fontSize 3"><font size="3">Normal</font></a></li>
-                                <li><a data-edit="fontSize 1"><font size="1">Small</font></a></li>
-                            </ul>
+                        <div class="form-group has-feedback">
+                            <label>Laboratorio:</label>
+                            <select id="laboratorios" style="width:100%;">
+                                <option value="">Selecione um laboratório</option>
+                            </select>
                         </div>
-                        <div class="btn-group">
-                            <a class="btn" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="icon-bold"></i></a>
-                            <a class="btn" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="icon-italic"></i></a>
-                            <a class="btn" data-edit="strikethrough" title="Strikethrough"><i class="icon-strikethrough"></i></a>
-                            <a class="btn" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="icon-underline"></i></a>
+                        <div class="form-group has-feedback">
+                            <label>Projeto:</label>
+                            <select id="projetos" style="width:100%;">
+                                <option value="">Selecione um tipo</option>
+                                <option value="1">Professor</option>
+                                <option value="2">Pesquisador</option>
+                                <option value="3">Doutorando</option>
+                                <option value="4">Mestrando</option>
+                                <option value="5">Graduando</option>                                  
+                            </select>
                         </div>
-                        <div class="btn-group">
-                            <a class="btn" data-edit="insertunorderedlist" title="Bullet list"><i class="icon-list-ul"></i></a>
-                            <a class="btn" data-edit="insertorderedlist" title="Number list"><i class="icon-list-ol"></i></a>
-                            <a class="btn" data-edit="outdent" title="Reduce indent (Shift+Tab)"><i class="icon-indent-left"></i></a>
-                            <a class="btn" data-edit="indent" title="Indent (Tab)"><i class="icon-indent-right"></i></a>
-                        </div>
-                        <div class="btn-group">
-                            <a class="btn" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i class="icon-align-left"></i></a>
-                            <a class="btn" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i class="icon-align-center"></i></a>
-                            <a class="btn" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i class="icon-align-right"></i></a>
-                            <a class="btn" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i class="icon-align-justify"></i></a>
-                        </div>
-                        <div class="btn-group">
-                            <a class="btn dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="icon-link"></i></a>
-                            <div class="dropdown-menu input-append">
-                                <input class="span2" placeholder="URL" type="text" data-edit="createLink"/>
-                                <button class="btn" type="button">Add</button>
+                    </div>
+                    <div class="row">
+                        <div id="alerts"></div>
+                        <div class="btn-toolbar col-lg-10" data-role="editor-toolbar" data-target="#editor">
+                            <div class="btn-group">
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="glyphicon glyphicon-font"></i><b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                </ul>
                             </div>
-                            <a class="btn" data-edit="unlink" title="Remove Hyperlink"><i class="icon-cut"></i></a>
+                            <div class="btn-group">
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" title="Tamanho da Fonte"><i class="glyphicon glyphicon-text-height"></i>&nbsp;<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a data-edit="fontSize 5"><font size="5">Huge</font></a></li>
+                                    <li><a data-edit="fontSize 3"><font size="3">Normal</font></a></li>
+                                    <li><a data-edit="fontSize 1"><font size="1">Small</font></a></li>
+                                </ul>
+                            </div>
+                            <div class="btn-group">
+                                <a class="btn" data-edit="bold" title="Negrito (Ctrl/Cmd+B)"><i class="glyphicon glyphicon-bold"></i></a>
+                                <a class="btn" data-edit="italic" title="Itálico (Ctrl/Cmd+I)"><i class="glyphicon glyphicon-italic"></i></a>
+                                <a class="btn" data-edit="strikethrough" title="Tachado"><s style='font-size: 1.3em'><b>S</b></s></a>
+                                <a class="btn" data-edit="underline" title="Sublinhado (Ctrl/Cmd+U)"><u style='font-size:1.3em'><b>U</b></u></a>
+                            </div>
+                            <div class="btn-group">
+                                <a class="btn" data-edit="insertunorderedlist" title="Lista com Marcadores"><i class="glyphicon glyphicon-list"></i></a>
+                                <a class="btn" data-edit="insertorderedlist" title="Lista Numerada"><i class="glyphicon glyphicon-list"></i></a>
+                                <a class="btn" data-edit="outdent" title="Recuar Identação (Shift+Tab)"><i class="glyphicon glyphicon-indent-left"></i></a>
+                                <a class="btn" data-edit="indent" title="Identar (Tab)"><i class="glyphicon glyphicon-indent-right"></i></a>
+                            </div>
+                            <div class="btn-group">
+                                <a class="btn" data-edit="justifyleft" title="Alinhar à esquerda (Ctrl/Cmd+L)"><i class="glyphicon glyphicon-align-left"></i></a>
+                                <a class="btn" data-edit="justifycenter" title="Centralizar (Ctrl/Cmd+E)"><i class="glyphicon glyphicon-align-center"></i></a>
+                                <a class="btn" data-edit="justifyright" title="Alinhar à direita(Ctrl/Cmd+R)"><i class="glyphicon glyphicon-align-right"></i></a>
+                                <a class="btn" data-edit="justifyfull" title="Justificar(Ctrl/Cmd+J)"><i class="glyphicon glyphicon-align-justify"></i></a>
+                            </div>
+                            <div class="btn-group">
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="glyphicon glyphicon-link"></i></a>
+                                <div class="dropdown-menu input-append">
+                                    <input class="span2" placeholder="URL" type="text" data-edit="createLink"/>
+                                    <button class="btn" type="button">Add</button>
+                                </div>
+                                <a class="btn" data-edit="unlink" title="Remover Hyperlink"><i class="glyphicon glyphicon-remove"></i></a>
 
+                            </div>
+
+                            <div class="btn-group">
+                                <a class="btn" title="Inserir Imagem (arraste e solte)" id="pictureBtn"><i class="glyphicon glyphicon-picture"></i></a>
+                                <input id="inputPicture" type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
+                            </div>
+                            <div class="btn-group">
+                                <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="glyphicon glyphicon-chevron-right"></i></a>
+                                <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                            </div>
+                            <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
                         </div>
-
-                        <div class="btn-group">
-                            <a class="btn" title="Insert picture (or just drag & drop)" id="pictureBtn"><i class="icon-picture"></i></a>
-                            <input id="inputPicture" type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
-                        </div>
-                        <div class="btn-group">
-                            <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="icon-undo"></i></a>
-                            <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="icon-repeat"></i></a>
-                        </div>
-                        <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
-                    </div>
-
-                    <div id="editor" style="margin-right:20px; margin-left: 20px">
-
+                        <div class="col-lg-11" id="editor" style="margin-right:20px; margin-left: 20px"></div>
                     </div>
                 </div>
             </div>
@@ -160,10 +189,10 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-<link href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
+<script src="<?php echo base_url(); ?>assets/js/jquery-image-preview.js"></script>
 <link href="<?php echo base_url(); ?>assets/bootstrap-wysiwyg/external/google-code-prettify/prettify.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>assets/bootstrap-wysiwyg/index.css" rel="stylesheet">
-<script src="<?php echo base_url(); ?>assets/js/publicacoes.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/noticias.js"></script>
 <script src="<?php echo base_url(); ?>assets/bootstrap-wysiwyg/bootstrap-wysiwyg.js"></script>
 <script src="<?php echo base_url(); ?>assets/bootstrap-wysiwyg/external/google-code-prettify/prettify.js"></script>
 <script src="<?php echo base_url(); ?>assets/bootstrap-wysiwyg/external/jquery.hotkeys.js"></script>
@@ -223,8 +252,8 @@
         $('#editor').wysiwyg({fileUploadError: showErrorAlert});
         window.prettyPrint && prettyPrint();
 
-        $('li.active').removeClass('active');
-        $('li:contains("Notícias")').addClass('active');
+        $('.nav-sidebar > li.active').removeClass('active');
+        $('.nav-sidebar > li:contains("Notícias")').addClass('active');
         $('#entrada,#saida').datepicker({dateFormat: 'dd/mm/yy',
             dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
             dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],

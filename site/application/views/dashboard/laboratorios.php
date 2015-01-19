@@ -88,8 +88,8 @@
 <script src="<?php echo base_url(); ?>assets/js/laboratorios.js"></script>
 <script>
     $(document).ready(function () {
-        $('li.active').removeClass('active');
-        $('li:contains("Laboratórios")').addClass('active');
+        $('.nav-sidebar > li.active').removeClass('active');
+        $('.nav-sidebar > li:contains("Laboratórios")').addClass('active');
     });
     var js_site_url = function (urlText) {
         var url = "<?php echo base_url(); ?>" + urlText;

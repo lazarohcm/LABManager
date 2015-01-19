@@ -10,7 +10,7 @@ body {
 }
 
 body {
-   //background-color: #eee;
+   background-color: #eee;
     /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
 }
 
@@ -33,7 +33,10 @@ body {
 .navbar-nav > li > a {
     line-height: 20px;
     padding-bottom: 10px;
-    padding-top: 20px;
+    padding-top: 25px;
+}
+.navbar-btn {
+    
 }
 
 .img-projeto{

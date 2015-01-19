@@ -6,6 +6,7 @@
  * and open the template in the editor.
  */
 use LabManager\Facade\NoticiaFacade;
+use LabManager\Bean\Noticia;
 /**
  * Description of Noticiasmodel
  *
@@ -22,5 +23,33 @@ class NoticiasModel extends CI_Model {
         }
         
         return $arrayNoticias;
+    }
+    
+    public function buscarPorID($id){
+       $facade = new NoticiaFacade();
+        try {
+            $noticia = $facade->buscarPorID($id);
+        } catch (Exception $ex) {
+            throw new Exception($ex->getMessage());
+        }
+        
+        return $noticia; 
+    }
+    
+    public function cadastrar($arrayNoticia){
+        $facade = new NoticiaFacade();
+        $noticia = new Noticia();
+        $noticia->setCapa($arrayNoticia['capa']);
+        $noticia->setTitulo($arrayNoticia['titulo']);
+        $noticia->setTexto($arrayNoticia['conteudo']);
+        $noticia->setData(new DateTime());
+        try {
+            $retorno = $facade->salvar($noticia);
+        } catch (Exception $ex) {
+            throw new Exception($ex->getMessage());
+        }
+        
+        return $retorno;
+        
     }
 }

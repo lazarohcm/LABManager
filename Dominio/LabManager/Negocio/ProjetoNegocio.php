@@ -9,6 +9,8 @@ namespace LabManager\Negocio;
 
 use LabManager\DAO\DAOGenericImpl;
 use LabManager\Bean\Projeto;
+use LabManager\Negocio\LaboratorioNegocio;
+use LabManager\Negocio\MembroNegocio;
 /**
  * Description of ProjetoNegocio
  *
@@ -17,12 +19,21 @@ use LabManager\Bean\Projeto;
  */
 class ProjetoNegocio {
     private $dao;
+    private $labNegocio;
+    private $membroNegocio;
     
     function __construct() {
         $this->dao = new DAOGenericImpl();
+        $this->labNegocio = new LaboratorioNegocio();
+        $this->membroNegocio = new MembroNegocio();
     }
     
-    public function salvar($projeto){
+    public function salvar($projetoData){
+        $lab = $this->labNegocio->buscarPorID($projetoData['idLab']);
+        $coordenador = $this->membroNegocio->buscarPorID($projetoData['idCoordenador']);
+        $projeto = $projetoData['projeto'];
+        $projeto->setLaboratorio($lab);
+        $projeto->setCoordenador($coordenador);
         try{
             return $this->dao->save($projeto);
         } catch (\Exception $ex) {

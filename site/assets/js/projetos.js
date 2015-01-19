@@ -5,13 +5,28 @@ $(document).ready(function () {
     $('#modalNewEdit').on('show.bs.modal', function () {
         ajaxMessage();
         $('#laboratorios option').each(function(){
-           $(this).remove(); 
+           if($(this).val()){
+               $(this).remove();
+           }
+        });
+        $('#coordenadores option').each(function(){
+           if($(this).val()){
+               $(this).remove();
+           }
         });
         $.post(js_site_url('index.php/laboratorios/buscartodosarray'), function (response) {
             if (response.sucesso) {
                 var labs = response.lab;
                 for (var index in labs) {
                     $('#laboratorios').append(new Option(labs[index], index));
+                }
+            }
+        });
+        $.post(js_site_url('index.php/membros/buscarcoordenadores'), function (response) {
+            if (response.sucesso) {
+                var coordenadores = response.coordenadores;
+                for (var index in coordenadores) {
+                    $('#coordenadores').append(new Option(coordenadores[index], index));
                 }
             }
         });
@@ -23,7 +38,7 @@ $(document).ready(function () {
         id = $(this).parents('tr').find('.username').data('id');
         dataPost = {idUsuario: id};
         ajaxMessage();
-        $.post(js_site_url('index.php/membros/buscarporid'), dataPost, function (response) {
+        $.post(js_site_url('index.php/projetos/buscarporid'), dataPost, function (response) {
             console.log(response.membro);
             $('#imgFoto').attr('src', response.membro.foto);
             $('#nome').val(response.membro.nome);
@@ -46,30 +61,22 @@ $(document).ready(function () {
     });
 
     $('#btnSalvar').on('click', function () {
-        var nome, email, usuario, laboratorio, tipo, ativo = false, entrada, saida, admin = false, foto, dataPost;
+        var nome, inicio, termino, laboratorio, descricao, coordenador, capa, dataPost;
         nome = $('#nome').val();
-        email = $('#email').val();
-        usuario = $('#usuario').val();
+        inicio = $('#inicio').val();
+        termino = $('#termino').val();
         laboratorio = $('#laboratorios').val();
-        tipo = $('#tipo').val();
-        entrada = $('#entrada').val();
-        saida = $('#saida').val();
-        foto = $('#imgFoto').attr('src');
-        if ($('#ativo').is(':checked')) {
-            ativo = true;
-        }
-        if ($('#admin').is(':checked')) {
-            admin = true;
-        }
-        dataPost = {id: id, nome: nome, email: email, usuario: usuario, laboratorio: laboratorio, tipo: tipo, ativo: ativo, entrada: entrada, saida: saida,
-            admin: admin, foto: foto};
+        coordenador = $('#coordenadores').val();
+        descricao = $('#descricao').val();
+        capa = $('#capaProjeto').attr('src');
+        dataPost = {id: id, nome: nome, laboratorio: laboratorio, inicio: inicio, termino: termino, descricao:descricao, coordenador: coordenador, capa: capa};
         ajaxMessage();
         if (id === null) {
-            $.post(js_site_url('index.php/membros/cadastrar'), dataPost, function (response) {
+            $.post(js_site_url('index.php/projetos/cadastrar'), dataPost, function (response) {
                 
             });
         } else {
-            $.post(js_site_url('index.php/membros/atualizar'), dataPost, function (response) {
+            $.post(js_site_url('index.php/projetos/atualizar'), dataPost, function (response) {
                 
             });
         }

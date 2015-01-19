@@ -46,6 +46,8 @@
                         $(this).val('');
                     });
                     $('.modal').find('img').each(function () {
+                        var width = $(this).data('image-width');
+                        var height = $(this).data('image-height');
                         $(this).attr('src', '');
                         Holder.run({});
                     });
@@ -77,7 +79,7 @@
                 <nav class="collapse navbar-collapse bs-navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="<?php echo site_url() . "/home"; ?>">Notícias</a>
+                            <a href="<?php echo site_url() . "/noticias"; ?>">Notícias</a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Laboratórios<b class="caret"></b></a>
@@ -102,6 +104,11 @@
                         <li>
                             <a href="<?php echo site_url() . "/membros"; ?>">Membros</a>
                         </li>
+                        <?php if (isset($usuario) && $usuario != NULL) { ?>
+                            <li>
+                                <a href="<?php echo site_url() . "/dashboard/"; ?>">Dashboard</a>
+                            </li>
+                        <?php } ?>
                         <li>
                             <a href="agendar.html">Agendar</a>
                         </li>
@@ -110,7 +117,9 @@
                         </li>
                     </ul>
                     <?php if (isset($usuario) && $usuario != NULL) { ?>
-                    <a style="margin-top: 10px;" href="<?php echo site_url() . "/acesso/sair"; ?>" type="button" class="btn btn-danger navbar-btn pull-right">Sair</a>
+                        <a style="margin-top: 16px;" href="<?php echo site_url() . "/acesso/sair"; ?>" type="button" class="btn btn-danger navbar-btn pull-right">Sair</a>
+                    <?php } else { ?>
+                        <a style="margin-top: 16px;" href="<?php echo site_url() . "/acesso"; ?>" type="button" class="btn btn-success navbar-btn pull-right">Entrar</a>
                     <?php } ?>
                 </nav>
             </div>

@@ -40,13 +40,20 @@ class Noticia {
      * @ORM\Column(type="blob")
      * @var type 
      */
-    private $imagem;
+    private $capa;
     
-    function __construct($id = NULL, $titulo = NULL, $text = NULL, $imagem = NULL) {
+    /**
+     * @ORM\Column(type="datetime")
+     * 
+     */
+    private $data;
+    
+    function __construct($id = NULL, $titulo = NULL, $texto = NULL, $capa = NULL, $data = NULL) {
         $this->id = $id;
         $this->titulo = $titulo;
-        $this->texto = $text;
-        $this->imagem = $imagem;
+        $this->texto = $texto;
+        $this->capa = $capa;
+        $this->data = $data;
     }
     
     function getId() {
@@ -57,32 +64,38 @@ class Noticia {
         return $this->titulo;
     }
 
-    function getText() {
-        return $this->text;
+    function getTexto() {
+        return $this->texto;
     }
 
-    function getImagem() {
-        return $this->imagem;
+    function getCapa() {
+        return $this->capa;
     }
 
-    function setId(type $id) {
+    function setId($id) {
         $this->id = $id;
     }
 
-    function setTitulo(type $titulo) {
+    function setTitulo($titulo) {
         $this->titulo = $titulo;
     }
 
-    function setText(type $text) {
-        $this->text = $text;
+    function setTexto($texto) {
+        $this->texto = $texto;
     }
 
-    function setImagem(type $imagem) {
-        $this->imagem = $imagem;
+    function setCapa($capa) {
+        $this->capa = $capa;
     }
-
-
-
     
+    function getData() {
+        return $this->data;
+    }
+
+    function setData($data) {
+        $this->data = $data;
+    }
+
+
     
 }

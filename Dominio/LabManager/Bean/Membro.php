@@ -2,7 +2,7 @@
 namespace LabManager\Bean;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
+use \Doctrine\Common\Collections\ArrayCollection;
 /**
  * Description of Membro
  *
@@ -133,6 +133,14 @@ class Membro {
      */
     private $foto;
     
+    /**
+     * Propriedade privada
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Projeto", mappedBy="coordenador", cascade={"all"})
+     *  
+     */
+    private $chefeProjeto;
+    
     function __construct($id = NULL ,$laboratorio = NULL ,$nome = NULL ,$ativo = NULL ,$tipo = NULL ,$email = NULL ,$telefone = NULL ,
             $facebook = NULL ,$twitter = NULL ,$linkdl = NULL ,$data_entrada = NULL ,$data_saida = NULL ,$biografia = NULL ,
             $area_interesse = NULL ,$admin = NULL ,$senha = NULL ,$usuario = NULL ,$lattes = NULL ,$foto = NULL ) {
@@ -154,6 +162,8 @@ class Membro {
         $this->usuario = $usuario;
         $this->lattes = $lattes;
         $this->foto = $foto;
+        
+        $this->chefeProjeto = new ArrayCollection();
     }
     
     public function __toString() {
@@ -311,6 +321,17 @@ class Membro {
     function setFoto($foto) {
         $this->foto = $foto;
     }
+    
+    function getChefeProjeto() {
+        return $this->chefeProjeto;
+    }
+
+    function setChefeProjeto(Projeto $chefeProjeto) {
+        $chefeProjeto->setCoordenador($this);
+        $this->chefeProjeto->add($chefeProjeto);
+    }
+
+
 
 
 }

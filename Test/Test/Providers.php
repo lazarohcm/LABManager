@@ -36,4 +36,11 @@ class Providers {
         return $membro;
     }
     
+    public function ProjetoProvider(){
+        $projeto = new \LabManager\Bean\Projeto(NULL, 'Segurança', new \DateTime(), new \DateTime('tomorrow'), NULL, 'Projeto de Segurança');
+        $projeto->setCoordenador($this->MembroProvider());
+        $projeto->setLaboratorio($this->laboratorioProvider());
+        return $projeto;
+    }
+    
 }
