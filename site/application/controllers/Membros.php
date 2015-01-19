@@ -15,13 +15,38 @@
 class Membros extends CI_Controller {
 
     public function index() {
-        $this->load->model('laboratoriomodel');
+        $this->load->model('membrosmodel');
         try {
-            $lab = $this->laboratoriomodel->buscarPorNome('algo');
+            $arrayMembros = $this->membrosmodel->buscarTodos();
         } catch (Exception $ex) {
             throw new Exception($ex->getMessage());
         }
-        $this->templateadmin->load('membros/membros', TITULO_SITE, '', TRUE, array());
+        $professores = array(); $pesquisadores = array(); $doutorandos = array(); $mestrandos = array(); $graduandos = array();
+        $membrosAntigos = array();
+        foreach($arrayMembros as $membro){
+            if($membro->getData_saida() != NULL){
+                $membrosAntigos[] = $membro;
+            }else{
+                if($membro->getTipo() == 'Professor'){
+                   $professores[] = $membro; 
+                }
+                if($membro->getTipo() == 'Pesquisador'){
+                    $pesquisadores = $membro;
+                }
+                if($membro->getTipo() == 'Doutorando'){
+                    $doutorandos = $membro;
+                }
+                if($membro->getTipo() == 'Mestrando'){
+                    $mestrandos = $membro;
+                }
+                if($membro->getTipo() == 'Graduando'){
+                    $graduandos = $membro;
+                }
+            }
+        }
+        
+        $this->templateadmin->load('membros/membros', TITULO_SITE, '', TRUE, array('professores' => $professores, 'pesquisadores' => $pesquisadores,
+            'doutorandos' => $doutorandos,'mestrandos' => $mestrandos, 'graduandos' => $graduandos, 'membrosAntigos'  => $membrosAntigos));
     }
 
     public function cadastrar() {
@@ -63,9 +88,13 @@ class Membros extends CI_Controller {
         if($membro->getTipo() == 'Soutorando') $tipo = 3;
         if($membro->getTipo() == 'Mestrando') $tipo = 4;
         if($membro->getTipo() == 'Graduando') $tipo = 5;
+        $saida = NULL;
+        if($membro->getData_saida() != NULL){
+            $saida = $membro->getData_saida()->format('d/m/Y');
+        };
         $arrayMembro = array('nome' => $membro->getNome(), 'email' => $membro->getEmail(), 'usuario' => $membro->getUsuario(),
             'laboratorio' => $membro->getlaboratorio()->getId(), 'tipo' => $tipo, 'entrada' => $membro->getData_entrada()->format('d/m/Y'),
-            'saida' => $membro->getData_saida()->format('d/m/Y'), 'ativo' => $membro->getAtivo(), 'admin' => $membro->getAdmin(), 'foto' => stream_get_contents($membro->getFoto()));
+            'saida' => $saida, 'ativo' => $membro->getAtivo(), 'admin' => $membro->getAdmin(), 'foto' => stream_get_contents($membro->getFoto()));
         $this->output
                 ->set_content_type('application/json')
                 ->set_output(json_encode(array('sucesso' => true, 'membro' => $arrayMembro)));
