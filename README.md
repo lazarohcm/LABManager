@@ -4,10 +4,12 @@ Esta software é uma aplicação desenvolvida em *PHP* durante a disciplina de L
 O objetivo é criar um Portal que permite o gerenciamento de Laboratórios, com publicação de Notícias, gerenciamento de Membros, Projetos, Publicações, Instalações e Equipamentos.
 ## Requerimentos
 Para rodar a aplicação o servidor necessita ter instalado as seguintes dependências.
+
 **Principais**
  * Php >= 5;
  * MYSql;
  * Apache;
+
 **Extensões PHP**
 php-intl, php-pdo, php-mysql, php-mcrypy
 
