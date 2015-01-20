@@ -37,8 +37,11 @@ class Noticias extends CI_Controller {
                 ->set_output(json_encode(array('sucesso' => true, 'noticia' => $retorno)));
     }
     
-    public function read($id){
+    public function read($id = NULL){
         $this->load->model('noticiasmodel');
+        if($id == NULL){
+            show_404();
+        }
         try {
             $noticia = $this->noticiasmodel->buscarPorID($id);
         } catch (Exception $ex) {

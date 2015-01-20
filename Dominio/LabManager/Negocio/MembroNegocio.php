@@ -70,8 +70,11 @@ class MembroNegocio {
     }
     
     public function atualizar($membroData){
-        $lab = $this->labNegocio->buscarPorID($membroData['idLab']);
-        $membro = $membroData['membro'];
+         $membro = $membroData['membro'];
+        if(isset($membroData['idLab'])){
+            $lab = $this->labNegocio->buscarPorID($membroData['idLab']);
+            $membro->setLaboratorio($lab);
+        }
         
         try{
             $this->dao->update($membro);

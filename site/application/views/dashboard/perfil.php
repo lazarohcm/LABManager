@@ -10,7 +10,7 @@
                         <div class="image-preview" id="id-image-preview">
                             <div class="image-wrap" data-image-width="220" data-image-height="200" data-img-name="foto">
                                 <div class="image-default">
-                                    <img class="img-responsive" id="imgFoto" data-src="holder.js/220x200" alt="..." />
+                                    <img class="img-responsive" id="foto" data-src="holder.js/220x200" alt="..." src="<?php echo stream_get_contents($membro->getFoto()); ?>"/>
                                 </div>
                             </div>
 
@@ -26,7 +26,9 @@
                     <div class="row col-lg-8">
                         <label>Sobre:</label>
                         <form>
-                            <textarea style="height: 200px;" class="form-control" placeholder="Escreva algo sobre você" rows="3"></textarea>
+                            <textarea id="sobre" style="height: 200px;" class="form-control" placeholder="Escreva algo sobre você" rows="3">
+                                <?php echo $membro->getBiografia() != NULL ? $membro->getBiografia() : NULL; ?>
+                            </textarea>
                         </form>
                         <br>
                     </div>
@@ -45,21 +47,23 @@
                             <div class="col-md-5">
                                 <div class="form-group has-feedback">
                                     <label>Nome:</label>
-                                    <input id="nome" type="text" class="form-control"/>
+                                    <input id="nome" type="text" class="form-control" value="<?php echo $membro->getNome(); ?>"/>
                                 </div>
                                 <div class="form-group has-feedback">
                                     <label>Email:</label>
-                                    <input id="email" type="text" class="form-control"/>
+                                    <input id="email" type="text" class="form-control" value="<?php echo $membro->getEmail(); ?>"/>
                                 </div>
                                 <div class="form-group has-feedback">
                                     <label>Usuário:</label>
-                                    <input id="usuario" type="text" class="form-control"/>
+                                    <input disabled="" id="usuario" type="text" class="form-control" value="<?php echo $membro->getUsuario(); ?>"/>
                                 </div>
                             </div>
                             <div class="col-md-5">
                                 <div class="form-group has-feedback">
                                     <label>Telefone:</label>
-                                    <input id="telefone" type="tel" class="form-control"/>
+                                    <input id="telefone" type="tel" class="form-control" value="<?php $telefone = ($membro->getTelefone() != NULL) ? $membro->getTelefone() : NULL;
+                                echo $telefone;
+                                ?>"/>
                                 </div>
                                 <div class="form-group has-feedback">
                                     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalSenha">Alterar Senha</button>
@@ -71,15 +75,15 @@
                             <div class="col-md-5">
                                 <div class="form-group has-feedback">
                                     <label>Facebook:</label>
-                                    <input id="facebook" type="url" class="form-control"/>
+                                    <input id="facebook" type="url" class="form-control" value="<?php echo $membro->getFacebook() != NULL ? $membro->getFacebook() : NULL; ?>"/>
                                 </div>
                                 <div class="form-group has-feedback">
                                     <label>Twitter:</label>
-                                    <input id="twitter" type="url" class="form-control"/>
+                                    <input id="twitter" type="url" class="form-control" value="<?php echo $membro->getTwitter() != NULL ? $membro->getTwitter() : NULL; ?>"/>
                                 </div>
                                 <div class="form-group has-feedback">
                                     <label>Linkdln:</label>
-                                    <input id="linkdin" type="url" class="form-control"/>
+                                    <input id="linkdin" type="url" class="form-control" value="<?php echo $membro->getLinkdl() != NULL ? $membro->getLinkdl() : NULL; ?>"/>
                                 </div>
                             </div>
                             <div class="col-md-5">
@@ -90,21 +94,23 @@
                             <div class="col-md-5">
                                 <div class="form-group has-feedback">
                                     <label>Lattes:</label>
-                                    <input id="lattes" type="url" class="form-control"/>
+                                    <input id="lattes" type="url" class="form-control" value="<?php echo $membro->getLattes() != NULL ? $membro->getLattes() : NULL; ?>"/>
                                 </div>
                                 <div class="form-group has-feedback">
                                     <label>Data de Entrada:</label>
-                                    <input id="entrada" type="date" class="form-control" disabled=""/>
+                                    <input id="entrada" type="date" class="form-control" disabled="" value="<?php echo $membro->getData_entrada() != NULL ? $membro->getData_entrada()->format('d/m/Y') : NULL; ?>"/>
                                 </div>
                                 <div class="form-group has-feedback">
                                     <label>Data de Saída:</label>
-                                    <input id="email" type="date" class="form-control" disabled=""/>
+                                    <input id="email" type="date" class="form-control" disabled="" value="<?php echo $membro->getData_saida() != NULL ? $membro->getData_saida()->format('d/m/Y') : NULL; ?>"/>
                                 </div>
                             </div>
                             <div class="col-md-5">
                                 <div class="form-group has-feedback">
                                     <label>Áreas de Interesse:</label>
-                                    <textarea class="form-control" placeholder="Escreva algo sobre você" rows="3"></textarea>
+                                    <textarea id="areas" class="form-control" placeholder="Escreva algo sobre você" rows="3">
+                                        <?php echo $membro->getArea_interesse() != NULL ? $membro->getArea_interesse() : NULL; ?>
+                                    </textarea>
                                 </div>
                             </div>
                         </div> <!-- Tab Acadêmico -->
@@ -112,8 +118,11 @@
                     </div>
                 </div>
             </div>
+            <button id="btnSalvar" type="button" class="btn btn-primary pull-left">Salvar</button>
         </div>
+
     </div>
+
 </div>
 
 <div id="modalSenha" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -128,7 +137,7 @@
                         <div class="col-md-8 col-md-offset-2">
                             <div class="form-group">
                                 <label>Senha atual:</label>
-                                <input name="senhAtual" id="senhAtual" type="password" class="form-control" value=""/>
+                                <input name="senhaAtual" id="senhaAtual" type="password" class="form-control" value=""/>
                             </div>
                             <div class="form-group">
                                 <label>Nova Senha:</label>
@@ -143,8 +152,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button href="#" class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                <button href="#" class="btn btn-primary" id="password_modal_save">Save changes</button>
+                <button href="#" class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
+                <button id="btnAlterarSenha" href="#" class="btn btn-primary" id="password_modal_save">Salvar</button>
             </div>
         </div>
     </div>

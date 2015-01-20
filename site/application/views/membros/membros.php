@@ -24,9 +24,17 @@
                 <?php foreach ($professores as $professor) { ?>
                     <div class="col-md-4 text-center">
                         <div class="thumbnail">
+                            <a href="<?php echo site_url("/membros/visualizar/" . $professor->getId()); ?>">
+                                <img class="img-responsive" src="<?php echo stream_get_contents($professor->getFoto()); ?>" alt="">
+                            </a>
                             <img class="img-responsive" src="<?php echo stream_get_contents($professor->getFoto()); ?>" alt="">
                             <div class="caption">
-                                <h3><?php echo $professor->getNome(); ?><br>
+                                <h3>
+                                    <a href="<?php echo site_url("/membros/visualizar/" . $professor->getId()); ?>">
+                                        <?php echo $professor->getNome(); ?>
+                                    </a>
+
+                                    <br>
                                     <small>Professor</small>
                                 </h3>
                                 <p>
@@ -69,9 +77,16 @@
                 <?php foreach ($pesquisadores as $pesquisador) { ?>
                     <div class="col-md-4 text-center">
                         <div class="thumbnail">
-                            <img class="img-responsive" src="<?php echo stream_get_contents($pesquisador->getFoto()); ?>" alt="">
+
+                            <a href="<?php echo site_url("/membros/visualizar/" . $pesquisador->getId()); ?>">
+                                <img class="img-responsive" src="<?php echo stream_get_contents($pesquisador->getFoto()); ?>" alt="">
+                            </a>
                             <div class="caption">
-                                <h3><?php echo $pesquisador->getNome(); ?><br>
+                                <h3>
+                                    <a href="<?php echo site_url("/membros/visualizar/" . $pesquisador->getId()); ?>">
+                                        <?php echo $pesquisador->getNome(); ?>
+                                    </a>
+                                    <br>
                                     <small>Professor</small>
                                 </h3>
                                 <p>
@@ -114,9 +129,15 @@
                 <?php foreach ($doutorandos as $doutorando) { ?>
                     <div class="col-md-4 text-center">
                         <div class="thumbnail">
-                            <img class="img-responsive" src="<?php echo stream_get_contents($doutorando->getFoto()); ?>" alt="">
+
+                            <a href="<?php echo site_url("/membros/visualizar/" . $doutorando->getId()); ?>">
+                                <img class="img-responsive" src="<?php echo stream_get_contents($doutorando->getFoto()); ?>" alt="">
+                            </a>
                             <div class="caption">
-                                <h3><?php echo $doutorando->getNome(); ?><br>
+                                <h3>
+                                    <a href="<?php echo site_url("/membros/visualizar/" . $doutorando->getId()); ?>">
+                                        <?php echo $doutorando->getNome(); ?>
+                                    </a>
                                     <small>Professor</small>
                                 </h3>
                                 <p>
@@ -159,9 +180,16 @@
                 <?php foreach ($mestrandos as $mestrando) { ?>
                     <div class="col-md-4 text-center">
                         <div class="thumbnail">
-                            <img class="img-responsive" src="<?php echo stream_get_contents($mestrando->getFoto()); ?>" alt="">
+
+                            <a href="<?php echo site_url("/membros/visualizar/" . $mestrando->getId()); ?>">
+                                <img class="img-responsive" src="<?php echo stream_get_contents($mestrando->getFoto()); ?>" alt="">
+                            </a>
                             <div class="caption">
-                                <h3><?php echo $mestrando->getNome(); ?><br>
+                                <h3>
+                                    <a href="<?php echo site_url("/membros/visualizar/" . $mestrando->getId()); ?>">
+                                        <?php echo $mestrando->getNome(); ?>
+                                    </a>
+                                    <br>
                                     <small>Professor</small>
                                 </h3>
                                 <p>
@@ -204,9 +232,16 @@
                 <?php foreach ($graduandos as $graduando) { ?>
                     <div class="col-md-4 text-center">
                         <div class="thumbnail">
-                            <img class="img-responsive" src="<?php echo stream_get_contents($graduando->getFoto()); ?>" alt="">
+
+                            <a href="<?php echo site_url("/membros/visualizar/" . $graduando->getId()); ?>">
+                                <img class="img-responsive" src="<?php echo stream_get_contents($graduando->getFoto()); ?>" alt="">
+                            </a>
                             <div class="caption">
-                                <h3><?php echo $graduando->getNome(); ?><br>
+                                <h3>
+                                    <a href="<?php echo site_url("/membros/visualizar/" . $graduando->getId()); ?>">
+                                        <?php echo $graduando->getNome(); ?>
+                                    </a>
+                                    <br>
                                     <small>Professor</small>
                                 </h3>
                                 <p>
@@ -249,9 +284,16 @@
                 <?php foreach ($membrosAntigos as $membroAntigo) { ?>
                     <div class="col-md-4 text-center">
                         <div class="thumbnail">
-                            <img class="img-responsive" src="<?php echo stream_get_contents($membroAntigo->getFoto()); ?>" alt="">
+
+                            <a href="<?php echo site_url("/membros/visualizar/" . $membroAntigo->getId()); ?>">
+                                <img class="img-responsive" src="<?php echo stream_get_contents($membroAntigo->getFoto()); ?>" alt="">
+                            </a>
                             <div class="caption">
-                                <h3><?php echo $membroAntigo->getNome(); ?><br>
+                                <h3>
+                                    <a href="<?php echo site_url("/membros/visualizar/" . $membroAntigo->getId()); ?>">
+                                        <?php echo $membroAntigo->getNome(); ?>
+                                    </a>
+                                    <br>
                                     <small><?php echo $membroAntigo->getTipo(); ?></small>
                                 </h3>
                                 <p>

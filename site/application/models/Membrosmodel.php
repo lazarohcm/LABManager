@@ -80,7 +80,7 @@ class MembrosModel extends CI_Model {
 
         return $arrayMembros;
     }
-    
+
     public function buscarCoordenadores() {
         $facade = new MembroFacade();
         try {
@@ -88,16 +88,16 @@ class MembrosModel extends CI_Model {
         } catch (Exception $ex) {
             throw new Exception($ex->getMessage());
         }
-        
+
         $array = array();
-        foreach ($arrayMembros as $membro){
+        foreach ($arrayMembros as $membro) {
             $array[$membro->getId()] = $membro->getNome();
         }
 
         return $array;
     }
-    
-    public function atualizar($arrayMembro){
+
+    public function atualizar($arrayMembro) {
         $facedeMembro = new MembroFacade();
         $membro = $facedeMembro->buscarPorId($arrayMembro['id']);
         $membro->setNome($arrayMembro['nome']);
@@ -108,9 +108,9 @@ class MembrosModel extends CI_Model {
         $membro->setAdmin($arrayMembro['admin'] === 'true' ? true : false);
         $membro->setFoto($arrayMembro['foto']);
         $idLab = $arrayMembro['laboratorio'];
-        $tipo = (int)$arrayMembro['tipo'];
-        
-        switch ($tipo){
+        $tipo = (int) $arrayMembro['tipo'];
+
+        switch ($tipo) {
             case 1:
                 $membro->setTipo('Professor');
                 break;
@@ -129,31 +129,73 @@ class MembrosModel extends CI_Model {
             default :
                 throw new \Exception('O tipo selecionado é inválido');
         }
-        
-        if($arrayMembro['saida'] != null && $arrayMembro['saida'] != ''){
+
+        if ($arrayMembro['saida'] != null && $arrayMembro['saida'] != '') {
             $membro->setData_saida(DateTime::createFromFormat('d/m/Y', $arrayMembro['saida']));
-        }else{
+        } else {
             $membro->setData_saida(NULL);
         }
-        
-        if(!isset($arrayMembro['biografia']) && $arrayMembro['biografia'] == ''){
+
+        if (!isset($arrayMembro['biografia']) && $arrayMembro['biografia'] == '') {
             $membro->setBiografia('...');
-        }else{
+        } else {
             $membro->setBiografia($arrayMembro['biografia']);
         }
-        
-        if(!isset($arrayMembro['lattes']) && $arrayMembro['lattes'] == ''){
+
+        if (!isset($arrayMembro['lattes']) && $arrayMembro['lattes'] == '') {
             $membro->setLattes('...');
-        }else{
+        } else {
             $membro->setLattes($arrayMembro['lattes']);
         }
-        
+
         try {
             $retorno = $facedeMembro->atualizar(array('membro' => $membro, 'idLab' => $idLab, 'tipo' => $tipo));
         } catch (Exception $ex) {
             throw new Exception($ex->getMessage());
         }
         return $retorno;
+    }
+
+    public function atualizarPerfil($arrayMembro) {
+        $facedeMembro = new MembroFacade();
+        $membro = new Membro();
+        $membro = $facedeMembro->buscarPorId($arrayMembro['id']);
+        $membro->setNome($arrayMembro['nome']);
+        $membro->setEmail($arrayMembro['email']);
+        $membro->setFoto($arrayMembro['foto']);
+        (isset($arrayMembro['lattes']) && $arrayMembro['lattes'] != NULL) ? $membro->setLattes($arrayMembro['lattes']) : NULL;
+        (isset($arrayMembro['areas']) && $arrayMembro['areas'] != NULL) ? $membro->setArea_interesse($arrayMembro['areas']) : NULL;
+        (isset($arrayMembro['facebook']) && $arrayMembro['facebook'] != NULL) ? $membro->setFacebook($arrayMembro['facebook']) : NULL;
+        (isset($arrayMembro['twitter']) && $arrayMembro['twitter'] != NULL) ? $membro->setTwitter($arrayMembro['twitter']) : NULL;
+        (isset($arrayMembro['linkdin']) && $arrayMembro['linkdin'] != NULL) ? $membro->setLinkdl($arrayMembro['linkdin']) : NULL;
+        (isset($arrayMembro['sobre']) && $arrayMembro['sobre'] != NULL) ? $membro->setBiografia($arrayMembro['sobre']) : NULL;
+        (isset($arrayMembro['telefone']) && $arrayMembro['telefone'] != NULL) ? $membro->setTelefone($arrayMembro['telefone']) : NULL;
+
+        try {
+            $retorno = $facedeMembro->atualizar(array('membro' => $membro));
+        } catch (Exception $ex) {
+            throw new Exception($ex->getMessage());
+        }
+        return $retorno;
+    }
+
+    public function atualizarSenha($arrayMembro) {
+        $facedeMembro = new MembroFacade();
+        $membro = new Membro();
+        $membro = $facedeMembro->buscarPorId($arrayMembro['id']);
+        $senha = md5($arrayMembro['senhaAtual']);
+        if ($membro->getSenha() == $senha) {
+            $membro->setSenha(md5($arrayMembro['novaSenha']));
+        } else {
+            return array('sucesso' => false, 'msg' => 'A senha atual não confere');
+        }
+        
+        try {
+            $retorno = $facedeMembro->atualizar(array('membro' => $membro));
+        } catch (Exception $ex) {
+            throw new Exception($ex->getMessage());
+        }
+        return array('sucesso' => true, 'membro' => $retorno);
     }
 
     public function remover($id) {

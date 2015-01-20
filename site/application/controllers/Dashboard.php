@@ -41,11 +41,11 @@ class dashboard extends CI_Controller {
         if (!$this->sessioncontrol->isLoggedIn()) {
             redirect('/acesso/index');
         }
-        $this->load->model('membrosmodel');
         $userData = $this->sessioncontrol->getUserDataSession();
-        $arrayMembros = $this->membrosmodel->buscarTodos();
+        $this->load->model('membrosmodel');
+        $membro = $this->membrosmodel->buscarPorId($userData['id']);
         $sidebar = $this->load->view('layout/sidebar', array('usuario' => $userData), true);
-        $this->templateadmin->load('dashboard/perfil', TITULO_SITE, $sidebar, TRUE, array('membros' => $arrayMembros));
+        $this->templateadmin->load('dashboard/perfil', TITULO_SITE, $sidebar, TRUE, array('membro' => $membro));
     }
 
     public function noticias() {

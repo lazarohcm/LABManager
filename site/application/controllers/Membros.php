@@ -61,6 +61,42 @@ class Membros extends CI_Controller {
                 ->set_content_type('application/json')
                 ->set_output(json_encode(array('sucesso' => true, 'membro' => $membro)));
     }
+    
+    public function atualizarperfil() {
+        if (!$this->sessioncontrol->isLoggedIn()) {
+            redirect('/acesso/index');
+        }
+        $userData = $this->sessioncontrol->getUserDataSession();
+        $arrayRequest = $this->input->post();
+        $arrayRequest['id'] = $userData['id'];
+        $this->load->model('membrosmodel');
+        try {
+            $membro = $this->membrosmodel->atualizarPerfil($arrayRequest);
+        } catch (Exception $ex) {
+            throw new Exception($ex->getMessage());
+        }
+        $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode(array('sucesso' => true, 'membro' => $membro)));
+    }
+    
+    public function atualizarsenha() {
+        if (!$this->sessioncontrol->isLoggedIn()) {
+            redirect('/acesso/index');
+        }
+        $userData = $this->sessioncontrol->getUserDataSession();
+        $arrayRequest = $this->input->post();
+        $arrayRequest['id'] = $userData['id'];
+        $this->load->model('membrosmodel');
+        try {
+            $retorno = $this->membrosmodel->atualizarSenha($arrayRequest);
+        } catch (Exception $ex) {
+            throw new Exception($ex->getMessage());
+        }
+        $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode($retorno));
+    }
 
     public function atualizar() {
         $arrayRequest = $this->input->post();
@@ -125,6 +161,19 @@ class Membros extends CI_Controller {
         $this->output
                 ->set_content_type('application/json')
                 ->set_output(json_encode(array('sucesso' => true, 'retorno' => $retorno)));
+    }
+    
+    public function visualizar($id){
+        $this->load->model('membrosmodel');
+        if($id == NULL){
+            show_404();
+        }
+        try {
+            $membro = $this->membrosmodel->buscarPorID($id);
+        } catch (Exception $ex) {
+            throw new Exception($ex->getMessage());
+        }
+        $this->templateadmin->load('membros/view', TITULO_SITE, '', TRUE, array('membro' => $membro));
     }
 
 }
