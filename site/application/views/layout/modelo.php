@@ -65,7 +65,7 @@
     </head>
 
     <body style="height: 100%">
-        <header class="navbar navbar-default navbar-static-top bs-docs-nav" id="top" role="banner">
+        <header class="navbar navbar-default navbar-inverse navbar-static-top bs-docs-nav" id="top" role="banner">
             <div class="container">
                 <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -110,7 +110,7 @@
                             </li>
                         <?php } ?>
                         <li>
-                            <a href="agendar.html">Agendar</a>
+                            <a href="<?php echo site_url() . "/home/agendar"; ?>">Agendar</a>
                         </li>
                         <li>
                             <a href="<?php echo site_url() . "/home/contato"; ?>">Contato</a>

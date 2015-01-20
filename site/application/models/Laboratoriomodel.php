@@ -45,6 +45,22 @@ class Laboratoriomodel extends CI_Model {
 
         return $array;
     }
+    
+    public function buscarPorId($id){
+        $facade = new LaboratorioFacade();
+        try {
+            $laboratorio = $facade->buscarPorID($id);
+        } catch (Exception $ex) {
+            throw new Exception($ex->getMessage());
+        }
+        if($laboratorio == NULL){
+            throw new Exception('Laboratório não encontrado');
+        }else{
+           $array = array('nome' => $laboratorio->getNome(), 'descricao' => $laboratorio->getDescricao(),
+               'telefone' => $laboratorio->getTelefone(), 'capa' => $laboratorio->getCapa()); 
+        }  
+        return $array;
+    }
 
     public function salvar($arrayLaboratorio) {
         $facade = new LaboratorioFacade();
@@ -58,6 +74,25 @@ class Laboratoriomodel extends CI_Model {
             throw new Exception($ex->getMessage());
         }
         return array('nome'=> $lab->getNome(), 'descricao'=> $lab->getDescricao(), 'telefone'=> $lab->getTelefone(), 'id' => $lab->getId());
+    }
+    
+    public function atualizar($arrayLaboratorio){
+        $facade = new LaboratorioFacade();
+        $laboratorio = new Laboratorio();
+        $laboratorio = $facade->buscarPorID($arrayLaboratorio['id']);
+        if($laboratorio != NULL){
+            $laboratorio->setNome($arrayLaboratorio['nome']);
+            $laboratorio->setDescricao($arrayLaboratorio['descricao']);
+            $laboratorio->setTelefone($arrayLaboratorio['telefone']);
+            $laboratorio->setCapa($arrayLaboratorio['capa']);
+            try{
+                $facade->atualizar($laboratorio);
+            } catch (Exception $ex) {
+                throw new Exception($ex->getMessage());
+            }
+        }else{
+            throw new Exception('Laboratório não encontrado');
+        }
     }
     
     public function remover($idLaboratorio){

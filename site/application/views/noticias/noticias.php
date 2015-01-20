@@ -37,15 +37,12 @@
                        echo $noticia->getId();
                        ?>"><?php echo $noticia->getTitulo(); ?></a>
                 </h3>
-                <p><?php echo substr($noticia->getTexto(), 0, 140); ?></p>
+                <p><?php echo strip_tags(substr($noticia->getTexto(), 0, 140)); ?></p>
             </div>
             <?php } ?>
     </div>
     <!-- /.row -->
-
-    <hr>
-
-    <!-- Pagination -->
+    <!-- Pagination
     <div class="row text-center">
         <div class="col-lg-12">
             <ul class="pagination">
@@ -73,8 +70,6 @@
             </ul>
         </div>
     </div>
-    <!-- /.row -->
-
-    <hr>
+    .row -->
 </div>
 <!-- /.container -->

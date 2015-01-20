@@ -81,9 +81,9 @@
                         <label>Bio:</label>
                         <p><?php echo $membro->getBiografia(); ?></p>
                     </div>
-                    <hr>
+                    
                 </div>
-
+                <hr>
                 <div class="container">
                     <h3>Contato</h3>
                     <div class="row">
@@ -97,9 +97,9 @@
                     </div>
 
                 </div>
-
+                <hr>
                 <div class="container">
-                    <hr>
+                    
                     <div class="form-group">
                         <h3>Projetos</h3>
                     </div> 

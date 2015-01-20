@@ -41,6 +41,11 @@ class Laboratorio {
     private $telefone;
     
     /**
+     * @ORM\Column(type="blob")
+     */
+    private $capa;
+    
+    /**
      * Propriedade privada
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="Membro", mappedBy="laboratorio", cascade={"all"}, orphanRemoval=true, fetch="LAZY") 
@@ -53,11 +58,12 @@ class Laboratorio {
      */
     private $projeto;
     
-    function __construct($id = NULL,$nome = NULL,$descricao = NULL,$telefone = NULL) {
+    function __construct($id = NULL,$nome = NULL,$descricao = NULL,$telefone = NULL, $capa = NULL) {
         $this->id = $id;
         $this->nome = $nome;
         $this->descricao = $descricao;
         $this->telefone = $telefone;
+        $this->capa = $capa;
         $this->membro = new ArrayCollection();
         $this->projeto = new ArrayCollection();
     }
@@ -114,11 +120,12 @@ class Laboratorio {
         $projeto->setLaboratorio($this);
         $this->projeto->add($projeto);
     }
-
-
-
-
-
     
-    
+    function getCapa() {
+        return $this->capa;
+    }
+
+    function setCapa($capa) {
+        $this->capa = $capa;
+    }   
 }

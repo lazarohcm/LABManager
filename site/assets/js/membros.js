@@ -24,7 +24,6 @@ $(document).ready(function () {
         dataPost = {idUsuario: id};
         ajaxMessage();
         $.post(js_site_url('index.php/membros/buscarporid'), dataPost, function (response) {
-            console.log(response.membro);
             $('#imgFoto').attr('src', response.membro.foto);
             $('#nome').val(response.membro.nome);
             $('#usuario').val(response.membro.usuario);

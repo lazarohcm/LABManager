@@ -52,4 +52,32 @@ class NoticiasModel extends CI_Model {
         return $retorno;
         
     }
+    
+    public function atualizar($arrayNoticia){
+        $facade = new NoticiaFacade();
+        $noticia = new Noticia();
+        $noticia = $facade->buscarPorID($arrayNoticia['id']);
+        $noticia->setCapa($arrayNoticia['capa']);
+        $noticia->setTitulo($arrayNoticia['titulo']);
+        $noticia->setTexto($arrayNoticia['conteudo']);
+        $noticia->setData(new DateTime());
+        try {
+            $retorno = $facade->atualizar($noticia);
+        } catch (Exception $ex) {
+            throw new Exception($ex->getMessage());
+        }
+        return TRUE;
+    }
+    
+    public function remover($id){
+        $facade = new NoticiaFacade();
+        try {
+            $noticia = $facade->buscarPorID($id);
+            $facade->excluir($noticia);
+        } catch (Exception $ex) {
+            throw new Exception($ex->getMessage());
+        }
+        
+        return TRUE;
+    }
 }

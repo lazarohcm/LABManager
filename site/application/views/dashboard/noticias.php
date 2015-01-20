@@ -48,7 +48,14 @@
                     <tbody>
                         <?php foreach ($noticias as $noticia) { ?>
                             <tr>
-                                <td><?php echo $noticia->getTitulo(); ?></td>
+                                <td>
+                                    <strong>
+                                        <a href="#" class="titulo" data-id="<?php echo $noticia->getId(); ?>">
+                                            <?php echo $noticia->getTitulo(); ?>
+                                        </a>
+                                    </strong>
+                                    
+                                </td>
                                 <td><?php //echo $noticia->getLaboratorio();   ?></td>
                                 <td><?php //echo $noticia->getProjeto();   ?></td>
                                 <td><?php
@@ -58,10 +65,22 @@
                                         echo 'Sem data';
                                     }
                                     ?></td>
-                                <td>
-                                    <button type="button" class="btn btn-danger remover" aria-label="">
-                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                <td style="position:relative;">
+                                    <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                                        Ação&nbsp;&nbsp;&nbsp; <span class="caret"></span>
                                     </button>
+                                    <ul style="top: 70%" class="dropdown-menu" role="menu">
+                                        <li>
+                                            <a class="editar" href="#" data-toggle="modal" data-target="#modalNewEdit">
+                                                <span class="glyphicon glyphicon-pencil"></span> Editar
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="remover" href="#" data-toggle="modal" data-target="#modalRemover">
+                                                <span class="glyphicon glyphicon-remove-circle"></span> Excluir
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -83,7 +102,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-4">
-                        <div class="image-preview" id="id-image-preview" style="margin-left: 50px;">
+                        <div class="image-preview" id="id-image-previewEditar" style="margin-left: 50px;">
                             <div class="image-wrap" data-image-width="320" data-image-height="200" data-img-name="capa">
                                 <div class="image-default">
                                     <img class="img-responsive" id="capa" data-src="holder.js/320x200" alt="..." />
@@ -189,6 +208,26 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
+
+<!-- Modal Alterar Remover -->
+<div class="modal fade" id="modalRemover" tabindex="-1" role="dialog" aria-labelledby="modalRemover" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Tem certeza que deseja remover?</h4>
+            </div>
+            <div class="modal-footer">
+                <button id="btnNao" type="button" class="btn btn-primary" data-dismiss="modal">Não</button>
+                <button id="btnRemover" type="button" class="btn btn-danger">Sim</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
 <script src="<?php echo base_url(); ?>assets/js/jquery-image-preview.js"></script>
 <link href="<?php echo base_url(); ?>assets/bootstrap-wysiwyg/external/google-code-prettify/prettify.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>assets/bootstrap-wysiwyg/index.css" rel="stylesheet">
@@ -201,7 +240,10 @@
     $(document).ready(function () {
         $('#editor').wysiwyg();
         $('#editor').cleanHtml();
-        $('#pictureBtn').on('click', function () {
+        $('#editorEditar').wysiwyg();
+        $('#editorEditar').cleanHtml();
+        
+        $('.btn-image-preview').on('click', function () {
             $('#inputPicture').click();
         });
         function initToolbarBootstrapBindings() {
@@ -250,6 +292,7 @@
         ;
         initToolbarBootstrapBindings();
         $('#editor').wysiwyg({fileUploadError: showErrorAlert});
+        $('#editorEditar').wysiwyg({fileUploadError: showErrorAlert});
         window.prettyPrint && prettyPrint();
 
         $('.nav-sidebar > li.active').removeClass('active');

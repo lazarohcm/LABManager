@@ -9,7 +9,7 @@
             <ol class="breadcrumb">
                 <li><a href="<?php echo site_url() . "/home"; ?>">Home</a>
                 </li>
-                <li>Projetos</li>
+                <li class="active"><a href="<?php echo site_url() . "/projetos"; ?>">Projetos</a></li>
                 <li class="active"><?php echo $projeto->getNome(); ?></li>
             </ol>
         </div>

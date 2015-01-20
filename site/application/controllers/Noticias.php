@@ -49,5 +49,47 @@ class Noticias extends CI_Controller {
         }
         $this->templateadmin->load('noticias/read', TITULO_SITE, '', TRUE, array('noticia' => $noticia));
     }
+    
+    public function buscarporid(){
+        $arrayRequest = $this->input->post();
+        $this->load->model('noticiasmodel');
+        try {
+            $noticia = $this->noticiasmodel->buscarPorID($arrayRequest['id']);
+            $array = array('id' => $noticia->getId(), 'titulo' => $noticia->getTitulo(), 'texto' => $noticia->getTexto(),  
+                'capa' => stream_get_contents($noticia->getCapa()));
+        } catch (Exception $ex) {
+            throw new Exception($ex->getMessage());
+        }
+        $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode(array('sucesso' => true, 'noticia' => $array)));
+    }
+    
+    public function atualizar(){
+        $arrayRequest = $this->input->post();
+        $this->load->model('noticiasmodel');
+        try {
+            $noticia = $this->noticiasmodel->atualizar($arrayRequest);
+        } catch (Exception $ex) {
+            throw new Exception($ex->getMessage());
+        }
+        $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode(array('sucesso' => true)));
+    }
+    
+    
+    public function remover(){
+        $arrayRequest = $this->input->post();
+        $this->load->model('noticiasmodel');
+        try {
+            $this->noticiasmodel->remover($arrayRequest['id']);
+        } catch (Exception $ex) {
+            throw new Exception($ex->getMessage());
+        }
+        $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode(array('sucesso' => true)));
+    }
 
 }

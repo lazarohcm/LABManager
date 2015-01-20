@@ -10,12 +10,12 @@ body {
 }
 
 body {
-   background-color: #eee;
+   //background-color: #eee;
     /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
 }
 
 .navbar-nca{
-    background-color: #eee;
+    //background-color: #eee;
 }
 #imgLogo{
     padding-top: -30px;
@@ -27,7 +27,7 @@ body {
 .navbar{
     height: 95px;
     min-height:70px;
-    background-color: #FFFFFF;
+    //background-color: #FFFFFF;
 }
 
 .navbar-nav > li > a {
@@ -200,7 +200,7 @@ td, th{
  #editor {overflow:scroll; max-height:300px}
  
  .bs-docs-nav .navbar-brand, .bs-docs-nav .navbar-nav > li > a {
-    color: #563d7c;
+    color: #FFFFFF;
     font-weight: bold;
 }
 .navbar-brand {

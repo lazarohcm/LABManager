@@ -20,11 +20,11 @@
 
         <div class="row">
             <div class="col-md-6 img-portfolio">
-                <a href="portfolio-item.html">
+                <a href="<?php echo site_url() . "/projetos/visualizar/".$projeto->getId(); ?>">
                     <img class="img-responsive img-hover" src="<?php echo stream_get_contents($projeto->getImagem()); ?>" alt="">
                 </a>
                 <h3>
-                    <a href="pagina-projeto.html"><?php echo $projeto->getNome(); ?></a>
+                    <a href="<?php echo site_url() . "/projetos/visualizar/".$projeto->getId(); ?>"><?php echo $projeto->getNome(); ?></a>
                 </h3>
                 <p><?php echo substr($projeto->getTexto(),0,140); ?></p>
             </div>            
@@ -35,7 +35,7 @@
     <hr>
 
     <!-- Pagination -->
-    <div class="row text-center">
+<!--    <div class="row text-center">
         <div class="col-lg-12">
             <ul class="pagination">
                 <li>
@@ -61,7 +61,7 @@
                 </li>
             </ul>
         </div>
-    </div>
+    </div>-->
     <!-- /.row -->
 
     <hr>

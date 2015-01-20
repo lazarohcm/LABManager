@@ -1,6 +1,8 @@
 $(document).ready(function () {
-    $('#editor').cleanHtml();
+    var table = $('.table').DataTable();
     $('#id-image-preview').imagepreview();
+    $('#id-image-previewEditar').imagepreview();
+    
     $('#modalNewEdit').on('show.bs.modal', function () {
         ajaxMessage();
         $.post(js_site_url('index.php/laboratorios/buscartodosarray'), function (response) {
@@ -12,22 +14,67 @@ $(document).ready(function () {
             }
         });
     });
+
+    $(document).on('click', '.editar, .remover', function () {
+        element = $(this).parents('tr');
+        elementId = $(element).find('.titulo').data('id');
+    });
+
+    $('#btnRemover').on('click', function () {
+        var id, dataPost;
+        id = elementId;
+        dataPost = {id: id};
+        $.post(js_site_url('index.php/noticias/remover'), dataPost, function (response) {
+            if (response.sucesso) {
+                table.row(element).remove().draw();
+                $("#modalRemover").modal('hide');
+            }
+        });
+    });
     
-    $('#btnSalvar').on('click', function(){
+    
+    
+    var id = null;
+    
+    $('.editar').on('click', function () {
+        var dataPost;
+        id = null;
+        id = $(this).parents('tr').find('.titulo').data('id');
+        ajaxMessage();
+        dataPost = {id: id};
+        $.post(js_site_url('index.php/noticias/buscarporid'), dataPost, function (response) {
+            if (response.sucesso) {
+                if (response.noticia.capa) {
+                    $('#capa').attr('src', response.noticia.capa);
+                    $('#titulo').val(response.noticia.titulo);
+                    $('#editor').append(response.noticia.texto);
+                }
+            }
+        });
+    });
+    
+    $('#btnSalvar').on('click', function () {
         var titulo, capa, lab, projeto, conteudo, dataPost;
         titulo = $('#titulo').val();
         lab = $('laboratorios').val();
         projeto = $('#projetos').val();
         conteudo = $('#editor').html();
         capa = $('#capa').attr('src');
-        dataPost = {titulo: titulo, lab: lab, projeto: projeto, capa: capa,conteudo: conteudo};
+        dataPost = {id: id, titulo: titulo, lab: lab, projeto: projeto, capa: capa, conteudo: conteudo};
         ajaxMessage();
-        $.post(js_site_url('index.php/noticias/cadastrar'), dataPost, function (response) {
-            if (response.sucesso) {
-            }
-        });        
+        if (id === null) {
+            $.post(js_site_url('index.php/noticias/cadastrar'), dataPost, function (response) {
+                
+            });
+        } else {
+            $.post(js_site_url('index.php/noticias/atualizar'), dataPost, function (response) {
+                
+            });
+        }
     });
-    
+
+
+
     function initToolbarBootstrapBindings() {
         var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',
             'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times',
@@ -70,9 +117,11 @@ $(document).ready(function () {
         }
         $('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>' +
                 '<strong>Erro ao carregar arquivo: </strong> ' + msg + ' </div>').prependTo('#alerts');
-    };
+    }
+    ;
     initToolbarBootstrapBindings();
     $('#editor').wysiwyg({fileUploadError: showErrorAlert});
+    $('#editorEditor').wysiwyg({fileUploadError: showErrorAlert});
     window.prettyPrint && prettyPrint();
 });
 
