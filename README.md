@@ -11,6 +11,7 @@ Para rodar a aplicação o servidor necessita ter instalado as seguintes depend�
  * Apache;
 
 **Extensões PHP**
+
 php-intl, php-pdo, php-mysql, php-mcrypy
 
 ##Configurações
