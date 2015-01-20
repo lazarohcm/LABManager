@@ -53,7 +53,58 @@
                         ?>"><strong>Lattes</strong></a>
                     </li>
                 </ul>
-                <?php echo $membro->getBiografia(); ?>
+                <div class="form-group text-center">
+                    <label>Áreas de interesse:</label>
+                    <p><?php echo $membro->getArea_interesse(); ?></p>
+                    <hr>
+                </div>
+                <div class="container">
+                    <h3>Sobre</h3>
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            <label>Laboratório:</label>
+                            <a href="<?php echo site_url('/laboratorios/lab/' . strtolower($membro->getLaboratorio()->getNome())); ?>">
+                                <?php echo $membro->getLaboratorio()->getNome(); ?>
+                            </a>
+                        </div>
+                        <div class=" form-group col-md-3">
+                            <label>Desde de: </label>
+                            <?php echo $membro->getData_entrada()->format('d/m/Y'); ?>
+                        </div>
+                        <div class=" form-group col-md-3">
+                            <label>Até</label>
+                            <?php echo $membro->getData_saida() != NULL ? $membro->getData_saida()->format('d/m/Y') : 'Hoje'; ?>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Bio:</label>
+                        <p><?php echo $membro->getBiografia(); ?></p>
+                    </div>
+                    <hr>
+                </div>
+
+                <div class="container">
+                    <h3>Contato</h3>
+                    <div class="row">
+                        
+                        <div class="form-group col-md-4">
+                            <label>Email: </label><?php echo $membro->getEmail(); ?>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Telefone: </label><?php echo $membro->getTelefone(); ?>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="container">
+                    <hr>
+                    <div class="form-group">
+                        <h3>Projetos</h3>
+                    </div> 
+                </div>
+
             </div>
         </div>
     </div>
