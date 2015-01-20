@@ -33,7 +33,7 @@ class Laboratorios extends CI_Controller {
                 ->set_output(json_encode(array('sucesso' => true, 'lab' =>$array)));
     }
     
-    public function lab($nomeLab){
+    public function visualizar($nomeLab){
         $this->load->model('laboratoriomodel');
         try{
             $lab = $this->laboratoriomodel->buscarPorNome($nomeLab);

@@ -87,7 +87,7 @@
                                 <?php foreach ($laboratorios as $laboratorio) { ?>
                                     <li>
                                         <a href="<?php
-                                        echo site_url() . "/laboratorios/lab/";
+                                        echo site_url() . "/laboratorios/visualizar/";
                                         echo strtolower($laboratorio->getNome());
                                         ?>">
                                             <?php echo $laboratorio->getNome(); ?></a>
@@ -117,21 +117,27 @@
                         </li>
                     </ul>
                     <?php if (isset($usuario) && $usuario != NULL) { ?>
-                        <a style="margin-top: 16px;" href="<?php echo site_url() . "/acesso/sair"; ?>" type="button" class="btn btn-danger navbar-btn pull-right">Sair</a>
+                        <a style="margin-top: 30px;" href="<?php echo site_url() . "/acesso/sair"; ?>" type="button" class="btn btn-danger navbar-btn pull-right">Sair</a>
                     <?php } else { ?>
-                        <a style="margin-top: 16px;" href="<?php echo site_url() . "/acesso"; ?>" type="button" class="btn btn-success navbar-btn pull-right">Entrar</a>
+                        <a style="margin-top: 30px;" href="<?php echo site_url() . "/acesso"; ?>" type="button" class="btn btn-success navbar-btn pull-right">Entrar</a>
                     <?php } ?>
                 </nav>
             </div>
         </header>
 
         <div class="container-fluid" style="min-height:100%;">
-            <?php
-            if (isset($menu)) {
-                echo $menu;
-            }
-            ?>
-            <?php echo $contents; ?>
+            <div class="dashboar-menu" style="margin-top: 70px">
+                <?php
+                if (isset($menu)) {
+                    echo $menu;
+                }
+                ?> 
+            </div>
+
+            <div class="conteudo-site" style="margin-top: 40px">
+                <?php echo $contents; ?>
+            </div>
+
             <hr>
 
             <!-- Footer -->

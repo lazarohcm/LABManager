@@ -19,13 +19,13 @@ body {
 }
 #imgLogo{
     padding-top: -30px;
-    width: 100px;
-    height: 50px;
+    //width: 100px;
+    //height: 50px;
     margin-left: 30px;
 }
 
 .navbar{
-    height: 60px;
+    height: 95px;
     min-height:70px;
     background-color: #FFFFFF;
 }
@@ -33,7 +33,7 @@ body {
 .navbar-nav > li > a {
     line-height: 20px;
     padding-bottom: 10px;
-    padding-top: 25px;
+    padding-top: 40px;
 }
 .navbar-btn {
     

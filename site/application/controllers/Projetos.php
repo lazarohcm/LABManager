@@ -1,11 +1,4 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of projetos
  *
@@ -15,13 +8,13 @@
 class projetos extends CI_Controller {
 
     public function index() {
-        $this->load->model('laboratoriomodel');
+        $this->load->model('projetosmodel');
         try {
-            $lab = $this->laboratoriomodel->buscarPorNome('algo');
+            $arrayProjetos = $this->projetosmodel->buscarTodos();
         } catch (Exception $ex) {
             throw new Exception($ex->getMessage());
         }
-        $this->templateadmin->load('projetos/projetos', TITULO_SITE, '', TRUE, array());
+        $this->templateadmin->load('projetos/projetos', TITULO_SITE, '', TRUE, array('projetos' =>  $arrayProjetos));
     }
 
     public function cadastrar() {
@@ -35,6 +28,19 @@ class projetos extends CI_Controller {
         $this->output
                 ->set_content_type('application/json')
                 ->set_output(json_encode(array('sucesso' => true, 'projeto' => $projeto)));
+    }
+    
+    public function visualizar($id = NULL){
+        if($id == NULL){
+            show_404();
+        }
+        $this->load->model('projetosmodel');
+        try {
+            $projeto = $this->projetosmodel->buscarPorId($id);
+        } catch (Exception $ex) {
+            throw new Exception($ex->getMessage());
+        }
+        $this->templateadmin->load('projetos/view', TITULO_SITE, '', TRUE, array('projeto' =>  $projeto));
     }
     
 

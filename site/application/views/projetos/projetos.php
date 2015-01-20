@@ -16,73 +16,21 @@
     <!-- /.row -->
 
     <!-- Projects Row -->
-    <div class="row">
-        <div class="col-md-6 img-portfolio">
-            <a href="portfolio-item.html">
-                <img class="img-responsive img-hover" src="<?php echo base_url(); ?>assets/img/logo-ncleclipse.png" alt="">
-            </a>
-            <h3>
-                <a href="pagina-projeto.html">NCL Eclipse</a>
-            </h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-        </div>
-        <div class="col-md-6 img-portfolio">
-            <a href="portfolio-item.html">
-                <img class="img-responsive img-hover" src="http://placehold.it/700x400" alt="">
-            </a>
-            <h3>
-                <a href="portfolio-item.html">Project Two</a>
-            </h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-        </div>
-    </div>
-    <!-- /.row -->
+    <?php foreach ($projetos as $projeto) { ?>
 
-    <!-- Projects Row -->
-    <div class="row">
-        <div class="col-md-6 img-portfolio">
-            <a href="portfolio-item.html">
-                <img class="img-responsive img-hover" src="http://placehold.it/700x400" alt="">
-            </a>
-            <h3>
-                <a href="portfolio-item.html">Project Three</a>
-            </h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+        <div class="row">
+            <div class="col-md-6 img-portfolio">
+                <a href="portfolio-item.html">
+                    <img class="img-responsive img-hover" src="<?php echo stream_get_contents($projeto->getImagem()); ?>" alt="">
+                </a>
+                <h3>
+                    <a href="pagina-projeto.html"><?php echo $projeto->getNome(); ?></a>
+                </h3>
+                <p><?php echo substr($projeto->getTexto(),0,140); ?></p>
+            </div>            
         </div>
-        <div class="col-md-6 img-portfolio">
-            <a href="portfolio-item.html">
-                <img class="img-responsive img-hover" src="http://placehold.it/700x400" alt="">
-            </a>
-            <h3>
-                <a href="portfolio-item.html">Project Four</a>
-            </h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-        </div>
-    </div>
-    <!-- /.row -->
 
-    <!-- Projects Row -->
-    <div class="row">
-        <div class="col-md-6 img-portfolio">
-            <a href="portfolio-item.html">
-                <img class="img-responsive img-hover" src="http://placehold.it/700x400" alt="">
-            </a>
-            <h3>
-                <a href="portfolio-item.html">Project Five</a>
-            </h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-        </div>
-        <div class="col-md-6 img-portfolio">
-            <a href="portfolio-item.html">
-                <img class="img-responsive img-hover" src="http://placehold.it/700x400" alt="">
-            </a>
-            <h3>
-                <a href="portfolio-item.html">Project Six</a>
-            </h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-        </div>
-    </div>
-    <!-- /.row -->
+    <?php } ?>
 
     <hr>
 

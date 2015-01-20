@@ -3,7 +3,10 @@
     <!-- Page Heading/Breadcrumbs -->
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header"><?php echo $laboratorio->getNome(); ?></h1>
+            <h1 class="page-header">
+                Laboratórios
+                 <small><?php echo $laboratorio->getNome(); ?></small>
+            </h1>
             <ol class="breadcrumb">
                 <li><a href="<?php echo site_url() . "/home"; ?>">Home</a>
                 </li>

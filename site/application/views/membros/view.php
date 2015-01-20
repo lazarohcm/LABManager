@@ -63,7 +63,7 @@
                     <div class="row">
                         <div class="form-group col-md-3">
                             <label>Laboratório:</label>
-                            <a href="<?php echo site_url('/laboratorios/lab/' . strtolower($membro->getLaboratorio()->getNome())); ?>">
+                            <a href="<?php echo site_url('/laboratorios/visualizar/' . strtolower($membro->getLaboratorio()->getNome())); ?>">
                                 <?php echo $membro->getLaboratorio()->getNome(); ?>
                             </a>
                         </div>

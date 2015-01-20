@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
-                Bem vindo ao NCA
+                Bem vindo ao NCA!
             </h1>
             <h2> O Núcleo de Computação Aplicada é composto pelos seguintes laboratórios:</h2>
         </div>
@@ -16,7 +16,7 @@
                     </div>
                     <div class="panel-body" style="position: relative; height: 174px">
                         <p><?php echo $laboratorio->getDescricao(); ?></p>
-                        <a style="position: absolute; bottom: 13px" href="<?php echo site_url()."/laboratorios/lab/"; echo strtolower($laboratorio->getNome());?>" class="btn btn-default">Ir para página</a>
+                        <a style="position: absolute; bottom: 13px" href="<?php echo site_url()."/laboratorios/visualizar/"; echo strtolower($laboratorio->getNome());?>" class="btn btn-default">Ir para página</a>
                     </div>
                 </div>
             </div>
