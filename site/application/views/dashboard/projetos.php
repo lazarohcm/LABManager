@@ -36,7 +36,7 @@
                 <h1>Projetos</h1> 
             </div>
             <div class="bs-example" data-example-id="striped-table">
-                <table id="tabelaMembros" class="table table-hover">
+                <table id="tabelaProjetos" class="table table-hover">
                     <thead>
                         <tr>
                             <th>Nome</th>
@@ -52,7 +52,7 @@
                             <tr>
                                 <td class="tdUsuario">
                                     <strong>
-                                        <a href="#" class="username" data-id="<?php echo $projeto->getId(); ?>">
+                                        <a href="#" class="projectname" data-id="<?php echo $projeto->getId(); ?>">
                                             <?php echo $projeto->getNome(); ?>
                                         </a>
                                     </strong>
@@ -178,7 +178,7 @@
     <!-- /.modal-dialog -->
 </div>
 
-<!-- Modal Alterar Cadastrar -->
+<!-- Modal Cadastrar Membro -->
 <div class="modal fade" id="modalAddMembro" tabindex="-1" role="dialog" aria-labelledby="modalRemover" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -186,9 +186,21 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title">Adicione membros ao projeto</h4>
             </div>
+            <div class="modal-body">
+                <table id="tabelaMembros" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
             <div class="modal-footer">
                 <button id="btnNao" type="button" class="btn btn-primary" data-dismiss="modal">Não</button>
-                <button id="btnRemover" type="button" class="btn btn-danger">Sim</button>
+                <button id="btnAdicionarMembroProjeto" type="button" class="btn btn-danger">Sim</button>
             </div>
         </div>
         <!-- /.modal-content -->

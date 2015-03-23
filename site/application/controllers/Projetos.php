@@ -43,5 +43,36 @@ class projetos extends CI_Controller {
         $this->templateadmin->load('projetos/view', TITULO_SITE, '', TRUE, array('projeto' =>  $projeto));
     }
     
-
+    public function atualizar(){
+        $arrayRequest = $this->input->post();
+        $this->load->model('projetosmodel');
+        try {
+            $projeto = $this->projetosmodel->atualizar($arrayRequest);
+        } catch (Exception $ex) {
+            throw new Exception($ex->getMessage());
+        }
+        $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode(array('sucesso' => true, 'projeto' => $projeto)));
+    }
+    
+    public function buscarporid(){
+        $arrayRequest = $this->input->post();
+        $this->load->model('projetosmodel');
+        try {
+            $projeto = $this->projetosmodel->buscarPorId($arrayRequest['idProjeto']);
+            $arrayProjeto = array();
+            if($projeto != NULL){
+                $arrayProjeto = array('nome' => $projeto->getNome(), 'inicio' => $projeto->getData_inicio()->format('d/m/Y'), 
+                    'termino' => $projeto->getData_termino()->format('d/m/Y'), 'laboratorio' => $projeto->getLaboratorio()->getId(), 
+                    'coordenador' => $projeto->getCoordenador()->getId(), 'descricao'=> $projeto->getTexto(),
+                    'capaProjeto' => stream_get_contents($projeto->getImagem()));
+            }
+        } catch (Exception $ex) {
+            throw new Exception($ex->getMessage());
+        }
+        $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode(array('sucesso' => true, 'projeto' => $arrayProjeto)));
+    }
 }

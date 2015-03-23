@@ -141,6 +141,14 @@ class Membro {
      */
     private $chefeProjeto;
     
+    /**
+     * Propriedade privada
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="MembroProjeto", mappedBy="membro", cascade={"all"})
+     *  
+     */
+    private $membro_projeto;
+    
     function __construct($id = NULL ,$laboratorio = NULL ,$nome = NULL ,$ativo = NULL ,$tipo = NULL ,$email = NULL ,$telefone = NULL ,
             $facebook = NULL ,$twitter = NULL ,$linkdl = NULL ,$data_entrada = NULL ,$data_saida = NULL ,$biografia = NULL ,
             $area_interesse = NULL ,$admin = NULL ,$senha = NULL ,$usuario = NULL ,$lattes = NULL ,$foto = NULL ) {
@@ -330,8 +338,14 @@ class Membro {
         $chefeProjeto->setCoordenador($this);
         $this->chefeProjeto->add($chefeProjeto);
     }
+    
+    function getMembroProjeto() {
+        return $this->membro_projeto;
+    }
 
-
-
+    function setMembroProjeto(MembroProjeto $membro_projeto) {
+        $membro_projeto->setMembro($this);
+        $this->membro_projeto->add($membro_projeto);
+    }
 
 }

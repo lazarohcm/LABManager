@@ -7,12 +7,14 @@ $(document).ready(function () {
         var nome = $('#txtNomeLaboratorio').val();
         var descricao = $('#txtDescricao').val();
         var telefone = $('#txtTelefone').val();
-        var dataPost = {nome: nome, descricao: descricao, telefone: telefone};
+        var capa = $('#capa').attr('src');
+        var dataPost = {nome: nome, descricao: descricao, telefone: telefone, capa:capa};
         ajaxMessage();
         $.post(js_site_url('index.php/laboratorios/cadastrar'), dataPost, function (response) {
             console.log(response);
         });
         $("#modalNewEdit").modal('hide');
+        //location.reload();
     });
 
     $('#btnEditarSalvar').on('click', function () {
@@ -20,7 +22,7 @@ $(document).ready(function () {
         nome = $('#txtEditarNome').val();
         descricao = $('#txtEditarDescricao').val();
         telefone = $('#txtEditarTelefone').val();
-        capa = $('#capa').attr('src');
+        capa = $('#editarCapa').attr('src');
         id = elementId;
         dataPost = {id:id, nome: nome, descricao: descricao, telefone: telefone, capa: capa};
         ajaxMessage();
@@ -28,11 +30,13 @@ $(document).ready(function () {
             console.log(response);
         });
         $("#modalNewEdit").modal('hide');
+        location.reload();
     });
 
     $(document).on('click', '.editar, .remover', function () {
         element = $(this).parent();
         elementId = $(this).parent().find('h4').data('id');
+        
     });
 
     $('.editar').on('click', function () {
@@ -48,7 +52,6 @@ $(document).ready(function () {
                 $('#txtEditarTelefone').val(response.lab.telefone);
                 $('#capa').attr('src', response.lab.capa);
             }
-
         });
     });
 
@@ -57,10 +60,9 @@ $(document).ready(function () {
         var dataPost = {id: elementId};
         ajaxMessage();
         $.post(js_site_url('index.php/laboratorios/remover'), dataPost, function (response) {
-            $(element).remove();
+            $(element).parent().remove();
         });
         $("#modalRemover").modal('hide');
-        location.reload();
     });
 });
 

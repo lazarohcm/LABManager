@@ -12,7 +12,7 @@
             <div class="row placeholders">
 
                 <?php foreach ($laboratorios as $laboratorio) { ?> 
-                    <div class="col-xs-6 col-sm-6 placeholder">
+                    <div class="col-xs-5 col-sm-5 placeholder" style="margin-left: 20px;">
                         <div class="row">
                             <div class="thumbnail col-sm-5 col-md-offset-3" style="left: 20px;">
                                 <img class="img-rounded" src="<?php echo stream_get_contents($laboratorio->getCapa()); ?>" alt="">
@@ -54,6 +54,24 @@
                 <h4 class="modal-title">Novo Laboratório</h4>
             </div>
             <div class="modal-body">
+                <div class="col-lg-8 col-md-offset-2">
+                    <div class="image-preview" id="id-image-preview">
+                        <div class="image-wrap" data-image-width="400" data-image-height="300" data-img-name="capa">
+                            <div class="image-default">
+                                <img class="img-responsive" id="capa" data-src="holder.js/400x300" alt="..." />
+                            </div>
+                        </div>
+
+                        <div class="message"></div>
+                        <br>
+                        <div class="action">
+                            <button type="button" class="btn btn-primary btn-block btn-image-preview">
+                                <i class="fa fa-cloud-upload"></i> Carregar imagem
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <hr>
                 <div class="form-group">
                     <label>Nome do Laboratório: </label>
                     <input name="txtNome" id="txtNomeLaboratorio" type="text" class="form-control" placeholder="Digite aqui o nome do laboratório..." />
@@ -89,9 +107,9 @@
                 <div class="row">
                     <div class="col-lg-8 col-md-offset-2">
                         <div class="image-preview" id="id-image-preview">
-                            <div class="image-wrap" data-image-width="400" data-image-height="300" data-img-name="capa">
+                            <div class="image-wrap" data-image-width="400" data-image-height="300" data-img-name="editarCapa">
                                 <div class="image-default">
-                                    <img class="img-responsive" id="capa" data-src="holder.js/400x300" alt="..." />
+                                    <img class="img-responsive" id="editarCapa" data-src="holder.js/400x300" alt="..." />
                                 </div>
                             </div>
 

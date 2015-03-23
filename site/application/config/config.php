@@ -357,10 +357,10 @@ $config['encryption_key'] = md5('LabManagers');
 */
 $config['sess_driver']			= 'cookie';
 $config['sess_valid_drivers']	= array();
-$config['sess_cookie_name']		= 'ci_session';
+$config['sess_cookie_name']		= 'lab_manager';
 $config['sess_expiration']		= 7200;
 $config['sess_expire_on_close']	= FALSE;
-$config['sess_encrypt_cookie']	= FALSE;
+$config['sess_encrypt_cookie']	= TRUE;
 $config['sess_use_database']	= FALSE;
 $config['sess_table_name']		= 'ci_sessions';
 $config['sess_match_ip']		= FALSE;

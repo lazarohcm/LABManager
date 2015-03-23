@@ -56,5 +56,25 @@ class Projetosmodel extends CI_Model {
         }
         return $retorno;
     }
+    
+    public function atualizar($arrayProjeto){
+        $facedeProjeto = new ProjetoFacade();
+        $projeto = $facedeProjeto->buscarPorID($arrayProjeto['id']);
+        $projeto->setNome($arrayProjeto['nome']);
+        $projeto->setTexto($arrayProjeto['descricao']);
+        $projeto->setData_inicio(DateTime::createFromFormat('d/m/Y', $arrayProjeto['inicio']));
+        if (isset($arrayProjeto['termino'])) {
+            $projeto->setData_termino(DateTime::createFromFormat('d/m/Y', $arrayProjeto['termino']));
+        }
+        $projeto->setImagem($arrayProjeto['capa']);
+        $idLab = $arrayProjeto['laboratorio'];
+        $idCoordenador = $arrayProjeto['coordenador'];
+        try {
+            $retorno = $facedeProjeto->atualizar(array('projeto' => $projeto, 'idLab' => $idLab, 'idCoordenador' => $idCoordenador));
+        } catch (Exception $ex) {
+            throw new Exception($ex->getMessage());
+        }
+        return $retorno;
+    }
 
 }

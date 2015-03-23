@@ -26,8 +26,7 @@
                     <div class="row col-lg-8">
                         <label>Sobre:</label>
                         <form>
-                            <textarea id="sobre" style="height: 200px;" class="form-control" placeholder="Escreva algo sobre você" rows="3">
-                                <?php echo $membro->getBiografia() != NULL ? $membro->getBiografia() : NULL; ?>
+                            <textarea id="sobre" style="height: 200px;" class="form-control" placeholder="Escreva algo sobre você" rows="3"><?php echo $membro->getBiografia() != NULL ? $membro->getBiografia() : NULL; ?>
                             </textarea>
                         </form>
                         <br>

@@ -8,6 +8,7 @@ namespace LabManager\Bean;
  * @version string
  */
 use Doctrine\ORM\Mapping as ORM;
+use \Doctrine\Common\Collections\ArrayCollection;
 /**
  * @ORM\Table(name="PROJETO")
  * @ORM\Entity()
@@ -65,6 +66,14 @@ class Projeto {
      */
     private $laboratorio;
     
+    /**
+     * Propriedade privada
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="MembroProjeto", mappedBy="membro", cascade={"all"})
+     *  
+     */
+    private $membro_projeto;
+    
     function __construct($id = NULL, $nome = NULL, $data_inicio = NULL, $data_termino = NULL, $imagem = NULL, $texto = NULL) {
         $this->id = $id;
         $this->nome = $nome;
@@ -72,6 +81,8 @@ class Projeto {
         $this->data_termino = $data_termino;
         $this->imagem = $imagem;
         $this->texto = $texto;
+        
+        $this->membro_projeto = new ArrayCollection();
     }
     
     public function __toString() {
@@ -140,5 +151,14 @@ class Projeto {
 
     function setLaboratorio($laboratorio) {
         $this->laboratorio = $laboratorio;
+    }
+    
+    function getMembroProjeto() {
+        return $this->membro_projeto;
+    }
+
+    function setMembroProjeto(MembroProjeto $membro_projeto) {
+        $membro_projeto->setMembro($this);
+        $this->membro_projeto->add($membro_projeto);
     }
 }

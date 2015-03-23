@@ -27,3 +27,8 @@ Para configurar o banco de dados do sistema é necessário alterar o arquivo com
       $databaseConfig['production']['dbdriver'] =  'pdo_mysql';
       $databaseConfig['production']['charset'] =  'utf8';
 ```
+
+###Implantação
+Após configurado o acesso ao bando de dados, basta importar o arquivo SQL de implementação que está localizado em `LABManager\Doc\sqlimplantacao.sql`.
+Será criado um banco com um laboratório, algumas notícias, projetos e um usuário cadastrado.
+###Utilização

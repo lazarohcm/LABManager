@@ -49,7 +49,12 @@ class ProjetoNegocio {
         }
     }
     
-    public function atualizar($projeto){
+    public function atualizar($projetoData){
+        $lab = $this->labNegocio->buscarPorID($projetoData['idLab']);
+        $coordenador = $this->membroNegocio->buscarPorID($projetoData['idCoordenador']);
+        $projeto = $projetoData['projeto'];
+        $projeto->setLaboratorio($lab);
+        $projeto->setCoordenador($coordenador);
         try{
             $this->dao->update($projeto);
         } catch (\Exception $ex) {

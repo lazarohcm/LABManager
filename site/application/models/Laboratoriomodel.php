@@ -13,7 +13,7 @@ class Laboratoriomodel extends CI_Model {
     public function buscarTodos() {
         $facade = new LaboratorioFacade();
         try {
-            $arrayLaboratorios = $facade->buscarTodos();
+            $arrayLaboratorios = $facade->findAll();
         } catch (Exception $ex) {
             throw new Exception($ex->getMessage());
         }
@@ -68,8 +68,9 @@ class Laboratoriomodel extends CI_Model {
         $laboratorio->setNome($arrayLaboratorio['nome']);
         $laboratorio->setDescricao($arrayLaboratorio['descricao']);
         $laboratorio->setTelefone($arrayLaboratorio['telefone']);
+        $laboratorio->setCapa($arrayLaboratorio['capa']);
         try {
-            $lab = $facade->salvar($laboratorio);
+            $lab = $facade->save($laboratorio);
         } catch (Exception $ex) {
             throw new Exception($ex->getMessage());
         }

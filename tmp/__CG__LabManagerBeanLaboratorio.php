@@ -64,10 +64,10 @@ class Laboratorio extends \LabManager\Bean\Laboratorio implements \Doctrine\ORM\
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'id', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'nome', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'descricao', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'telefone', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'membro');
+            return array('__isInitialized__', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'id', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'nome', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'descricao', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'telefone', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'capa', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'membro', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'projeto');
         }
 
-        return array('__isInitialized__', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'id', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'nome', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'descricao', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'telefone', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'membro');
+        return array('__isInitialized__', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'id', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'nome', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'descricao', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'telefone', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'capa', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'membro', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'projeto');
     }
 
     /**
@@ -290,12 +290,56 @@ class Laboratorio extends \LabManager\Bean\Laboratorio implements \Doctrine\ORM\
     /**
      * {@inheritDoc}
      */
-    public function setMembro(\Doctrine\Common\Collections\ArrayCollection $membro)
+    public function setMembro(\LabManager\Bean\Membro $membro)
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setMembro', array($membro));
 
         return parent::setMembro($membro);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getProjeto()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getProjeto', array());
+
+        return parent::getProjeto();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setProjeto(\LabManager\Bean\Projeto $projeto)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setProjeto', array($projeto));
+
+        return parent::setProjeto($projeto);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCapa()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCapa', array());
+
+        return parent::getCapa();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setCapa($capa)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCapa', array($capa));
+
+        return parent::setCapa($capa);
     }
 
 }

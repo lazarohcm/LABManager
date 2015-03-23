@@ -6,7 +6,7 @@
  */
 class Laboratorios extends CI_Controller {
     public function cadastrar(){
-        if ($this->sessioncontrol->isLoggedIn()) {
+        if (!$this->sessioncontrol->isLoggedIn()) {
             redirect('/acesso/index');
         }
         $arrayRequest = $this->input->post();
@@ -82,7 +82,7 @@ class Laboratorios extends CI_Controller {
     }
     
     public function remover(){
-        if ($this->sessioncontrol->isLoggedIn()) {
+        if (!$this->sessioncontrol->isLoggedIn()) {
             redirect('/acesso/index');
         }
         $arrayRequest = $this->input->post();

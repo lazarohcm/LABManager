@@ -16,6 +16,7 @@ $(document).ready(function () {
             }
         });
     });
+    
     var id = null;
     $('.editar').on('click', function () {
         id = null;
