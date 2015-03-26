@@ -1,112 +1,119 @@
-<link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>assets/fonts/font-awesome/css/font-awesome.min.css">
-<div class="container">
-    <!-- Page Heading/Breadcrumbs -->
+<div class="thumbnail content-usuario">
+    <img src="<?php echo stream_get_contents($membro->getFoto()); ?>" alt="...">
+    <div class="caption-full">
+        <h4 class="text-center">
+            <a href="<?php echo $membro->getLattes(); ?>">Lázaro Henrique de Carvalho Marques</a>
+        </h4>
+    </div>
     <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header"><?php echo $membro->getNome(); ?>
-            </h1>
-            <ol class="breadcrumb">
+        <ul class="list-inline text-center">
+            <li>
+                <a target="_blank" class="btn-user-social" href="<?php echo $membro->getFacebook(); ?>">
+                    <i class="fa fa-fw fa-facebook"></i>
+                </a>
+            </li>
+            <li>
+                <a target="_blank" class="btn-user-social" href="<?php echo $membro->getLinkdl(); ?>">
+                    <i class="fa fa-fw fa-twitter"></i>
+                </a>
+            </li>
+            <li>
+                <a target="_blank" class="btn-user-social" href="<?php echo $membro->getTwitter(); ?>">
+                    <i class="fa fa-fw fa-linkedin"></i>
+                </a>
+            </li>
+        </ul>
+        <div class="text-center">
+
+            <ul class="list-inline">
                 <li>
-                    <a href="<?php echo site_url() . "/home"; ?>">Home</a>
+                    <span><strong>Áreas de interesse: </strong></span>
                 </li>
-                <li class="active">
-                    <a href="<?php echo site_url() . "/noticias"; ?>">Notícias</a>
+                <?php
+                $areas = explode(',', $membro->getArea_interesse());
+                $labels = array('warning', 'info', 'success');
+                foreach ($areas as $key => $area) { ?>
+                <li>
+                    <span class="label label-<?php echo $labels[$key%3] ?>"><?php echo $area ?></span>
                 </li>
-                <li class="active"><?php echo $membro->getId(); ?></li>
-            </ol>
+                <?php
+                }
+                ?>
+            </ul>
+        </div>
+        <br>
+        <div class="text-center">
+            <ul class="list-inline">
+                <li>
+                    <i class="fa fa-phone"></i> <?php echo $membro->getTelefone(); ?>
+                </li>
+                <li>
+                    <i class="fa fa-envelope"> <?php echo $membro->getEmail(); ?></i>
+                </li>
+            </ul>
         </div>
     </div>
-    <!-- /.row -->
-    <div class="col-md-9 col-md-offset-2">
 
-        <div class="thumbnail">
-            <img class="img-responsive" src="<?php echo stream_get_contents($membro->getFoto()); ?>" alt="" width="350">
-            <div class="caption-full">
-                <h4 class="text-center"><a href="#"><?php echo $membro->getNome(); ?></a>
-                </h4>
-                <ul class="list-inline col-md-offset-5">
-                    <li><a href="
-                        <?php
-                        if ($membro->getFacebook() != NULL) {
-                            echo $membro->getFacebook();
-                        }
-                        ?>">
-                            <i class="fa fa-2x fa-facebook-square"></i>
-                        </a>
-                    </li>
-                    <li><a href="<?php
-                        if ($membro->getLinkdl() != NULL) {
-                            echo $membro->getLinkdl();
-                        }
-                        ?>"><i class="fa fa-2x fa-linkedin-square"></i></a>
-                    </li>
-                    <li><a href="<?php
-                        if ($membro->getTwitter() != NULL) {
-                            echo $membro->getTwitter();
-                        }
-                        ?>"><i class="fa fa-2x fa-twitter-square"></i></a>
-                    </li>
-                    <li><a href="<?php
-                        if ($membro->getLattes() != NULL) {
-                            echo $membro->getLattes();
-                        }
-                        ?>"><strong>Lattes</strong></a>
-                    </li>
-                </ul>
-                <div class="form-group text-center">
-                    <label>Áreas de interesse:</label>
-                    <p><?php echo $membro->getArea_interesse(); ?></p>
-                    <hr>
-                </div>
-                <div class="container">
-                    <h3>Sobre</h3>
-                    <div class="row">
-                        <div class="form-group col-md-3">
-                            <label>Laboratório:</label>
-                            <a href="<?php echo site_url('/laboratorios/visualizar/' . strtolower($membro->getLaboratorio()->getNome())); ?>">
-                                <?php echo $membro->getLaboratorio()->getNome(); ?>
-                            </a>
-                        </div>
-                        <div class=" form-group col-md-3">
-                            <label>Desde de: </label>
-                            <?php echo $membro->getData_entrada()->format('d/m/Y'); ?>
-                        </div>
-                        <div class=" form-group col-md-3">
-                            <label>Até</label>
-                            <?php echo $membro->getData_saida() != NULL ? $membro->getData_saida()->format('d/m/Y') : 'Hoje'; ?>
-                        </div>
+
+    <hr>
+    <div class="row">
+        <div class="col-md-4 col-sm-4 col-xs-6">
+            <label>Laboratório:</label>
+            <a href="<?php echo site_url("/laboratorios/visualizar/").'/'.strtolower($membro->getLaboratorio()->getNome()); ?>">
+                <?php echo $membro->getLaboratorio()->getNome(); ?>
+            </a>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-6">
+            <label>Membro desde: </label>
+            <?php echo $membro->getData_entrada()->format('d/m/Y'); ?>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-6">
+            <label>Até: </label>
+            <?php echo $membro->getData_saida() != NULL ? $membro->getData_saida()->format('d/m/Y') : 'Hoje'; ?>
+        </div>
+
+        <div class="col-md-12 col-lg-12 col-xs-12 text-justify">
+            <hr>
+            <label>Bio:  </label>
+            <p><?php echo $membro->getBiografia(); ?></p>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-xs-12">
+            <h3>Projetos</h3>
+            <div class="col-sm-6 col-md-4 col-xs-6">
+                <div class="thumbnail projeto">
+                    <img src="http://placehold.it/460x250/e67e22/ffffff&text=HTML5" alt="...">
+                    <div class="caption">
+                        <h3><a href="projeto.html">Título do Projeto</a></h3>
                     </div>
-
-                    <div class="form-group">
-                        <label>Bio:</label>
-                        <p><?php echo $membro->getBiografia(); ?></p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-xs-6">
+                <div class="thumbnail projeto">
+                    <img src="http://placehold.it/460x250/e67ede/ffffff&text=HTML5" alt="...">
+                    <div class="caption">
+                        <h3><a href="projeto.html">Título do Projeto</a></h3>
                     </div>
-                    
                 </div>
-                <hr>
-                <div class="container">
-                    <h3>Contato</h3>
-                    <div class="row">
-                        
-                        <div class="form-group col-md-4">
-                            <label>Email: </label><?php echo $membro->getEmail(); ?>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label>Telefone: </label><?php echo $membro->getTelefone(); ?>
-                        </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-xs-6">
+                <div class="thumbnail projeto">
+                    <img src="http://placehold.it/460x250/2c7e22/ffffff&text=HTML5" alt="...">
+                    <div class="caption">
+                        <h3><a href="projeto.html">Título do Projeto</a></h3>
                     </div>
-
                 </div>
-                <hr>
-                <div class="container">
-                    
-                    <div class="form-group">
-                        <h3>Projetos</h3>
-                    </div> 
+            </div>
+            <div class="col-sm-6 col-md-4 col-xs-6">
+                <div class="thumbnail projeto">
+                    <img src="http://placehold.it/460x250/e62d22/ffffff&text=HTML5" alt="...">
+                    <div class="caption">
+                        <h3><a href="projeto.html">Título do Projeto</a></h3>
+                    </div>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
-

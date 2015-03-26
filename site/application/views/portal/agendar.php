@@ -1,26 +1,6 @@
-<link href="<?php echo base_url(); ?>assets/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
-<!-- Page Content -->
-<div class="container">
-
-    <!-- Page Heading/Breadcrumbs -->
+<div class="col-lg-12">
+    <h1 class="page-header">Agendar</h1>
     <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Notícias
-            </h1>
-            <ol class="breadcrumb">
-                <li><a href="<?php echo site_url() . "/home"; ?>">Home</a>
-                </li>
-                <li class="active">Agendar</li>
-            </ol>
-        </div>
-    </div>
-    <!-- /.row -->
-
-    <!-- Publicações Row -->
-    <div class="row">
-        <div class="col-lg-12">
-            <h2 class="page-header">Agende Algo</h2>
-        </div>
         <div class="col-md-3 col-sm-6">
             <div class="panel panel-default text-center">
                 <div class="panel-heading">
@@ -54,8 +34,4 @@
             </div>
         </div>
     </div>
-    <!-- /.row -->
-
-    <hr>
 </div>
-<!-- /.container -->

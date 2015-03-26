@@ -106,9 +106,6 @@
                                             <?php echo $laboratorio->getNome(); ?></a>
                                     </li> 
                                 <?php } ?>
-                                <li>
-                                    <a href="laboratorio.html"> LabPAI</a>
-                                </li>
                             </ul>
                         </li>
                         <li>

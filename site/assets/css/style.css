@@ -5,6 +5,10 @@ body {
     font-size: 15px;
 }
 
+.container{
+    margin-bottom: 30px;
+}
+
 /*Navbar */
 .navbar {
     text-transform: uppercase;
@@ -75,7 +79,22 @@ body {
 }
 
 .navbar-default .navbar-toggle .icon-bar {
-    background-color: #DDD;
+    background-color: #000;
+}
+.navbar-default .navbar-toggle {
+    border-color: #000;
+}
+
+.membro-lab{
+    min-height: 392px;
+    max-height: 392px;
+}
+
+.img-all-posts{
+    min-height: 150px;
+    min-width: 150px;
+    max-height: 150px;
+    max-width: 150px;
 }
 
 .dropdown-menu{
