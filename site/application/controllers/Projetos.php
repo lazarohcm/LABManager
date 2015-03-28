@@ -75,4 +75,17 @@ class projetos extends CI_Controller {
                 ->set_content_type('application/json')
                 ->set_output(json_encode(array('sucesso' => true, 'projeto' => $arrayProjeto)));
     }
+    
+    public function buscarTodosArray(){
+        $this->load->model('projetosmodel');
+        try {
+            $projetos = $this->projetosmodel->buscarTodosArray();
+            $retorno = array('sucesso' => true, 'projetos' => $projetos);
+        } catch (Exception $ex) {
+            $retorno = array('sucesso' => false, 'msg' => $ex->getMessage());
+        }
+        $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode($retorno));
+    }
 }

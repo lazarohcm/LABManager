@@ -7,6 +7,13 @@ namespace LabManager\Bean;
  * @author Lázaro Henrique <lazarohcm@gmail.com>
  * @version string
  */
+
+/**
+ * @ORM\Table(name="NOTICIA_PROJETO")
+ * @ORM\Entity()
+ */
 class NoticiaProjeto {
-    //put your code here
+    private $id;
+    private $noticia;
+    private $projeto;
 }

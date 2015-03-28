@@ -27,6 +27,21 @@ class Projetosmodel extends CI_Model {
         return $arrayProjetos;
     }
     
+    public function buscarTodosArray(){
+        $facade = new ProjetoFacade();
+        try {
+            $arrayProjetos = $facade->findAll();
+        } catch (Exception $ex) {
+            throw new Exception($ex->getMessage());
+        }
+        $array = array();
+        foreach ($arrayProjetos as $projeto){
+            $array[$projeto->getId()] = $projeto->getNome();
+        }
+
+        return $array;
+    }
+    
     public function buscarPorId($id){
         $facade = new ProjetoFacade();
         try {

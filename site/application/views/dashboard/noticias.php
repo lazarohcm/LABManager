@@ -1,99 +1,63 @@
-<style> 
-    .image-preview>.image-wrap {
-        margin: 0 auto;
-        margin-bottom: 15px;
-        margin-top: 10px;    
-    }
+<div class="col-md-9">
+    <button class="pull-right btn btn-primary" data-toggle="modal" data-target="#modalNewEdit">
+        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+        Adicionar Nova
+    </button>
+    <h1>Notícias</h1>
+    <hr>
+    <table id="tabela-noticias" class="table table-hover">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Laboratório</th>
+                <th>Projeto</th>
+                <th>Data</th>
+                <th>Remover</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($noticias as $noticia) { ?>
+                <tr data-id="<?php echo $noticia->getId(); ?>">
+                    <td>
+                        <strong>
+                            <a href="#" class="titulo">
+                                <?php echo $noticia->getTitulo(); ?>
+                            </a>
+                        </strong>
 
-    .image-preview>.image-wrap {
-        cursor: pointer;
-    }
-
-    .image-preview>.image-wrap img {
-    }
-
-    .image-preview>.action button {
-        width: 80%;
-        margin: 0 auto;
-    }
-
-    .image-preview>.message.error {
-        text-align: center;
-        margin: 10px 0 10px 0;
-        background-color: red;
-        color: #fff;
-    }
-</style>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="top: -40px">
-            <div class="page-header">
-                <button id="btnModal" class='btn btn-primary pull-right' data-target='#modalNewEdit' data-toggle='modal'>
-                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                    Adicionar Nova
-                </button>
-                <h1>Notícias</h1> 
-            </div>
-            <div class="bs-example" data-example-id="striped-table">
-                <table id="tabelaMembros" class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Título</th>
-                            <th>Laboratório</th>
-                            <th>Projeto</th>
-                            <th>Data</th>
-                            <th>Remover</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($noticias as $noticia) { ?>
-                            <tr>
-                                <td>
-                                    <strong>
-                                        <a href="#" class="titulo" data-id="<?php echo $noticia->getId(); ?>">
-                                            <?php echo $noticia->getTitulo(); ?>
-                                        </a>
-                                    </strong>
-                                    
-                                </td>
-                                <td><?php //echo $noticia->getLaboratorio();   ?></td>
-                                <td><?php //echo $noticia->getProjeto();   ?></td>
-                                <td><?php
-                                    if ($noticia->getData() != NULL) {
-                                        echo $noticia->getData()->format('d/m/Y');
-                                    } else {
-                                        echo 'Sem data';
-                                    }
-                                    ?></td>
-                                <td style="position:relative;">
-                                    <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
-                                        Ação&nbsp;&nbsp;&nbsp; <span class="caret"></span>
-                                    </button>
-                                    <ul style="top: 70%" class="dropdown-menu" role="menu">
-                                        <li>
-                                            <a class="editar" href="#" data-toggle="modal" data-target="#modalNewEdit">
-                                                <span class="glyphicon glyphicon-pencil"></span> Editar
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="remover" href="#" data-toggle="modal" data-target="#modalRemover">
-                                                <span class="glyphicon glyphicon-remove-circle"></span> Excluir
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+                    </td>
+                    <td><?php //echo $noticia->getLaboratorio();               ?></td>
+                    <td><?php //echo $noticia->getProjeto();               ?></td>
+                    <td><?php $noticia->getData() != NULL ? printf($noticia->getData()->format('d/m/Y')) : printf('Sem data'); ?></td>
+                    <td>
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                                Ação&nbsp;&nbsp;&nbsp; <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a class="editar" href="#" data-toggle="modal" data-target="#modalNewEdit">
+                                        <span class="glyphicon glyphicon-pencil"></span> Editar
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="remover" href="#" data-toggle="modal" data-target="#modalRemover">
+                                        <span class="glyphicon glyphicon-remove-circle"></span> Excluir
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
 </div>
+
 
 <!-- Modal Alterar Cadastrar -->
 <div class="modal fade" id="modalNewEdit" tabindex="-1" role="dialog" aria-labelledby="modalNewEdit" aria-hidden="true">
-    <div class="modal-dialog modal-lg" style="width:90%;">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -102,21 +66,11 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-4">
-                        <div class="image-preview" id="id-image-previewEditar" style="margin-left: 50px;">
-                            <div class="image-wrap" data-image-width="320" data-image-height="200" data-img-name="capa">
-                                <div class="image-default">
-                                    <img class="img-responsive" id="capa" data-src="holder.js/320x200" alt="..." />
-                                </div>
-                            </div>
-
-                            <div class="message"></div>
-
-                            <div class="action">
-                                <button type="button" class="btn btn-primary btn-block btn-image-preview">
-                                    <i class="fa fa-cloud-upload"></i> Carregar imagem
-                                </button>
-                            </div>
-                        </div>
+                        <input style="display: none" type="file" id="input-capa" onchange="previewFile()"   >
+                        <img id="capa" src="http://placehold.it/700x300/81326D/ffffff&text=Notícia" class="img-responsive img-upload" alt="Capa Labarotório"/>
+                        <button id="btn-upload" type="button" class="btn btn-primary btn-block">
+                            <i class="fa fa-cloud-upload"></i> Carregar imagem
+                        </button>
                     </div>
                     <div class="col-lg-7">
                         <div class="form-group has-feedback">
@@ -125,32 +79,28 @@
                         </div>
                         <div class="form-group has-feedback">
                             <label>Laboratorio:</label>
-                            <select id="laboratorios" style="width:100%;">
-                                <option value="">Selecione um laboratório</option>
+                            <select id="laboratorios" class="form-control">
+                                <option value="0">Selecione um Laboratório</option>
                             </select>
                         </div>
                         <div class="form-group has-feedback">
                             <label>Projeto:</label>
-                            <select id="projetos" style="width:100%;">
-                                <option value="">Selecione um tipo</option>
-                                <option value="1">Professor</option>
-                                <option value="2">Pesquisador</option>
-                                <option value="3">Doutorando</option>
-                                <option value="4">Mestrando</option>
-                                <option value="5">Graduando</option>                                  
+                            <select id="projetos" class="form-control">
+                                <option value="0">Selecione um Projeto</option>                                
                             </select>
                         </div>
                     </div>
+
                     <div class="row">
                         <div id="alerts"></div>
                         <div class="btn-toolbar col-lg-10" data-role="editor-toolbar" data-target="#editor">
                             <div class="btn-group">
-                                <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="glyphicon glyphicon-font"></i><b class="caret"></b></a>
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="fa fa-font fa-2x"></i><b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                 </ul>
                             </div>
                             <div class="btn-group">
-                                <a class="btn dropdown-toggle" data-toggle="dropdown" title="Tamanho da Fonte"><i class="glyphicon glyphicon-text-height"></i>&nbsp;<b class="caret"></b></a>
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font Size"><i class=" fa fa-text-height fa-2x"></i>&nbsp;<b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a data-edit="fontSize 5"><font size="5">Huge</font></a></li>
                                     <li><a data-edit="fontSize 3"><font size="3">Normal</font></a></li>
@@ -158,42 +108,41 @@
                                 </ul>
                             </div>
                             <div class="btn-group">
-                                <a class="btn" data-edit="bold" title="Negrito (Ctrl/Cmd+B)"><i class="glyphicon glyphicon-bold"></i></a>
-                                <a class="btn" data-edit="italic" title="Itálico (Ctrl/Cmd+I)"><i class="glyphicon glyphicon-italic"></i></a>
-                                <a class="btn" data-edit="strikethrough" title="Tachado"><s style='font-size: 1.3em'><b>S</b></s></a>
-                                <a class="btn" data-edit="underline" title="Sublinhado (Ctrl/Cmd+U)"><u style='font-size:1.3em'><b>U</b></u></a>
+                                <a class="btn" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="fa fa-bold fa-2x"></i></a>
+                                <a class="btn" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class=" fa fa-italic fa-2x"></i></a>
+                                <a class="btn" data-edit="strikethrough" title="Strikethrough"><i class="fa fa-strikethrough fa-2x"></i></a>
+                                <a class="btn" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="fa fa-underline fa-2x"></i></a>
                             </div>
                             <div class="btn-group">
-                                <a class="btn" data-edit="insertunorderedlist" title="Lista com Marcadores"><i class="glyphicon glyphicon-list"></i></a>
-                                <a class="btn" data-edit="insertorderedlist" title="Lista Numerada"><i class="glyphicon glyphicon-list"></i></a>
-                                <a class="btn" data-edit="outdent" title="Recuar Identação (Shift+Tab)"><i class="glyphicon glyphicon-indent-left"></i></a>
-                                <a class="btn" data-edit="indent" title="Identar (Tab)"><i class="glyphicon glyphicon-indent-right"></i></a>
+                                <a class="btn" data-edit="insertunorderedlist" title="Bullet list"><i class="fa fa-list-ul fa-2x"></i></a>
+                                <a class="btn" data-edit="insertorderedlist" title="Number list"><i class="fa fa-list-ol fa-2x"></i></a>
+                                <a class="btn" data-edit="outdent" title="Reduce indent (Shift+Tab)"><i class="fa fa-outdent fa-2x"></i></a>
+                                <a class="btn" data-edit="indent" title="Indent (Tab)"><i class="fa fa-indent fa-2x"></i></a>
                             </div>
                             <div class="btn-group">
-                                <a class="btn" data-edit="justifyleft" title="Alinhar à esquerda (Ctrl/Cmd+L)"><i class="glyphicon glyphicon-align-left"></i></a>
-                                <a class="btn" data-edit="justifycenter" title="Centralizar (Ctrl/Cmd+E)"><i class="glyphicon glyphicon-align-center"></i></a>
-                                <a class="btn" data-edit="justifyright" title="Alinhar à direita(Ctrl/Cmd+R)"><i class="glyphicon glyphicon-align-right"></i></a>
-                                <a class="btn" data-edit="justifyfull" title="Justificar(Ctrl/Cmd+J)"><i class="glyphicon glyphicon-align-justify"></i></a>
+                                <a class="btn" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i class="fa fa-align-left fa-2x"></i></a>
+                                <a class="btn" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i class="fa fa-align-center fa-2x"></i></a>
+                                <a class="btn" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i class="fa fa-align-right fa-2x"></i></a>
+                                <a class="btn" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i class="fa fa-align-justify fa-2x"></i></a>
                             </div>
                             <div class="btn-group">
-                                <a class="btn dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="glyphicon glyphicon-link"></i></a>
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="fa fa-link fa-2x"></i></a>
                                 <div class="dropdown-menu input-append">
                                     <input class="span2" placeholder="URL" type="text" data-edit="createLink"/>
                                     <button class="btn" type="button">Add</button>
                                 </div>
-                                <a class="btn" data-edit="unlink" title="Remover Hyperlink"><i class="glyphicon glyphicon-remove"></i></a>
+                                <a class="btn" data-edit="unlink" title="Remove Hyperlink"><i class="fa fa-cut fa-2x"></i></a>
 
                             </div>
 
                             <div class="btn-group">
-                                <a class="btn" title="Inserir Imagem (arraste e solte)" id="pictureBtn"><i class="glyphicon glyphicon-picture"></i></a>
-                                <input id="inputPicture" type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
+                                <a class="btn" title="Insert picture (or just drag & drop)" id="pictureBtn"><i class="fa fa-picture-o fa-2x"></i></a>
+                                <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
                             </div>
                             <div class="btn-group">
-                                <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="glyphicon glyphicon-chevron-right"></i></a>
-                                <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                                <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="fa fa-undo fa-2x"></i></a>
+                                <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="fa fa-repeat fa-2x"></i></a>
                             </div>
-                            <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
                         </div>
                         <div class="col-lg-11" id="editor" style="margin-right:20px; margin-left: 20px"></div>
                     </div>
@@ -227,25 +176,28 @@
     <!-- /.modal-dialog -->
 </div>
 
+<!-- Datatables -->
+<link href="<?php echo base_url(); ?>assets/DataTables/jquery.dataTables.css" rel="stylesheet" type="text/css">
+<link href="<?php echo base_url(); ?>assets/DataTables/dataTables.bootstrap.css" rel="stylesheet" type="text/css">
 
-<script src="<?php echo base_url(); ?>assets/js/jquery-image-preview.js"></script>
+<!-- Bootstrap wysiwyg -->
+<link href="<?php echo base_url(); ?>assets/bootstrap-wysiwyg/bootstrap-wysiwyg.css" rel="stylesheet" type="text/css">
 <link href="<?php echo base_url(); ?>assets/bootstrap-wysiwyg/external/google-code-prettify/prettify.css" rel="stylesheet">
-<link href="<?php echo base_url(); ?>assets/bootstrap-wysiwyg/index.css" rel="stylesheet">
-<script src="<?php echo base_url(); ?>assets/js/noticias.js"></script>
+
+<!-- Datatables -->
+<script src="<?php echo base_url(); ?>assets/DataTables/jquery.dataTables.js"></script>
+<!-- Datatables -->
+<script src="<?php echo base_url(); ?>assets/DataTables/dataTables.bootstrap.js"></script>
+
+<!-- Bootstrap WYSIWYG -->
 <script src="<?php echo base_url(); ?>assets/bootstrap-wysiwyg/bootstrap-wysiwyg.js"></script>
 <script src="<?php echo base_url(); ?>assets/bootstrap-wysiwyg/external/google-code-prettify/prettify.js"></script>
 <script src="<?php echo base_url(); ?>assets/bootstrap-wysiwyg/external/jquery.hotkeys.js"></script>
 
+<script src="<?php echo base_url(); ?>assets/js/noticias.js"></script>
+
 <script>
     $(document).ready(function () {
-        $('#editor').wysiwyg();
-        $('#editor').cleanHtml();
-        $('#editorEditar').wysiwyg();
-        $('#editorEditar').cleanHtml();
-        
-        $('.btn-image-preview').on('click', function () {
-            $('#inputPicture').click();
-        });
         function initToolbarBootstrapBindings() {
             var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',
                 'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times',
@@ -278,6 +230,7 @@
             }
         }
         ;
+
         function showErrorAlert(reason, detail) {
             var msg = '';
             if (reason === 'unsupported-file-type') {
@@ -290,21 +243,13 @@
                     '<strong>File upload error</strong> ' + msg + ' </div>').prependTo('#alerts');
         }
         ;
+
         initToolbarBootstrapBindings();
         $('#editor').wysiwyg({fileUploadError: showErrorAlert});
-        $('#editorEditar').wysiwyg({fileUploadError: showErrorAlert});
         window.prettyPrint && prettyPrint();
 
-        $('.nav-sidebar > li.active').removeClass('active');
-        $('.nav-sidebar > li:contains("Notícias")').addClass('active');
-        $('#entrada,#saida').datepicker({dateFormat: 'dd/mm/yy',
-            dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-            dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
-            dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
-            monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-            monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-            nextText: 'Próximo',
-            prevText: 'Anterior'});
+        $('.dashboard-options > li.active').removeClass('active');
+        $('.dashboard-options > li:contains("Notícias")').addClass('active');
     });
     var js_site_url = function (urlText) {
         var url = "<?php echo base_url(); ?>" + urlText;

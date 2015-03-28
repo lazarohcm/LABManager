@@ -11,22 +11,29 @@ use LabManager\DAO\DAOGenericImpl;
 use LabManager\Bean\Projeto;
 use LabManager\Negocio\LaboratorioNegocio;
 use LabManager\Negocio\MembroNegocio;
+use LabManager\Negocio\AbstractNegocio;
 /**
  * Description of ProjetoNegocio
  *
  * @author Lázaro Henrique <lazarohcm@gmail.com>
  * @version string
  */
-class ProjetoNegocio {
-    private $dao;
-    private $labNegocio;
+class ProjetoNegocio extends AbstractNegocio{
     private $membroNegocio;
     
     function __construct() {
-        $this->dao = new DAOGenericImpl();
-        $this->labNegocio = new LaboratorioNegocio();
+        parent::setDAO(new DAOGenericImpl());
+        parent::setBeanNegocio(new Projeto());
         $this->membroNegocio = new MembroNegocio();
     }
+    
+    function validarObjeto($object) {
+        return TRUE;
+    }
+    
+    function attachEntity($object) {
+        return $object;
+    }   
     
     public function salvar($projetoData){
         $lab = $this->labNegocio->buscarPorID($projetoData['idLab']);
@@ -57,23 +64,6 @@ class ProjetoNegocio {
         $projeto->setCoordenador($coordenador);
         try{
             $this->dao->update($projeto);
-        } catch (\Exception $ex) {
-            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
-        }
-    }
-    
-    public function buscarTodos(){
-        try{
-            return $this->dao->findAll(get_class(new Projeto()));
-        } catch (\Exception $ex) {
-            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
-        }
-    }
-    
-    public function excluir($projeto){
-        try{
-            $labToRemove = $this->buscarPorID($projeto->getId());
-            $this->dao->delete($labToRemove);
         } catch (\Exception $ex) {
             throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
         }

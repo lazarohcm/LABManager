@@ -26,20 +26,20 @@
 
         <!-- Bootstrap Core JavaScript -->
         <script src="<?php echo base_url(); ?>/assets/bootstrap/js/bootstrap.min.js"></script>
-
-        <!--         Bootstrap core JavaScript
-                ================================================== 
-                 Placed at the end of the document so the pages load faster 
-                <script src="<?php echo base_url(); ?>assets/js/jquery-2.1.1.js"></script>
-                <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
-                <script src="<?php echo base_url(); ?>assets/js/nca.js"></script>
-                <script src="<?php echo base_url(); ?>assets/js/holder.js"></script>
-                <script src="<?php echo base_url(); ?>assets/js/bootstrap-growl.js"></script>
-                <script src="<?php echo base_url(); ?>assets/js/plugins/jquery.blockUI.js"></script>
-                <script src="<?php echo base_url(); ?>assets/jquery-ui/jquery-ui.js"></script>
-                <script src="<?php echo base_url(); ?>assets/DataTables/jquery.dataTables.js"></script>
         
-                <script src="<?php echo base_url(); ?>assets/DataTables/dataTables.bootstrap.js"></script>
+        <link href="<?php echo base_url(); ?>/assets/bootstrap-notify/animate.min.css" rel="stylesheet">
+        
+         <!-- Bootstrap Core JavaScript -->
+        <script src="<?php echo base_url(); ?>/assets/bootstrap-notify/bootstrap-notify.min.js"></script>
+        
+        <!-- Bootstrap Core JavaScript -->
+        <script src="<?php echo base_url(); ?>/assets/js/nca.js"></script>
+        
+        <!-- Bootstrap Core JavaScript -->
+        <script src="<?php echo base_url(); ?>/assets/js/jquery.blockUI.js"></script>
+        
+
+        <!-- 
                 <script>
                     $(document).ready(function () {
                         $(document).ajaxStop($.unblockUI);
@@ -71,6 +71,25 @@
     </head>
 
     <body>
+        <?php if (isset($usuario) && $usuario != NULL) { ?>
+            <!-- Admin Navbar -->
+            <div class="header-admin">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="col-md-2 col-sm-3 col-xs-6 pull-right">
+                                <a href="<?php echo site_url() . "/acesso/sair"; ?>"><button class="btn btn-danger navbar-btn">Sair</button></a>
+                            </div> 
+                            <div class="col-md-2 col-sm-3 col-xs-6 pull-right">
+                                <h4 class=""><a href="<?php echo site_url() . "/dashboard"; ?>">Administração</a></h4>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+
         <!-- Navigation -->
         <nav class="navbar navbar-default">
             <div class="container container-navigation">
@@ -130,9 +149,9 @@
                         </li>
                     </ul>
                     <?php if (isset($usuario) && $usuario != NULL) { ?>
-                            <!--<a style="margin-top: 30px;" href="<?php echo site_url() . "/acesso/sair"; ?>" type="button" class="btn btn-danger navbar-btn pull-right">Sair</a>-->
+                                                                <!--<a style="margin-top: 30px;" href="<?php echo site_url() . "/acesso/sair"; ?>" type="button" class="btn btn-danger navbar-btn pull-right">Sair</a>-->
                     <?php } else { ?>
-                            <!--<a style="margin-top: 30px;" href="<?php echo site_url() . "/acesso"; ?>" type="button" class="btn btn-success navbar-btn pull-right">Entrar</a>-->
+                                                                <!--<a style="margin-top: 30px;" href="<?php echo site_url() . "/acesso"; ?>" type="button" class="btn btn-success navbar-btn pull-right">Entrar</a>-->
                     <?php } ?>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -140,17 +159,22 @@
             <!-- /.container-fluid -->
         </nav>
 
-
-        <div class="container">
-            <div class="dashboar-menu">
-                <?php
-                if (isset($menu)) {
+        <?php if ($this->uri->segment(1) == 'dashboard') { ?>
+            <div class="container container-dashboard">
+                <div class="row dashboard-content">
+                    <?php
                     echo $menu;
-                }
-                ?> 
+
+                    echo $contents;
+                    ?>
+                </div>
             </div>
-            <?php echo $contents; ?>
-        </div>
+        <?php } else { ?>
+            <div class="container">
+                <?php echo $contents; ?>
+            </div>
+
+        <?php } ?>
 
         <!-- Footer -->
         <footer class="text-center">

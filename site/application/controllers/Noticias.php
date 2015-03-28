@@ -28,9 +28,10 @@ class Noticias extends CI_Controller {
         $arrayRequest = $this->input->post();
         $this->load->model('noticiasmodel');
         try {
-            $retorno = $this->noticiasmodel->cadastrar($arrayRequest);
+            $this->noticiasmodel->cadastrar($arrayRequest);
+            $retorno = array('sucesso' => true, 'msg' => 'A notícia foi cadastrada');
         } catch (Exception $ex) {
-            throw new Exception($ex->getMessage());
+            $retorno =  array ('sucesso' => false, 'msg' => $ex->getMessage());
         }
         $this->output
                 ->set_content_type('application/json')
@@ -84,12 +85,13 @@ class Noticias extends CI_Controller {
         $this->load->model('noticiasmodel');
         try {
             $this->noticiasmodel->remover($arrayRequest['id']);
+            $retorno = array('sucesso' => true, 'msg' => 'A notícia foi removida');
         } catch (Exception $ex) {
-            throw new Exception($ex->getMessage());
+            $retorno = array('sucesso' => false, 'msg' => $ex->getMessage());
         }
         $this->output
                 ->set_content_type('application/json')
-                ->set_output(json_encode(array('sucesso' => true)));
+                ->set_output(json_encode($retorno));
     }
 
 }

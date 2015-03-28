@@ -34,7 +34,7 @@ class Laboratoriomodel extends CI_Model {
     public function buscarTodosArray(){
         $facade = new LaboratorioFacade();
         try {
-            $arrayLaboratorios = $facade->buscarTodos();
+            $arrayLaboratorios = $facade->findAll();
         } catch (Exception $ex) {
             throw new Exception($ex->getMessage());
         }

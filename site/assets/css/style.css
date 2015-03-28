@@ -9,6 +9,31 @@ body {
     margin-bottom: 30px;
 }
 
+/** header admin **/
+.header-admin{
+    background-color: #000;
+    max-height: 60px;
+}
+
+.header-admin .container{
+    margin-bottom: 0px;
+}
+
+.header-admin a{
+    color: #fff;
+    font-size: 15px;
+}
+
+.header-admin a:focus,
+.header-admin a:hover{
+    color: #1C95A4;
+    text-decoration: none;
+}
+
+.header-admin h4{
+    margin-top: 15px;
+}
+
 /*Navbar */
 .navbar {
     text-transform: uppercase;
@@ -231,6 +256,12 @@ header .intro-text .skills {
     margin-right: auto;
 }
 
+#capa:hover{
+    cursor: pointer;
+}
+.footer-below .container{
+    margin-bottom: 0;
+}
 
 
 /* Css para diferentes tipos de resoluções */
@@ -426,17 +457,15 @@ article{
     background: #fff;
 }
 
-.btn{
-    border: 0px;
-}
-
 .btn-blog {
     color: #ffffff;
     background-color: #85A5C0;
     border-color: #85A5C0;
     margin-bottom:10px
 }
-
+.dashboard-options li.active a{
+    color: #fff;
+}
 .btn-blog:hover,
 .btn-blog:focus,
 .btn-blog:active,
