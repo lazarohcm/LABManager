@@ -1,20 +1,3 @@
-function previewFile() {
-    var preview = document.querySelector('#capa'); //selects the query named img
-    var file = document.querySelector('#input-capa').files[0]; //sames as here
-    var reader = new FileReader();
-
-    reader.onloadend = function () {
-        preview.src = reader.result;
-    };
-
-    if (file) {
-        reader.readAsDataURL(file); //reads the data as a URL
-    } else {
-        preview.src = "";
-    }
-    ;
-}
-
 $(document).ready(function () {
     $('#tabela-noticias').dataTable({
         "language": {
@@ -123,17 +106,20 @@ $(document).ready(function () {
             $.post(js_site_url('index.php/noticias/cadastrar'), dataPost, function (response) {
                 initNotification(response);
                 if (response.sucesso) {
-                    //location.reload();
-                }
-                ;
+                    setTimeout(function () {
+                        location.reload();
+                    }, 3000);
+
+                };
             });
         } else {
             $.post(js_site_url('index.php/noticias/atualizar'), dataPost, function (response) {
                 initNotification(response);
                 if (response.sucesso) {
-                    //location.reload();
-                }
-                ;
+                    setTimeout(function () {
+                        location.reload();
+                    }, 3000);
+                };
             });
         }
     });

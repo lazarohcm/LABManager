@@ -14,7 +14,7 @@
                         <div class="panel-heading">
                             <h4><?php echo $laboratorio->getNome(); ?></h4>
                         </div>
-                        <div>
+                        <div class="panel-capa-laboratorio">
                             <img src="<?php echo stream_get_contents($laboratorio->getCapa()); ?>" class="img-responsive" alt="Capa Labarotório"/>
                             <h4><?php echo $laboratorio->getNome(); ?></h4>
                         </div>

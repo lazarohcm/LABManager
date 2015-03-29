@@ -5,6 +5,18 @@ body {
     font-size: 15px;
 }
 
+.overlay{
+    background-color: rgba(1, 1, 1, 0.7);
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1041;
+}
+
+
+
 .container{
     margin-bottom: 30px;
 }
@@ -141,9 +153,28 @@ b {
 }
 
 .panel-lab{
-    min-height: 574px;
-    max-height: 574px;
-    overflow-y: scrol;
+    min-height: 500px;
+    max-height: 500px;
+}
+
+.panel-lab .panel-heading{
+    max-height: 80px;
+    min-height: 80px;
+}
+
+.panel-lab .panel-body p{
+    max-height: 121px;
+    min-height: 121px;
+}
+
+.panel-capa-laboratorio img{
+    max-height: 140px;
+    min-height: 140px
+}
+
+.panel-capa-laboratorio{
+    max-height: 200px;
+    min-height: 200px
 }
 
 .panel-body p{
@@ -200,6 +231,10 @@ header .intro-text .name {
     margin-top: 20px;
 }
 
+.panel-capa-laboratorio{
+
+}
+
 .img-inicio-projeto{
     max-height: 200px;
 }
@@ -222,6 +257,22 @@ header .intro-text .skills {
 }
 .dashboard-content{
     margin-top: 40px;
+}
+
+.dashboard-capa-laboratorio{
+    max-height: 200px;
+    min-height: 200px;
+    min-width: 100%;
+}
+
+.upload-capa-laboratorio{
+    max-height: 205px;
+    min-width: 568px;
+}
+
+.thumbnail-dashboard-laboratorio{
+    min-height: 490px;
+    max-height: 490px;
 }
 
 /* Reovendo border-radius*/
@@ -328,6 +379,20 @@ Pagina inicial
     color: #333;
     padding: 9px;
     text-align: justify;
+}
+
+.form-control.descricao-laboratorio,
+.form-control.descricao-laboratorio[readonly],
+.form-control.descricao-laboratorio:focus{
+    resize: none;
+    background-color: #fff;
+    font-size: 18px;
+    color: #333;
+    cursor: auto;
+    max-height: 400px;
+    border-color: transparent;
+    box-shadow: none;
+    outline: 0 none;
 }
 
 /* Membro */

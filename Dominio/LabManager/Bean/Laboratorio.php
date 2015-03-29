@@ -42,6 +42,11 @@ class Laboratorio {
      * @var type 
      */
     private $telefone;
+    
+    /**
+     * @ORM\Column(type="string", length=45)
+     */
+    private $sigla;
 
     /**
      * @ORM\Column(type="blob")
@@ -67,12 +72,13 @@ class Laboratorio {
      */
     private $noticia;
 
-    function __construct($id = NULL, $nome = NULL, $descricao = NULL, $telefone = NULL, $capa = NULL) {
+    function __construct($id = NULL, $nome = NULL, $descricao = NULL, $telefone = NULL, $capa = NULL, $sigla = NULL) {
         $this->id = $id;
         $this->nome = $nome;
         $this->descricao = $descricao;
         $this->telefone = $telefone;
         $this->capa = $capa;
+        $this->sigla = NULL;
         $this->membro = new ArrayCollection();
         $this->projeto = new ArrayCollection();
         $this->noticia = new ArrayCollection();
@@ -113,7 +119,16 @@ class Laboratorio {
     function setTelefone($telefone) {
         $this->telefone = $telefone;
     }
+    
+    function getSigla() {
+        return $this->sigla;
+    }
 
+    function setSigla($sigla) {
+        $this->sigla = $sigla;
+    }
+
+    
     function getMembro() {
         return $this->membro;
     }

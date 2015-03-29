@@ -64,10 +64,10 @@ class Laboratorio extends \LabManager\Bean\Laboratorio implements \Doctrine\ORM\
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'id', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'nome', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'descricao', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'telefone', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'capa', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'membro', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'projeto', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'noticia');
+            return array('__isInitialized__', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'id', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'nome', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'descricao', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'telefone', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'sigla', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'capa', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'membro', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'projeto', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'noticia');
         }
 
-        return array('__isInitialized__', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'id', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'nome', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'descricao', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'telefone', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'capa', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'membro', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'projeto', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'noticia');
+        return array('__isInitialized__', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'id', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'nome', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'descricao', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'telefone', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'sigla', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'capa', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'membro', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'projeto', '' . "\0" . 'LabManager\\Bean\\Laboratorio' . "\0" . 'noticia');
     }
 
     /**
@@ -274,6 +274,28 @@ class Laboratorio extends \LabManager\Bean\Laboratorio implements \Doctrine\ORM\
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setTelefone', array($telefone));
 
         return parent::setTelefone($telefone);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSigla()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSigla', array());
+
+        return parent::getSigla();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setSigla($sigla)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setSigla', array($sigla));
+
+        return parent::setSigla($sigla);
     }
 
     /**

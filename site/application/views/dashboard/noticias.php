@@ -66,7 +66,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-4">
-                        <input style="display: none" type="file" id="input-capa" onchange="previewFile()"   >
+                        <input style="display: none" type="file" id="input-capa" onchange="previewFile('capa', 'input-capa')">
                         <img id="capa" src="http://placehold.it/700x300/81326D/ffffff&text=Notícia" class="img-responsive img-upload" alt="Capa Labarotório"/>
                         <button id="btn-upload" type="button" class="btn btn-primary btn-block">
                             <i class="fa fa-cloud-upload"></i> Carregar imagem

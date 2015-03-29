@@ -10,9 +10,7 @@
         <div class="caption-full">
             <h4 class="text-center"><a href="#">Laboratório de Processamento e Análise de Imagens - LabPAI</a>
             </h4>
-            <p>
-                <?php echo $laboratorio->getDescricao(); ?>
-            </p>
+            <p><?php echo nl2br($laboratorio->getDescricao()); ?><p>
         </div>
         <div class="ratings">
             <p>

@@ -25,12 +25,11 @@ class LaboratorioNegocio extends AbstractNegocio {
         parent::setBeanNegocio(new Laboratorio());
     }
     
-    public function buscarPorNome($nome){
-        $query = "SELECT laboratorio FROM LabManager\Bean\Laboratorio laboratorio WHERE LOWER(laboratorio.nome) = :nome";
-        try{
-            return $this->dao->findByParam($query, array('nome' => $nome));
-        } catch (\Exception $ex) {
-            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
-        }
-    }    
+//    public function buscarPorSigla($sigla){
+//        try{
+//            return $this->dao->findOneBy(array('sigla' => $sigla));
+//        } catch (\Exception $ex) {
+//            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
+//        }
+//    }    
 }

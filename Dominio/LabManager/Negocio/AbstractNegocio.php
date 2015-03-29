@@ -94,6 +94,22 @@ abstract class AbstractNegocio {
 
         return $retorno;
     }
+    
+    /**
+     * Retorna uma Objeto por parâmetro
+     * @param Integer $id
+     * @return Object
+     * @throws NegocioException
+     */
+    public function findOneBy($param) {
+        try {
+            $retorno = $this->dao->findOneBy(get_class($this->beanNegocio), $param);
+        } catch (DAOException $exc) {
+            throw new NegocioException($exc->getMessage());
+        }
+
+        return $retorno;
+    }
 
     /**
      * Salva um Objeto

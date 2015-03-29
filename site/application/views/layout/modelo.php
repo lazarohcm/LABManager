@@ -120,9 +120,9 @@
                                     <li>
                                         <a href="<?php
                                         echo site_url() . "/laboratorios/visualizar/";
-                                        echo strtolower($laboratorio->getNome());
+                                        echo strtolower($laboratorio->getSigla());
                                         ?>">
-                                            <?php echo $laboratorio->getNome(); ?></a>
+                                            <?php echo $laboratorio->getSigla(); ?></a>
                                     </li> 
                                 <?php } ?>
                             </ul>

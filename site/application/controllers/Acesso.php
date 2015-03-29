@@ -15,10 +15,11 @@
 class Acesso extends CI_Controller {
 
     public function index() {
+        $erro = $this->session->flashdata('erro');
         if ($this->sessioncontrol->isLoggedIn()) {
             redirect('/dashboard/index');
         }
-        $this->templateadmin->load('login', TITULO_SITE, '', TRUE, array(''));
+        $this->templateadmin->load('login', TITULO_SITE, '', TRUE, array('erro' => $erro));
     }
 
     public function autentica() {
@@ -38,7 +39,7 @@ class Acesso extends CI_Controller {
                 redirect('acesso/');
             }
         } catch (Exception $ex) {
-            $this->session->set_flashdata('erro', 'Senha ou usuário inválidos.');
+            $this->session->set_flashdata('erro', $ex->getMessage());
             redirect('acesso/');
         }
     }
