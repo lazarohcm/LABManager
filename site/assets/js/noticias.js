@@ -38,8 +38,9 @@ $(document).ready(function () {
         $("#projetos").val($("#projetos option:first").val());
 
         $('#tabela-noticias > tbody').find('tr').removeClass('selected');
-    };
-    
+    }
+    ;
+
     $('#modalNewEdit').on('hide.bs.modal', function () {
         clearModal();
     });
@@ -78,6 +79,7 @@ $(document).ready(function () {
         var id, dataPost;
         id = $('#tabela-noticias').find('tr.selected').data('id');
         dataPost = {id: id};
+        ajaxMessage();
         $.post(js_site_url('index.php/noticias/remover'), dataPost, function (data) {
             initNotification(data);
             if (data.sucesso) {
@@ -98,11 +100,11 @@ $(document).ready(function () {
         dataPost = {id: id};
         $.post(js_site_url('index.php/noticias/buscarporid'), dataPost, function (response) {
             if (response.sucesso) {
-                if (response.noticia.capa) {
-                    $('#capa').attr('src', response.noticia.capa);
-                    $('#titulo').val(response.noticia.titulo);
-                    $('#editor').append(response.noticia.texto);
-                }
+                $('#capa').attr('src', response.noticia.capa);
+                $('#titulo').val(response.noticia.titulo);
+                $('#editor').append(response.noticia.texto);
+                $('#laboratorios').val(response.noticia.laboratorio);
+                $('#projetos').val(response.noticia.projeto);
             }
         });
     });
@@ -120,10 +122,18 @@ $(document).ready(function () {
         if (typeof id === 'undefined') {
             $.post(js_site_url('index.php/noticias/cadastrar'), dataPost, function (response) {
                 initNotification(response);
+                if (response.sucesso) {
+                    //location.reload();
+                }
+                ;
             });
         } else {
             $.post(js_site_url('index.php/noticias/atualizar'), dataPost, function (response) {
                 initNotification(response);
+                if (response.sucesso) {
+                    //location.reload();
+                }
+                ;
             });
         }
     });

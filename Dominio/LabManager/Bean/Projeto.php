@@ -74,6 +74,14 @@ class Projeto {
      */
     private $membro_projeto;
     
+    /**
+     * Propriedade privada
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="NoticiaProjeto", mappedBy="projeto_id", cascade={"all"})
+     *  
+     */
+    private $noticiaProjeto;
+    
     function __construct($id = NULL, $nome = NULL, $data_inicio = NULL, $data_termino = NULL, $imagem = NULL, $texto = NULL) {
         $this->id = $id;
         $this->nome = $nome;
@@ -83,6 +91,7 @@ class Projeto {
         $this->texto = $texto;
         
         $this->membro_projeto = new ArrayCollection();
+        $this->noticiaProjeto = new ArrayCollection();
     }
     
     public function __toString() {
@@ -161,4 +170,15 @@ class Projeto {
         $membro_projeto->setMembro($this);
         $this->membro_projeto->add($membro_projeto);
     }
+    
+    function getNoticiaProjeto() {
+        return $this->noticiaProjeto;
+    }
+
+    function setNoticiaProjeto($noticiaProjeto) {
+        $noticiaProjeto->setProjeto($this);
+        $this->noticiaProjeto->add($noticiaProjeto);
+    }
+
+
 }

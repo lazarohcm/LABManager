@@ -30,8 +30,6 @@ class NoticiaLaboratorioNegocio extends AbstractNegocio {
     }
 
     function attachEntity($object) {
-        $object->setLaboratorio($this->dao->attachEntity($object->getLaboratorio()));
-        $object->setNoticia($this->dao->attachEntity($object->getNoticia()));
         try {
             $object->setLaboratorio($this->dao->attachEntity($object->getLaboratorio()));
             $object->setNoticia($this->dao->attachEntity($object->getNoticia()));

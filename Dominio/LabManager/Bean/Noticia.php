@@ -51,10 +51,16 @@ class Noticia {
     private $data;
 
     /**
-     * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="NoticiaLaboratorio", mappedBy="noticia_id", cascade={"all"}, orphanRemoval=true, fetch="LAZY") 
+     * @var NoticiaLaboratorio
+     * @ORM\OneToOne(targetEntity="NoticiaLaboratorio", mappedBy="noticia_id", cascade={"all"}, orphanRemoval=true, fetch="LAZY") 
      */
     private $noticiaLaboratorio;
+    
+    /**
+     * @var NoticiaProjeto
+     * @ORM\OneToOne(targetEntity="NoticiaProjeto", mappedBy="noticia_id", cascade={"all"}, orphanRemoval=true, fetch="LAZY") 
+     */
+    private $projeto;
 
     function __construct($id = NULL, $titulo = NULL, $texto = NULL, $capa = NULL, $data = NULL) {
         $this->id = $id;
@@ -62,7 +68,6 @@ class Noticia {
         $this->texto = $texto;
         $this->capa = $capa;
         $this->data = $data;
-        $this->noticiaLaboratorio = new ArrayCollection();
     }
 
     function getId() {
@@ -109,9 +114,18 @@ class Noticia {
         return $this->noticiaLaboratorio;
     }
 
-    function setNoticiaLaboratorio($noticiaLaboratorio) {
-        $noticiaLaboratorio->setNoticia($this);
-        $this->noticiaLaboratorio->add($noticiaLaboratorio);
+    function setNoticiaLaboratorio($noticiaLaboratorio = NULL) {
+        $this->noticiaLaboratorio = $noticiaLaboratorio;
     }
+    
+    function getNoticiaProjeto() {
+        return $this->projeto;
+    }
+
+    function setNoticiaProjeto($projeto = NULL) {
+        $this->projeto = $projeto;
+    }
+
+
 
 }

@@ -10,6 +10,7 @@
                 {
                     type: tipo,
                     delay: 3000,
+                    z_index:  1041,
                     placement: {
                         from: "top",
                         align: "right"

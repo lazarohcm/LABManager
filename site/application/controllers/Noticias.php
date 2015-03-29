@@ -56,8 +56,20 @@ class Noticias extends CI_Controller {
         $this->load->model('noticiasmodel');
         try {
             $noticia = $this->noticiasmodel->buscarPorID($arrayRequest['id']);
+            $idLab = 0;
+            $idProjeto = 0;
+            $capa = '';
+            if($noticia->getNoticiaLaboratorio() != NULL){
+                $idLab = $noticia->getNoticiaLaboratorio()->getLaboratorio()->getId();
+            }
+            if($noticia->getNoticiaProjeto() != NULL){
+                $idProjeto = $noticia->getNoticiaProjeto()->getProjeto()->getId();
+            }
+            if($noticia->getCapa() != NULL){
+                $capa = stream_get_contents($noticia->getCapa());
+            }
             $array = array('id' => $noticia->getId(), 'titulo' => $noticia->getTitulo(), 'texto' => $noticia->getTexto(),
-                'capa' => stream_get_contents($noticia->getCapa()));
+                'capa' => $capa, 'laboratorio' => $idLab,'projeto' => $idProjeto);
         } catch (Exception $ex) {
             throw new Exception($ex->getMessage());
         }
@@ -71,12 +83,13 @@ class Noticias extends CI_Controller {
         $this->load->model('noticiasmodel');
         try {
             $noticia = $this->noticiasmodel->atualizar($arrayRequest);
+            $retorno = array('sucesso' => true, 'msg' => 'A notícia foi alterada');
         } catch (Exception $ex) {
-            throw new Exception($ex->getMessage());
+            $retorno = $ex->getMessage();
         }
         $this->output
                 ->set_content_type('application/json')
-                ->set_output(json_encode(array('sucesso' => true)));
+                ->set_output(json_encode($retorno));
     }
 
     public function remover() {

@@ -31,6 +31,17 @@ class NoticiaNegocio extends AbstractNegocio {
     }
 
     function attachEntity($object) {
-        return $object;
+        try {
+            if ($object->getNoticiaLaboratorio() != NULL) {
+                $object->setNoticiaLaboratorio($this->dao->attachEntity($object->getNoticiaLaboratorio()));
+            }
+            if ($object->getNoticiaProjeto() != NULL) {
+                $object->setNoticiaProjeto($this->dao->attachEntity($object->getNoticiaProjeto()));
+            }
+            return $object;
+        } catch (Exception $ex) {
+            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
+        }
     }
+
 }

@@ -25,14 +25,12 @@ class NoticiaLaboratorio {
     /**
      * @ORM\ManyToOne(targetEntity="Laboratorio", inversedBy="noticia", cascade={"persist"}, fetch="EAGER")
      * @ORM\JoinColumn(name="laboratorio_id", referencedColumnName="id")
-     * @var type 
      */
     private $laboratorio_id;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Noticia", inversedBy="noticiaLaboratorio", cascade={"persist"},fetch="EAGER")
+     * @ORM\OneToOne(targetEntity="Noticia", inversedBy="noticiaLaboratorio", cascade={"persist"},fetch="EAGER")
      * @ORM\JoinColumn(name="noticia_id", referencedColumnName="id")
-     * @var type 
      */
     private $noticia_id;
     

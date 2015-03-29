@@ -8,9 +8,11 @@
 
 use LabManager\Facade\NoticiaFacade;
 use LabManager\Facade\LaboratorioFacade;
-use LabManager\Facade\NoticiaLaboratorioFacade;
+use LabManager\Facade\ProjetoFacade;
+
 use LabManager\Bean\Noticia;
 use LabManager\Bean\NoticiaLaboratorio;
+use LabManager\Bean\NoticiaProjeto;
 
 /**
  * Description of Noticiasmodel
@@ -34,7 +36,7 @@ class NoticiasModel extends CI_Model {
     public function buscarPorID($id) {
         $facade = new NoticiaFacade();
         try {
-            $noticia = $facade->buscarPorID($id);
+            $noticia = $facade->findById($id);
         } catch (Exception $ex) {
             throw new Exception($ex->getMessage());
         }
@@ -56,46 +58,44 @@ class NoticiasModel extends CI_Model {
         $noticia->setTexto($arrayNoticia['conteudo']);
         $noticia->setData(new DateTime());
         
+        if (isset($arrayNoticia['lab']) && $arrayNoticia['lab'] != 0) {
+            $noticia->setNoticiaLaboratorio($this->createNoticiaLaboratorio($noticia, $arrayNoticia['lab']));
+        }
+        if (isset($arrayNoticia['projeto']) && $arrayNoticia['projeto'] != 0) {
+            $noticia->setNoticiaProjeto($this->createNoticiaProjeto($noticia, $arrayNoticia['projeto']));
+        }
+
         try {
             $noticia = $facade->save($noticia);
         } catch (Exception $ex) {
             throw new Exception($ex->getMessage());
         }
-        
-        if(isset($arrayNoticia['lab']) && $arrayNoticia['lab'] != 0){
-            $this->saveNoticiaLaboratorio($noticia, $arrayNoticia['lab']);
-        }
+
+
 
         return $noticia;
-    }
-
-    public function saveNoticiaLaboratorio($noticia, $idLab) {
-        $labFacade = new LaboratorioFacade();
-        $noticiaLabFacede = new NoticiaLaboratorioFacade();
-        $laboratorio = $labFacade->findById($idLab);
-        if ($laboratorio == null){
-            throw new Exception('Houve um erro ao linkar esta notício ao laboratório');
-        }
-        
-        $noticiaLab = new NoticiaLaboratorio(NULL, $laboratorio, $noticia);
-        
-        try{
-            $noticiaLabFacede->save($noticiaLab);
-        }  catch (\Exception $ex){
-            throw new Exception($ex->getMessage());
-        }
     }
 
     public function atualizar($arrayNoticia) {
         $facade = new NoticiaFacade();
         $noticia = new Noticia();
-        $noticia = $facade->buscarPorID($arrayNoticia['id']);
+        $noticia = $facade->findById($arrayNoticia['id']);
         $noticia->setCapa($arrayNoticia['capa']);
         $noticia->setTitulo($arrayNoticia['titulo']);
         $noticia->setTexto($arrayNoticia['conteudo']);
         $noticia->setData(new DateTime());
+        if (isset($arrayNoticia['lab']) && $arrayNoticia['lab'] != 0) {
+            $noticia->setNoticiaLaboratorio($this->createNoticiaLaboratorio($noticia, $arrayNoticia['lab']));
+        }else{
+            $noticia->setNoticiaLaboratorio(NULL);
+        }
+        if (isset($arrayNoticia['projeto']) && $arrayNoticia['projeto'] != 0) {
+            $noticia->setNoticiaProjeto($this->createNoticiaProjeto($noticia, $arrayNoticia['projeto']));
+        }else{
+            $noticia->setNoticiaProjeto(NULL);
+        }
         try {
-            $retorno = $facade->atualizar($noticia);
+            $retorno = $facade->update($noticia);
         } catch (Exception $ex) {
             throw new Exception($ex->getMessage());
         }
@@ -112,6 +112,26 @@ class NoticiasModel extends CI_Model {
         }
 
         return TRUE;
+    }
+
+    public function createNoticiaLaboratorio($noticia, $idLab) {
+        $labFacade = new LaboratorioFacade();
+        $laboratorio = $labFacade->findById($idLab);
+        if ($laboratorio == null) {
+            throw new Exception('Houve um erro ao linkar esta notício ao laboratório');
+        }
+
+        return new NoticiaLaboratorio(NULL, $laboratorio, $noticia);
+    }
+
+    public function createNoticiaProjeto($noticia, $idProjeto) {
+        $projetoFacade = new ProjetoFacade();
+        $projeto = $projetoFacade->findById($idProjeto);
+        if ($projeto == null) {
+            throw new Exception('Houve um erro ao linkar esta notício ao laboratório');
+        }
+
+        return new NoticiaProjeto(NULL, $noticia, $projeto);
     }
 
 }
