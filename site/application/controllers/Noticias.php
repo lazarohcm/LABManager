@@ -23,24 +23,24 @@ class Noticias extends CI_Controller {
         }
         $this->templateadmin->load('noticias/noticias', TITULO_SITE, '', TRUE, array('noticias' => $noticias));
     }
-    
-    public function cadastrar(){
+
+    public function cadastrar() {
         $arrayRequest = $this->input->post();
         $this->load->model('noticiasmodel');
         try {
             $this->noticiasmodel->cadastrar($arrayRequest);
             $retorno = array('sucesso' => true, 'msg' => 'A notícia foi cadastrada');
         } catch (Exception $ex) {
-            $retorno =  array ('sucesso' => false, 'msg' => $ex->getMessage());
+            $retorno = array('sucesso' => false, 'msg' => $ex->getMessage());
         }
         $this->output
                 ->set_content_type('application/json')
-                ->set_output(json_encode(array('sucesso' => true, 'noticia' => $retorno)));
+                ->set_output(json_encode($retorno));
     }
-    
-    public function read($id = NULL){
+
+    public function read($id = NULL) {
         $this->load->model('noticiasmodel');
-        if($id == NULL){
+        if ($id == NULL) {
             show_404();
         }
         try {
@@ -50,13 +50,13 @@ class Noticias extends CI_Controller {
         }
         $this->templateadmin->load('noticias/read', TITULO_SITE, '', TRUE, array('noticia' => $noticia));
     }
-    
-    public function buscarporid(){
+
+    public function buscarporid() {
         $arrayRequest = $this->input->post();
         $this->load->model('noticiasmodel');
         try {
             $noticia = $this->noticiasmodel->buscarPorID($arrayRequest['id']);
-            $array = array('id' => $noticia->getId(), 'titulo' => $noticia->getTitulo(), 'texto' => $noticia->getTexto(),  
+            $array = array('id' => $noticia->getId(), 'titulo' => $noticia->getTitulo(), 'texto' => $noticia->getTexto(),
                 'capa' => stream_get_contents($noticia->getCapa()));
         } catch (Exception $ex) {
             throw new Exception($ex->getMessage());
@@ -65,8 +65,8 @@ class Noticias extends CI_Controller {
                 ->set_content_type('application/json')
                 ->set_output(json_encode(array('sucesso' => true, 'noticia' => $array)));
     }
-    
-    public function atualizar(){
+
+    public function atualizar() {
         $arrayRequest = $this->input->post();
         $this->load->model('noticiasmodel');
         try {
@@ -78,14 +78,17 @@ class Noticias extends CI_Controller {
                 ->set_content_type('application/json')
                 ->set_output(json_encode(array('sucesso' => true)));
     }
-    
-    
-    public function remover(){
+
+    public function remover() {
         $arrayRequest = $this->input->post();
         $this->load->model('noticiasmodel');
         try {
-            $this->noticiasmodel->remover($arrayRequest['id']);
-            $retorno = array('sucesso' => true, 'msg' => 'A notícia foi removida');
+            if (isset($arrayRequest['id'])) {
+                $this->noticiasmodel->remover($arrayRequest['id']);
+                $retorno = array('sucesso' => true, 'msg' => 'A notícia foi removida');
+            } else {
+                $retorno = array('sucesso' => false, 'msg' => 'Erro ao remover notícia, id não encontrado');
+            }
         } catch (Exception $ex) {
             $retorno = array('sucesso' => false, 'msg' => $ex->getMessage());
         }

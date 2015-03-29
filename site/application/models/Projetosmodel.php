@@ -20,7 +20,7 @@ class Projetosmodel extends CI_Model {
     public function buscarTodos() {
         $facade = new ProjetoFacade();
         try {
-            $arrayProjetos = $facade->buscarTodos();
+            $arrayProjetos = $facade->findAll();
         } catch (Exception $ex) {
             throw new Exception($ex->getMessage());
         }

@@ -3,6 +3,8 @@
 namespace LabManager\Bean;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Description of Noticia
  *
@@ -15,7 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity()
  */
 class Noticia {
-    
+
     /**
      * @ORM\Column(type="bigint", unique=true, nullable=false)
      * @ORM\Id
@@ -23,39 +25,46 @@ class Noticia {
      * @var type 
      */
     private $id;
-    
+
     /**
      * @ORM\Column(type="string", length=300, nullable=false)
      * @var type 
      */
     private $titulo;
-    
+
     /**
      * @ORM\Column(type="text", nullable=false)
      * @var type 
      */
     private $texto;
-    
+
     /**
      * @ORM\Column(type="blob")
      * @var type 
      */
     private $capa;
-    
+
     /**
      * @ORM\Column(type="datetime")
      * 
      */
     private $data;
-    
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="NoticiaLaboratorio", mappedBy="noticia_id", cascade={"all"}, orphanRemoval=true, fetch="LAZY") 
+     */
+    private $noticiaLaboratorio;
+
     function __construct($id = NULL, $titulo = NULL, $texto = NULL, $capa = NULL, $data = NULL) {
         $this->id = $id;
         $this->titulo = $titulo;
         $this->texto = $texto;
         $this->capa = $capa;
         $this->data = $data;
+        $this->noticiaLaboratorio = new ArrayCollection();
     }
-    
+
     function getId() {
         return $this->id;
     }
@@ -87,7 +96,7 @@ class Noticia {
     function setCapa($capa) {
         $this->capa = $capa;
     }
-    
+
     function getData() {
         return $this->data;
     }
@@ -96,6 +105,13 @@ class Noticia {
         $this->data = $data;
     }
 
+    function getNoticiaLaboratorio() {
+        return $this->noticiaLaboratorio;
+    }
 
-    
+    function setNoticiaLaboratorio($noticiaLaboratorio) {
+        $noticiaLaboratorio->setNoticia($this);
+        $this->noticiaLaboratorio->add($noticiaLaboratorio);
+    }
+
 }

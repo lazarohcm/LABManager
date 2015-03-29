@@ -10,6 +10,7 @@ namespace LabManager\Negocio;
 
 use LabManager\DAO\DAOGenericImpl;
 use LabManager\Bean\NoticiaLaboratorio;
+use LabManager\Negocio\AbstractNegocio;
 
 /**
  * Description of NoticiaLaboratorioNegocio
@@ -17,51 +18,27 @@ use LabManager\Bean\NoticiaLaboratorio;
  * @author Lázaro Henrique <lazarohcm@gmail.com>
  * @version string
  */
-class NoticiaLaboratorioNegocio {
-    private $dao;
-    
+class NoticiaLaboratorioNegocio extends AbstractNegocio {
+
     function __construct() {
-        $this->dao = new DAOGenericImpl();
+        parent::setDAO(new DAOGenericImpl());
+        parent::setBeanNegocio(new NoticiaLaboratorio());
     }
-    
-    public function salvar($noticiaLaboratorio){
-        try{
-            return $this->dao->save($noticiaLaboratorio);
-        } catch (\Exception $ex) {
+
+    function validarObjeto($object) {
+        return TRUE;
+    }
+
+    function attachEntity($object) {
+        $object->setLaboratorio($this->dao->attachEntity($object->getLaboratorio()));
+        $object->setNoticia($this->dao->attachEntity($object->getNoticia()));
+        try {
+            $object->setLaboratorio($this->dao->attachEntity($object->getLaboratorio()));
+            $object->setNoticia($this->dao->attachEntity($object->getNoticia()));
+            return $object;
+        } catch (Exception $ex) {
             throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
         }
     }
-    
-    public function buscarPorID($id){
-        try{
-            return $this->dao->findById(get_class(new NoticiaLaboratorio()), $id);
-        } catch (\Exception $ex) {
-            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
-        }
-    }
-    
-    public function atualizar($noticiaLaboratorio){
-        try{
-            $this->dao->update($noticiaLaboratorio);
-        } catch (\Exception $ex) {
-            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
-        }
-    }
-    
-    public function buscarTodos(){
-        try{
-            return $this->dao->findAll(get_class(new NoticiaLaboratorio()));
-        } catch (\Exception $ex) {
-            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
-        }
-    }
-    
-    public function excluir($noticiaLaboratorio){
-        try{
-            $noticiaLaboratorioToRemove = $this->buscarPorID($noticiaLaboratorio->getId());
-            $this->dao->delete($noticiaLaboratorioToRemove);
-        } catch (\Exception $ex) {
-            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
-        }
-    }
+
 }

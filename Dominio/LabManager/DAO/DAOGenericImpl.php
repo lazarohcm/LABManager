@@ -1,10 +1,11 @@
 <?php
+
 /**
  * UFMA - LabManager 
 
  * @author Lázaro Henrique <lazarohcm@gmail.com>   
  * @version 1.0
- 
+
  */
 
 namespace LabManager\DAO;
@@ -137,6 +138,22 @@ class DAOGenericImpl {
         } catch (Exception $exc) {
             throw new DAOException($exc->getMessage(), $exc->getCode(), $exc->getPrevious());
         } catch (ORMException $exc) {
+            throw new DAOException($exc->getMessage(), $exc->getCode(), $exc->getPrevious());
+        }
+    }
+
+    /**
+     * Sicroniza uma Entidade com o EnityFramework
+     * @param Object $object
+     * @return Object
+     * @throws DAOException
+     */
+    public function attachEntity($object) {
+        try {
+            return self::$entityManager->merge($object);
+        } catch (\Exception $exc) {
+            throw new DAOException($exc->getMessage(), $exc->getCode(), $exc->getPrevious());
+        } catch (\Doctrine\ORM\ORMException $exc) {
             throw new DAOException($exc->getMessage(), $exc->getCode(), $exc->getPrevious());
         }
     }

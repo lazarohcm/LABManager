@@ -49,7 +49,6 @@ abstract class AbstractNegocio {
      */
     public function delete($object) {
         $object = $this->findById($object->getId());
-
         try {
             $this->dao->delete($object);
         } catch (DAOException $ex) {

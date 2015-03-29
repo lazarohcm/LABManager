@@ -29,17 +29,24 @@ $(document).ready(function () {
 
     $(document).ajaxStop($.unblockUI);
 
-    $('#modalNewEdit').on('hide.bs.modal', function () {
+    function clearModal() {
         $('a.editar').removeClass('clicked');
         $('#titulo').val('');
         $('#capa').attr('src', 'http://placehold.it/700x300/81326D/ffffff&text=Notícia');
         $('#editor').empty();
         $("#laboratorios").val($("#laboratorios option:first").val());
         $("#projetos").val($("#projetos option:first").val());
+
+        $('#tabela-noticias > tbody').find('tr').removeClass('selected');
+    };
+    
+    $('#modalNewEdit').on('hide.bs.modal', function () {
+        clearModal();
     });
 
-    $(document).on('click', '.editar, .remover', function () {
-        $(this).addClass('clicked');
+    $(document).on('click', '.remover', function () {
+        $('#tabela-noticias > tbody').find('tr').removeClass('selected');
+        $(this).parents('tr').addClass('selected');
     });
 
     $('#btn-upload, #capa').on('click', function () {
@@ -65,24 +72,28 @@ $(document).ready(function () {
             });
         }
     });
-    
+
 
     $('#btnRemover').on('click', function () {
         var id, dataPost;
-        id = $('.remover.clicked').parents('tr').data('id');
+        id = $('#tabela-noticias').find('tr.selected').data('id');
         dataPost = {id: id};
         $.post(js_site_url('index.php/noticias/remover'), dataPost, function (data) {
             initNotification(data);
             if (data.sucesso) {
-                $('#tabela-noticias').DataTable().row($('.remover.clicked').parents('tr')).remove().draw();
+                var row = $('#tabela-noticias').find('tr.selected');
+                $('#tabela-noticias').DataTable().row(row).remove().draw();
+                $('#tabela-noticias > tbody').find('tr').removeClass('selected');
             }
         });
         $('#modalRemover').modal('hide');
     });
 
     $('.editar').on('click', function () {
+        clearModal();
         var dataPost;
-        id = $(this).parents('tr').data('id');
+        $(this).parents('tr').addClass('selected');
+        var id = $('#tabela-noticias').find('tr.selected').data('id');
         ajaxMessage();
         dataPost = {id: id};
         $.post(js_site_url('index.php/noticias/buscarporid'), dataPost, function (response) {
@@ -97,21 +108,22 @@ $(document).ready(function () {
     });
 
     $('#btnSalvar').on('click', function () {
-        var titulo, capa, lab, projeto, conteudo, dataPost;
+        var id, titulo, capa, lab, projeto, conteudo, dataPost;
         titulo = $('#titulo').val();
-        lab = $('laboratorios').val();
+        lab = $('#laboratorios option:selected').val();
         projeto = $('#projetos').val();
         conteudo = $('#editor').html();
         capa = $('#capa').attr('src');
+        id = $('#tabela-noticias').find('tr.selected').data('id');
         dataPost = {id: id, titulo: titulo, lab: lab, projeto: projeto, capa: capa, conteudo: conteudo};
         ajaxMessage();
-        if (id === null) {
+        if (typeof id === 'undefined') {
             $.post(js_site_url('index.php/noticias/cadastrar'), dataPost, function (response) {
-
+                initNotification(response);
             });
         } else {
             $.post(js_site_url('index.php/noticias/atualizar'), dataPost, function (response) {
-
+                initNotification(response);
             });
         }
     });
