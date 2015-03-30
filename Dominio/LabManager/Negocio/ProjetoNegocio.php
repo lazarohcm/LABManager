@@ -20,11 +20,12 @@ use LabManager\Negocio\AbstractNegocio;
  */
 class ProjetoNegocio extends AbstractNegocio{
     private $membroNegocio;
-    
+    private $labNegocio;
     function __construct() {
         parent::setDAO(new DAOGenericImpl());
         parent::setBeanNegocio(new Projeto());
         $this->membroNegocio = new MembroNegocio();
+        $this->labNegocio = new LaboratorioNegocio();
     }
     
     function validarObjeto($object) {
@@ -36,29 +37,21 @@ class ProjetoNegocio extends AbstractNegocio{
     }   
     
     public function salvar($projetoData){
-        $lab = $this->labNegocio->buscarPorID($projetoData['idLab']);
+        $lab = $this->labNegocio->findById($projetoData['idLab']);
         $coordenador = $this->membroNegocio->buscarPorID($projetoData['idCoordenador']);
         $projeto = $projetoData['projeto'];
         $projeto->setLaboratorio($lab);
         $projeto->setCoordenador($coordenador);
         try{
-            return $this->dao->save($projeto);
-        } catch (\Exception $ex) {
-            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
-        }
-    }
-    
-    public function buscarPorID($id){
-        try{
-            return $this->dao->findById(get_class(new Projeto()), $id);
+            return parent::save($projeto);
         } catch (\Exception $ex) {
             throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
         }
     }
     
     public function atualizar($projetoData){
-        $lab = $this->labNegocio->buscarPorID($projetoData['idLab']);
-        $coordenador = $this->membroNegocio->buscarPorID($projetoData['idCoordenador']);
+        $lab = $this->labNegocio->findById($projetoData['idLab']);
+        $coordenador = $this->membroNegocio->findById($projetoData['idCoordenador']);
         $projeto = $projetoData['projeto'];
         $projeto->setLaboratorio($lab);
         $projeto->setCoordenador($coordenador);

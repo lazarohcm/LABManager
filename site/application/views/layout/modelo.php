@@ -9,10 +9,15 @@
         <title><?php echo $title; ?></title>
         <!-- Bootstrap CSS-->
         <link href="<?php echo base_url(); ?>/assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+        
+        <!-- Bootstrap Datepicker -->
+        <link href="<?php echo base_url(); ?>assets/datepicker/datepicker.css" rel="stylesheet" type="text/css">
+        
         <!-- NCA CSS-->
         <link href="<?php echo base_url(); ?>/assets/css/style.css" rel="stylesheet" type="text/css">
         <!-- Custom Fonts -->
         <link href="<?php echo base_url(); ?>/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

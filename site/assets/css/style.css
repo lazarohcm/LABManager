@@ -15,6 +15,10 @@ body {
     z-index: 1041;
 }
 
+.datepicker td, .datepicker th {
+    border-radius: 0;
+}
+
 
 
 .container{
@@ -134,7 +138,7 @@ body {
     max-width: 150px;
 }
 
-.dropdown-menu{
+.dropdown .dropdown-menu{
     background-color: #E5E9EB;
     min-width: 177px;
 }
@@ -292,6 +296,10 @@ header .intro-text .skills {
 
 .modal-lg{
     width: 90%;
+}
+
+.modal-lg-projeto{
+    width: 75%;
 }
 
 .modal-content{

@@ -1,5 +1,5 @@
 <?php
-
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * Description of Dashboard
  *
@@ -72,6 +72,20 @@ class dashboard extends CI_Controller {
         $arrayProjetos = $this->projetosmodel->buscarTodos();
         $sidebar = $this->load->view('layout/sidebar', array('usuario' => $userData), true);
         $this->templateadmin->load('dashboard/projetos', TITULO_SITE, $sidebar, TRUE, array('projetos' => $arrayProjetos));
+    }
+    
+    public function publicacoes(){
+        if (!$this->sessioncontrol->isLoggedIn()) {
+            redirect('/acesso/index');
+        }
+        $userData = $this->sessioncontrol->getUserDataSession();
+        if (!$userData['admin'])
+            redirect('/dashboard/perfil');
+        
+        $this->load->model('publicacoesmodel');
+        $arrayPublicacoes = $this->publicacoesmodel->buscarTodos();
+        $sidebar = $this->load->view('layout/sidebar', array('usuario' => $userData), true);
+        $this->templateadmin->load('dashboard/publicacoes', TITULO_SITE, $sidebar, TRUE, array('publicacoes' => $arrayPublicacoes));
     }
 
 }

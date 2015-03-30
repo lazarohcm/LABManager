@@ -15,11 +15,19 @@ use LabManager\Bean\Publicacao;
  * @author Lázaro Henrique <lazarohcm@gmail.com>
  * @version string
  */
-class PublicacaoNegocio {
-    private $dao;
+class PublicacaoNegocio extends AbstractNegocio{
     
     function __construct() {
-        $this->dao = new DAOGenericImpl();
+        parent::setDAO(new DAOGenericImpl());
+        parent::setBeanNegocio(new Publicacao());
+    }
+    
+    function validarObjeto($object) {
+        return TRUE;
+    }
+    
+    function attachEntity($object) {
+        return $object;
     }
     
     public function salvar($publicacaoNeogcio){

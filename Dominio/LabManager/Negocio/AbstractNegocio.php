@@ -68,7 +68,7 @@ abstract class AbstractNegocio {
         try {
             $retorno = $this->dao->findAll(get_class($this->beanNegocio));
         } catch (DAOException $ex) {
-            throw new NegocioException($exc->getMessage());
+            throw new NegocioException($ex->getMessage());
         }
 
         return $retorno;

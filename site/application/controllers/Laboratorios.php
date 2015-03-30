@@ -11,6 +11,11 @@ class Laboratorios extends CI_Controller {
         if (!$this->sessioncontrol->isLoggedIn()) {
             redirect('/acesso/index');
         }
+        
+        if (!$this->input->is_ajax_request()) {
+            redirect('home');
+        }
+        
         $arrayRequest = $this->input->post();
         $this->load->model('laboratoriomodel');
         try {
@@ -29,6 +34,11 @@ class Laboratorios extends CI_Controller {
         if (!$this->sessioncontrol->isLoggedIn()) {
             redirect('/acesso/index');
         }
+        
+        if (!$this->input->is_ajax_request()) {
+            redirect('home');
+        }
+        
         $arrayRequest = $this->input->post();
         $this->load->model('laboratoriomodel');
         try {
@@ -47,6 +57,11 @@ class Laboratorios extends CI_Controller {
         if (!$this->sessioncontrol->isLoggedIn()) {
             redirect('/acesso/index');
         }
+        
+        if (!$this->input->is_ajax_request()) {
+            redirect('home');
+        }
+        
         $arrayRequest = $this->input->post();
         $this->load->model('laboratoriomodel');
         try {
@@ -61,6 +76,14 @@ class Laboratorios extends CI_Controller {
     }
 
     public function buscartodosarray() {
+        if (!$this->sessioncontrol->isLoggedIn()) {
+            redirect('/acesso/index');
+        }
+        
+        if (!$this->input->is_ajax_request()) {
+            redirect('home');
+        }
+        
         $this->load->model('laboratoriomodel');
         $arrayRequest = $this->input->post();
         try {
@@ -93,6 +116,11 @@ class Laboratorios extends CI_Controller {
         if (!$this->sessioncontrol->isLoggedIn()) {
             redirect('/acesso/index');
         }
+        
+        if (!$this->input->is_ajax_request()) {
+            redirect('home');
+        }
+        
         $arrayRequest = $this->input->post();
         $this->load->model('laboratoriomodel');
         try {

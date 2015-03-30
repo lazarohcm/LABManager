@@ -18,14 +18,22 @@ use LabManager\Negocio\LaboratorioNegocio;
  * @author Lázaro Henrique <lazarohcm@gmail.com>
  * @version string
  */
-class MembroNegocio {
-    private $dao;
-    
+class MembroNegocio extends AbstractNegocio{    
     private $labNegocio;
     function __construct() {
-        $this->dao = new DAOGenericImpl();
-        $this->labNegocio = new LaboratorioNegocio();
+        parent::setDAO(new DAOGenericImpl());
+        parent::setBeanNegocio(new Membro());
+         $this->labNegocio = new LaboratorioNegocio();
     }
+    
+    function validarObjeto($object) {
+        return TRUE;
+    }
+    
+    function attachEntity($object) {
+        return $object;
+    }   
+    
     
     public function salvar($membroData){
         $lab = $this->labNegocio->buscarPorID($membroData['idLab']);

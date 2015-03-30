@@ -18,16 +18,25 @@ class projetos extends CI_Controller {
     }
 
     public function cadastrar() {
+        if (!$this->sessioncontrol->isLoggedIn()) {
+            redirect('/acesso/index');
+        }
+        
+        if (!$this->input->is_ajax_request()) {
+            redirect('home');
+        }
+        
         $arrayRequest = $this->input->post();
         $this->load->model('projetosmodel');
         try {
-            $projeto = $this->projetosmodel->cadastrar($arrayRequest);
+            $this->projetosmodel->cadastrar($arrayRequest);
+            $retorno = array('sucesso' => true, 'msg' => 'O projeto foi cadastrado!');
         } catch (Exception $ex) {
-            throw new Exception($ex->getMessage());
+            $retorno = array('sucesso' => false, 'msg' => $ex->getMessage());
         }
         $this->output
                 ->set_content_type('application/json')
-                ->set_output(json_encode(array('sucesso' => true, 'projeto' => $projeto)));
+                ->set_output(json_encode($retorno));
     }
     
     public function visualizar($id = NULL){
@@ -44,29 +53,76 @@ class projetos extends CI_Controller {
     }
     
     public function atualizar(){
+        if (!$this->sessioncontrol->isLoggedIn()) {
+            redirect('/acesso/index');
+        }
+        
+        if (!$this->input->is_ajax_request()) {
+            redirect('home');
+        }
+        
         $arrayRequest = $this->input->post();
         $this->load->model('projetosmodel');
         try {
-            $projeto = $this->projetosmodel->atualizar($arrayRequest);
+            $this->projetosmodel->atualizar($arrayRequest);
+            $retorno = array('sucesso' => true, 'msg' => 'Projeto cadastrado com sucesso');
         } catch (Exception $ex) {
-            throw new Exception($ex->getMessage());
+            
+            $retorno = array('sucesso' => true, 'msg' => $ex->getMessage());
         }
         $this->output
                 ->set_content_type('application/json')
-                ->set_output(json_encode(array('sucesso' => true, 'projeto' => $projeto)));
+                ->set_output(json_encode($retorno));
+    }
+    
+    public function remover(){
+        if (!$this->sessioncontrol->isLoggedIn()) {
+            redirect('/acesso/index');
+        }
+        
+        if (!$this->input->is_ajax_request()) {
+            redirect('home');
+        }
+        $arrayRequest = $this->input->post();
+        $this->load->model('projetosmodel');
+        
+        try{
+            $this->projetosmodel->remover($arrayRequest['idProjeto']);
+            $retorno = array('sucesso' => true, 'msg' => 'Projeto removido com sucesso');
+        } catch (Exception $ex) {
+            $retorno = array('sucesso' => false, 'msg' =>$ex->getMessage());
+        }
+        $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode($retorno));
     }
     
     public function buscarporid(){
+        if (!$this->sessioncontrol->isLoggedIn()) {
+            redirect('/acesso/index');
+        }
+        
+        if (!$this->input->is_ajax_request()) {
+            redirect('home');
+        }
+        
         $arrayRequest = $this->input->post();
         $this->load->model('projetosmodel');
         try {
             $projeto = $this->projetosmodel->buscarPorId($arrayRequest['idProjeto']);
+            $inicio = NULL;
+            $termino = NULL;
+            if( $projeto->getData_inicio() != NULL){
+                $inicio = $projeto->getData_inicio()->format('d/m/Y');
+            }
+            if($projeto->getData_termino() != NULL){
+                $termino = $projeto->getData_termino()->format('d/m/Y');
+            }
             $arrayProjeto = array();
             if($projeto != NULL){
-                $arrayProjeto = array('nome' => $projeto->getNome(), 'inicio' => $projeto->getData_inicio()->format('d/m/Y'), 
-                    'termino' => $projeto->getData_termino()->format('d/m/Y'), 'laboratorio' => $projeto->getLaboratorio()->getId(), 
-                    'coordenador' => $projeto->getCoordenador()->getId(), 'descricao'=> $projeto->getTexto(),
-                    'capaProjeto' => stream_get_contents($projeto->getImagem()));
+                $arrayProjeto = array('nome' => $projeto->getNome(), 'inicio' => $inicio, 'termino' => $termino, 
+                    'laboratorio' => $projeto->getLaboratorio()->getId(),'coordenador' => $projeto->getCoordenador()->getId(), 
+                    'descricao'=> $projeto->getTexto(), 'capaProjeto' => stream_get_contents($projeto->getImagem()));
             }
         } catch (Exception $ex) {
             throw new Exception($ex->getMessage());
@@ -77,6 +133,14 @@ class projetos extends CI_Controller {
     }
     
     public function buscarTodosArray(){
+        if (!$this->sessioncontrol->isLoggedIn()) {
+            redirect('/acesso/index');
+        }
+        
+        if (!$this->input->is_ajax_request()) {
+            redirect('home');
+        }
+        
         $this->load->model('projetosmodel');
         try {
             $projetos = $this->projetosmodel->buscarTodosArray();

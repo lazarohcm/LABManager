@@ -29,7 +29,7 @@ class Projeto {
     private $nome;
     
     /**
-     * @ORM\Column(type="datetime", nullable=false) 
+     * @ORM\Column(type="datetime") 
      */
     private $data_inicio;
     
@@ -82,6 +82,14 @@ class Projeto {
      */
     private $noticiaProjeto;
     
+    /**
+     * Propriedade privada
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Publicacao", mappedBy="projeto_id", cascade={"all"})
+     *  
+     */
+    private $publicacao;
+    
     function __construct($id = NULL, $nome = NULL, $data_inicio = NULL, $data_termino = NULL, $imagem = NULL, $texto = NULL) {
         $this->id = $id;
         $this->nome = $nome;
@@ -92,6 +100,7 @@ class Projeto {
         
         $this->membro_projeto = new ArrayCollection();
         $this->noticiaProjeto = new ArrayCollection();
+        $this->publicacao = new ArrayCollection();
     }
     
     public function __toString() {
@@ -179,6 +188,16 @@ class Projeto {
         $noticiaProjeto->setProjeto($this);
         $this->noticiaProjeto->add($noticiaProjeto);
     }
+    function getPublicacao() {
+        return $this->publicacao;
+    }
+
+    function setPublicacao($publicacao) {
+        $publicacao->setProjeto($this);
+        $this->publicacao->add($publicacao);
+    }
+
+
 
 
 }

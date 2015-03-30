@@ -25,6 +25,14 @@ class Noticias extends CI_Controller {
     }
 
     public function cadastrar() {
+        if (!$this->sessioncontrol->isLoggedIn()) {
+            redirect('/acesso/index');
+        }
+        
+        if (!$this->input->is_ajax_request()) {
+            redirect('home');
+        }
+        
         $arrayRequest = $this->input->post();
         $this->load->model('noticiasmodel');
         try {
@@ -52,6 +60,14 @@ class Noticias extends CI_Controller {
     }
 
     public function buscarporid() {
+        if (!$this->sessioncontrol->isLoggedIn()) {
+            redirect('/acesso/index');
+        }
+        
+        if (!$this->input->is_ajax_request()) {
+            redirect('home');
+        }
+        
         $arrayRequest = $this->input->post();
         $this->load->model('noticiasmodel');
         try {
@@ -79,10 +95,18 @@ class Noticias extends CI_Controller {
     }
 
     public function atualizar() {
+        if (!$this->sessioncontrol->isLoggedIn()) {
+            redirect('/acesso/index');
+        }
+        
+        if (!$this->input->is_ajax_request()) {
+            redirect('home');
+        }
+        
         $arrayRequest = $this->input->post();
         $this->load->model('noticiasmodel');
         try {
-            $noticia = $this->noticiasmodel->atualizar($arrayRequest);
+            $this->noticiasmodel->atualizar($arrayRequest);
             $retorno = array('sucesso' => true, 'msg' => 'A notícia foi alterada');
         } catch (Exception $ex) {
             $retorno = $ex->getMessage();
@@ -93,6 +117,14 @@ class Noticias extends CI_Controller {
     }
 
     public function remover() {
+        if (!$this->sessioncontrol->isLoggedIn()) {
+            redirect('/acesso/index');
+        }
+        
+        if (!$this->input->is_ajax_request()) {
+            redirect('home');
+        }
+        
         $arrayRequest = $this->input->post();
         $this->load->model('noticiasmodel');
         try {

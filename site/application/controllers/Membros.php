@@ -54,6 +54,14 @@ class Membros extends CI_Controller {
     }
 
     public function cadastrar() {
+        if (!$this->sessioncontrol->isLoggedIn()) {
+            redirect('/acesso/index');
+        }
+        
+        if (!$this->input->is_ajax_request()) {
+            redirect('home');
+        }
+        
         $arrayRequest = $this->input->post();
         $this->load->model('membrosmodel');
         try {
@@ -70,6 +78,11 @@ class Membros extends CI_Controller {
         if (!$this->sessioncontrol->isLoggedIn()) {
             redirect('/acesso/index');
         }
+        
+        if (!$this->input->is_ajax_request()) {
+            redirect('home');
+        }
+        
         $userData = $this->sessioncontrol->getUserDataSession();
         $arrayRequest = $this->input->post();
         $arrayRequest['id'] = $userData['id'];
@@ -103,6 +116,14 @@ class Membros extends CI_Controller {
     }
 
     public function atualizar() {
+        if (!$this->sessioncontrol->isLoggedIn()) {
+            redirect('/acesso/index');
+        }
+        
+        if (!$this->input->is_ajax_request()) {
+            redirect('home');
+        }
+        
         $arrayRequest = $this->input->post();
         $this->load->model('membrosmodel');
         try {
@@ -116,6 +137,13 @@ class Membros extends CI_Controller {
     }
 
     public function buscarPorId() {
+        if (!$this->sessioncontrol->isLoggedIn()) {
+            redirect('/acesso/index');
+        }
+        
+        if (!$this->input->is_ajax_request()) {
+            redirect('home');
+        }
         $arrayRequest = $this->input->post();
         $this->load->model('membrosmodel');
         try {
@@ -146,6 +174,13 @@ class Membros extends CI_Controller {
     }
 
     public function buscarcoordenadores() {
+        if (!$this->sessioncontrol->isLoggedIn()) {
+            redirect('/acesso/index');
+        }
+        if (!$this->input->is_ajax_request()) {
+            redirect('home');
+        }
+        
         $this->load->model('membrosmodel');
         try {
             $array = $this->membrosmodel->buscarCoordenadores();
@@ -159,6 +194,14 @@ class Membros extends CI_Controller {
     }
 
     public function remover() {
+        if (!$this->sessioncontrol->isLoggedIn()) {
+            redirect('/acesso/index');
+        }
+        
+        if (!$this->input->is_ajax_request()) {
+            redirect('home');
+        }
+        
         $arrayRequest = $this->input->post();
         $this->load->model('membrosmodel');
         try {
@@ -186,6 +229,14 @@ class Membros extends CI_Controller {
     }
 
     public function buscarmembrosprojeto() {
+        if (!$this->sessioncontrol->isLoggedIn()) {
+            redirect('/acesso/index');
+        }
+        
+        if (!$this->input->is_ajax_request()) {
+            redirect('home');
+        }
+        
         $arrayRequest = $this->input->post();
         $this->load->model('membrosmodel');
         try {

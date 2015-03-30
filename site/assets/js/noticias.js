@@ -21,8 +21,7 @@ $(document).ready(function () {
         $("#projetos").val($("#projetos option:first").val());
 
         $('#tabela-noticias > tbody').find('tr').removeClass('selected');
-    }
-    ;
+    };
 
     $('#modalNewEdit').on('hide.bs.modal', function () {
         clearModal();
@@ -66,6 +65,7 @@ $(document).ready(function () {
         $.post(js_site_url('index.php/noticias/remover'), dataPost, function (data) {
             initNotification(data);
             if (data.sucesso) {
+//                disablePage();
                 var row = $('#tabela-noticias').find('tr.selected');
                 $('#tabela-noticias').DataTable().row(row).remove().draw();
                 $('#tabela-noticias > tbody').find('tr').removeClass('selected');
@@ -106,6 +106,7 @@ $(document).ready(function () {
             $.post(js_site_url('index.php/noticias/cadastrar'), dataPost, function (response) {
                 initNotification(response);
                 if (response.sucesso) {
+                    disablePage();
                     setTimeout(function () {
                         location.reload();
                     }, 3000);
@@ -116,6 +117,7 @@ $(document).ready(function () {
             $.post(js_site_url('index.php/noticias/atualizar'), dataPost, function (response) {
                 initNotification(response);
                 if (response.sucesso) {
+                    disablePage();
                     setTimeout(function () {
                         location.reload();
                     }, 3000);
