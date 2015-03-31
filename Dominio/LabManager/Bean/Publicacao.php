@@ -29,7 +29,7 @@ class Publicacao {
     private $titulo;
     
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=false)
      */
     private $data;
     

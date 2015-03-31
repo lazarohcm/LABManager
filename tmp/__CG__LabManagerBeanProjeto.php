@@ -64,10 +64,10 @@ class Projeto extends \LabManager\Bean\Projeto implements \Doctrine\ORM\Proxy\Pr
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'id', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'nome', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'data_inicio', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'data_termino', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'imagem', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'texto', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'coordenador', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'laboratorio', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'membro_projeto', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'noticiaProjeto');
+            return array('__isInitialized__', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'id', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'nome', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'data_inicio', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'data_termino', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'imagem', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'texto', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'coordenador', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'laboratorio', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'membro_projeto', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'noticiaProjeto', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'publicacao');
         }
 
-        return array('__isInitialized__', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'id', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'nome', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'data_inicio', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'data_termino', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'imagem', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'texto', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'coordenador', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'laboratorio', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'membro_projeto', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'noticiaProjeto');
+        return array('__isInitialized__', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'id', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'nome', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'data_inicio', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'data_termino', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'imagem', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'texto', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'coordenador', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'laboratorio', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'membro_projeto', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'noticiaProjeto', '' . "\0" . 'LabManager\\Bean\\Projeto' . "\0" . 'publicacao');
     }
 
     /**
@@ -406,6 +406,28 @@ class Projeto extends \LabManager\Bean\Projeto implements \Doctrine\ORM\Proxy\Pr
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setNoticiaProjeto', array($noticiaProjeto));
 
         return parent::setNoticiaProjeto($noticiaProjeto);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPublicacao()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPublicacao', array());
+
+        return parent::getPublicacao();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setPublicacao($publicacao)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPublicacao', array($publicacao));
+
+        return parent::setPublicacao($publicacao);
     }
 
 }

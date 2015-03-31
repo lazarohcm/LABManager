@@ -20,7 +20,7 @@
                         </div>
                         <div class="panel-body">
                             <p><?php echo substr($laboratorio->getDescricao(), 0, 160) . '...'; ?></p>
-                            <a href="<?php echo site_url('/laboratorios/visualizar/' . strtolower($laboratorio->getNome())) ?>" 
+                            <a href="<?php echo site_url('/laboratorios/visualizar/' . strtolower($laboratorio->getSigla())) ?>" 
                                class="btn btn-primary">Ir para página</a>
                         </div>
                     </div>

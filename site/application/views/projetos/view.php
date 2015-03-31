@@ -13,7 +13,7 @@
                     <div class="form-group">
                         <label>Laboratório:</label>
                         <p>
-                            <a href="<?php echo site_url('/laboratorios/visualizar/' . strtolower($projeto->getLaboratorio()->getNome())); ?>">
+                            <a href="<?php echo site_url('/laboratorios/visualizar/' . strtolower($projeto->getLaboratorio()->getSigla())); ?>">
                                 <?php echo $projeto->getLaboratorio()->getNome(); ?>
                             </a>
                         </p>

@@ -2,7 +2,7 @@
     <img src="<?php echo stream_get_contents($membro->getFoto()); ?>" alt="...">
     <div class="caption-full">
         <h4 class="text-center">
-            <a href="<?php echo $membro->getLattes(); ?>">Lázaro Henrique de Carvalho Marques</a>
+            <a target="_blank" href="<?php echo $membro->getLattes(); ?>">Lázaro Henrique de Carvalho Marques</a>
         </h4>
     </div>
     <div class="row">
@@ -57,17 +57,17 @@
 
     <hr>
     <div class="row">
-        <div class="col-md-4 col-sm-4 col-xs-6">
+        <div class="col-md-5 col-sm-4 col-xs-6">
             <label>Laboratório:</label>
             <a href="<?php echo site_url("/laboratorios/visualizar/").'/'.strtolower($membro->getLaboratorio()->getNome()); ?>">
                 <?php echo $membro->getLaboratorio()->getNome(); ?>
             </a>
         </div>
-        <div class="col-md-4 col-sm-4 col-xs-6">
+        <div class="col-md-3 col-sm-4 col-xs-6">
             <label>Membro desde: </label>
             <?php echo $membro->getData_entrada()->format('d/m/Y'); ?>
         </div>
-        <div class="col-md-4 col-sm-4 col-xs-6">
+        <div class="col-md-3 col-sm-4 col-xs-6">
             <label>Até: </label>
             <?php echo $membro->getData_saida() != NULL ? $membro->getData_saida()->format('d/m/Y') : 'Hoje'; ?>
         </div>
