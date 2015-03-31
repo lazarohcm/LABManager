@@ -12,7 +12,6 @@
 namespace LabManager\Negocio;
 
 use InfraEstrutura\Exception\DAOException;
-use InfraEstrutura\Exception\NegocioException;
 
 /**
  * Negocio Abstrato
@@ -52,7 +51,7 @@ abstract class AbstractNegocio {
         try {
             $this->dao->delete($object);
         } catch (DAOException $ex) {
-            throw new NegocioException($ex->getMessage());
+            throw new \Exception($ex->getMessage());
         }
 
         return TRUE;
@@ -68,7 +67,7 @@ abstract class AbstractNegocio {
         try {
             $retorno = $this->dao->findAll(get_class($this->beanNegocio));
         } catch (DAOException $ex) {
-            throw new NegocioException($ex->getMessage());
+            throw new \Exception($ex->getMessage());
         }
 
         return $retorno;
@@ -89,7 +88,7 @@ abstract class AbstractNegocio {
         try {
             $retorno = $this->dao->findById(get_class($this->beanNegocio), $id);
         } catch (DAOException $exc) {
-            throw new NegocioException($exc->getMessage());
+            throw new Exception($exc->getMessage());
         }
 
         return $retorno;
@@ -105,7 +104,7 @@ abstract class AbstractNegocio {
         try {
             $retorno = $this->dao->findOneBy(get_class($this->beanNegocio), $param);
         } catch (DAOException $exc) {
-            throw new NegocioException($exc->getMessage());
+            throw new Exception($exc->getMessage());
         }
 
         return $retorno;
@@ -124,7 +123,7 @@ abstract class AbstractNegocio {
         try {
             $this->dao->save($object);
         } catch (DAOException $exc) {
-            throw new NegocioException($exc->getMessage());
+            throw new Exception($exc->getMessage());
         }
         return $object;
     }
@@ -138,7 +137,7 @@ abstract class AbstractNegocio {
     public function update($object) {
         $object = $this->attachEntity($object);
         if (!is_numeric($object->getId())) {
-            throw new NegocioException("Id deve ser numérico!");
+            throw new Exception("Id deve ser numérico!");
         }
 
         $this->validarObjeto($object);
@@ -146,7 +145,7 @@ abstract class AbstractNegocio {
         try {
            return  $this->dao->update($object);
         } catch (DAOException $exc) {
-            throw new NegocioException($exc->getMessage());
+            throw new Exception($exc->getMessage());
         }
     }
     

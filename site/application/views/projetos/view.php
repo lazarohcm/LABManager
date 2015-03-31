@@ -48,26 +48,32 @@
     <!-- Notícias -->
     <div class="row">
         <h3>Notícias</h3>
-        <div class="col-md-4 col-sm-4 col-xs-5">
-            <hr>
-            <h4><a href="#">Notícia sobre o projeto</a></h4>
-            <hr>
-        </div>
-        <div class="col-md-4 col-sm-4 col-xs-5">
-            <hr>
-            <h4><a href="#">Notícia sobre o projeto</a></h4>
-            <hr>
-        </div>
-        <div class="col-md-4 col-sm-4 col-xs-5">
-            <hr>
-            <h4><a href="#">Notícia sobre o projeto</a></h4>
-            <hr>
-        </div>
-        <div class="col-md-4 col-sm-4 col-xs-5">
-            <hr>
-            <h4><a href="#">Notícia sobre o projeto</a></h4>
-            <hr>
-        </div>
+        <?php
+        $noticiasProjeto = $projeto->getNoticiaProjeto();
+        if ($projeto->getNoticiaProjeto()->isEmpty()) {
+            ?>
+            <div class="text-center">
+                <h3>Não há notícias sobre este projeto</h3>
+            </div>
+        <?php
+        } else {
+            foreach ($projeto->getNoticiaProjeto() as $noticiaProjeto) {
+                $noticia = $noticiaProjeto->getNoticia();
+                ?>
+                <div class="col-md-4 col-sm-4 col-xs-5">
+                    <hr>
+                    <h4>
+                        <a href="<?php echo site_url('/noticias/read') . '/' . $noticia->getId() ?>">
+        <?php echo $noticia->getTitulo(); ?>
+                        </a>
+                    </h4>
+                    <hr>
+                </div>
+                <?php
+            }
+        }
+        ?>
+
     </div>
 
     <!-- Membros -->
@@ -108,10 +114,9 @@
                         </div>
                     </div>
                 </div>
-        <?php
-    }
-}
-?> 
-
+                <?php
+            }
+        }
+        ?> 
     </div>
 </div>

@@ -11,11 +11,11 @@ class Publicacoes extends CI_Controller {
     public function index() {
         $this->load->model('publicacoesmodel');
         try {
-            $publicacoes = $this->publicacoesmodel->buscarTodos();
+            $publicacoes = $this->publicacoesmodel->buscarTodosPorAno();
         } catch (Exception $ex) {
             throw new Exception($ex->getMessage());
         }
-        $this->templateadmin->load('publicacoes/publicacoes', TITULO_SITE, '', TRUE, array('publicacoes' => $publicacoes));
+        $this->templateadmin->load('publicacoes/publicacoes', TITULO_SITE, '', TRUE, array('publicacoesPorAno' => $publicacoes));
     }
 
     public function cadastrar() {

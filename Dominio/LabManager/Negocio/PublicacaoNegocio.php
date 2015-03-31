@@ -36,45 +36,15 @@ class PublicacaoNegocio extends AbstractNegocio {
         }
         return $object;
     }
-
-//    public function salvar($publicacaoNeogcio){
-//        try{
-//            return $this->dao->save($publicacaoNeogcio);
-//        } catch (\Exception $ex) {
-//            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
-//        }
-//    }
-//    
-//    public function buscarPorID($id){
-//        try{
-//            return $this->dao->findById(get_class(new Publicacao()), $id);
-//        } catch (\Exception $ex) {
-//            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
-//        }
-//    }
-//    
-//    public function atualizar($publicacaoNeogcio){
-//        try{
-//            $this->dao->update($publicacaoNeogcio);
-//        } catch (\Exception $ex) {
-//            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
-//        }
-//    }
-//    
-//    public function buscarTodos(){
-//        try{
-//            return $this->dao->findAll(get_class(new Publicacao()));
-//        } catch (\Exception $ex) {
-//            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
-//        }
-//    }
-//    
-//    public function excluir($publicacaoNeogcio){
-//        try{
-//            $publicacaoNeogcioToRemove = $this->buscarPorID($publicacaoNeogcio->getId());
-//            $this->dao->delete($$publicacaoNeogcioToRemove);
-//        } catch (\Exception $ex) {
-//            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
-//        }
-//    }
+    
+    function buscarTodosPorAno(){
+        $query = "SELECT publicacao FROM LabManager\Bean\Publicacao publicacao ORDER BY publicacao.data DESC";
+        try {
+            $publicacoes = $this->dao->findByParam($query);
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+        return $publicacoes;
+    }
+    
 }

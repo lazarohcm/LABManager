@@ -22,6 +22,20 @@ class Publicacoesmodel extends CI_Model {
         return $publicacoes;
     }
     
+    public function buscarTodosPorAno(){
+        $facade = new PublicacaoFacade();
+        try{
+            $publicacoes = $facade->buscarTodosPorAno();
+        }  catch (\Exception $ex){
+            throw new Exception($ex->getMessage());
+        }
+        $publicacoesPorAno = array();
+        foreach($publicacoes as $publicacao){
+            $publicacoesPorAno[$publicacao->getData()->format('Y')][] = $publicacao;
+        }
+        return $publicacoesPorAno;
+    }
+    
     public function cadastrar($arrayCadastro){
         $facade = new PublicacaoFacade();
         $publicacao = new Publicacao();
