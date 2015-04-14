@@ -25,7 +25,7 @@
         <h2 class="page-header">Projetos</h2>
         <div class="row" id="projetos-lab">
             <?php foreach ($laboratorio->getProjeto() as $projeto) { ?>
-                <div class="col-sm-4 col-md-4">
+                <div class="col-sm-4 col-md-4 col-xs-6">
                     <div class="thumbnail projeto">
                         <img src="<?php echo stream_get_contents($projeto->getImagem()) ?>" alt="...">
                         <div class="caption">
@@ -48,7 +48,7 @@
         <h2 class="page-header">Membros</h2>
         <div class="row" id="membros-lab">
             <?php foreach ($laboratorio->getMembro() as $membro) { ?>
-                <div class="col-xs-6 col-sm-3 col-md-3 text-center col-membro">
+                <div class="col-xs-6 col-sm-4 col-md-3 text-center col-membro">
                     <div class="thumbnail membro-lab">
                         <a href="<?php echo site_url("/membros/visualizar/" . $membro->getId()); ?>">
                             <img class="img-responsive" src="<?php echo stream_get_contents($membro->getFoto()); ?>" alt="">

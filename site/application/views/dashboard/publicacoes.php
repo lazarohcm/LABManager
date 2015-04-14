@@ -90,6 +90,11 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <hr>
+                        </div>
+                    </div>
                     <div class="col-lg-12">
                         <ul class="nav nav-tabs">
                             <li id="tabelaDados" class="active"><a href="#tab-autores" data-toggle="tab">Autores</a></li>

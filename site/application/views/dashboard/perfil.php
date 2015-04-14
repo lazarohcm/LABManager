@@ -1,127 +1,95 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-10 col-md-offset-2 main" style="top: -40px">
-            <div class="page-header">
-                <h1>Perfil</h1> 
-            </div>
-            <div class="bs-example" data-example-id="striped-table">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <div class="image-preview" id="id-image-preview">
-                            <div class="image-wrap" data-image-width="220" data-image-height="200" data-img-name="foto">
-                                <div class="image-default">
-                                    <img class="img-responsive" id="foto" data-src="holder.js/220x200" alt="..." src="<?php echo stream_get_contents($membro->getFoto()); ?>"/>
-                                </div>
-                            </div>
-
-                            <div class="message"></div>
-
-                            <div class="action">
-                                <button type="button" class="btn btn-primary btn-block btn-image-preview">
-                                    <i class="fa fa-cloud-upload"></i> Carregar imagem
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row col-lg-8">
-                        <label>Sobre:</label>
-                        <form>
-                            <textarea id="sobre" style="height: 200px;" class="form-control" placeholder="Escreva algo sobre você" rows="3"><?php echo $membro->getBiografia() != NULL ? $membro->getBiografia() : NULL; ?>
-                            </textarea>
-                        </form>
-                        <br>
-                    </div>
-
-                    <div class="row">
-
-                    </div>
-
-                    <ul class="nav nav-tabs" style="top: 30px;">
-                        <li id="tabelaDados" class="active"><a aria-expanded="true" href="#dados" data-toggle="tab">Dados</a></li>
-                        <li id="tabelaAcademico" ><a aria-expanded="false" href="#academico" data-toggle="tab">Acadêmico</a></li>
-                        <li id="tabelaSocial" ><a aria-expanded="false" href="#social" data-toggle="tab">Social</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane fade in active" id="dados">
-                            <div class="col-md-5">
-                                <div class="form-group has-feedback">
-                                    <label>Nome:</label>
-                                    <input id="nome" type="text" class="form-control" value="<?php echo $membro->getNome(); ?>"/>
-                                </div>
-                                <div class="form-group has-feedback">
-                                    <label>Email:</label>
-                                    <input id="email" type="text" class="form-control" value="<?php echo $membro->getEmail(); ?>"/>
-                                </div>
-                                <div class="form-group has-feedback">
-                                    <label>Usuário:</label>
-                                    <input disabled="" id="usuario" type="text" class="form-control" value="<?php echo $membro->getUsuario(); ?>"/>
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="form-group has-feedback">
-                                    <label>Telefone:</label>
-                                    <input id="telefone" type="tel" class="form-control" value="<?php $telefone = ($membro->getTelefone() != NULL) ? $membro->getTelefone() : NULL;
-                                echo $telefone;
-                                ?>"/>
-                                </div>
-                                <div class="form-group has-feedback">
-                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalSenha">Alterar Senha</button>
-                                </div>
-                            </div>
-                        </div> <!-- Tab Dados -->
-
-                        <div class="tab-pane fade in" id="social">
-                            <div class="col-md-5">
-                                <div class="form-group has-feedback">
-                                    <label>Facebook:</label>
-                                    <input id="facebook" type="url" class="form-control" value="<?php echo $membro->getFacebook() != NULL ? $membro->getFacebook() : NULL; ?>"/>
-                                </div>
-                                <div class="form-group has-feedback">
-                                    <label>Twitter:</label>
-                                    <input id="twitter" type="url" class="form-control" value="<?php echo $membro->getTwitter() != NULL ? $membro->getTwitter() : NULL; ?>"/>
-                                </div>
-                                <div class="form-group has-feedback">
-                                    <label>Linkdln:</label>
-                                    <input id="linkdin" type="url" class="form-control" value="<?php echo $membro->getLinkdl() != NULL ? $membro->getLinkdl() : NULL; ?>"/>
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                            </div>
-                        </div> <!-- Tab Social -->
-
-                        <div class="tab-pane fade in" id="academico">
-                            <div class="col-md-5">
-                                <div class="form-group has-feedback">
-                                    <label>Lattes:</label>
-                                    <input id="lattes" type="url" class="form-control" value="<?php echo $membro->getLattes() != NULL ? $membro->getLattes() : NULL; ?>"/>
-                                </div>
-                                <div class="form-group has-feedback">
-                                    <label>Data de Entrada:</label>
-                                    <input id="entrada" type="date" class="form-control" disabled="" value="<?php echo $membro->getData_entrada() != NULL ? $membro->getData_entrada()->format('d/m/Y') : NULL; ?>"/>
-                                </div>
-                                <div class="form-group has-feedback">
-                                    <label>Data de Saída:</label>
-                                    <input id="email" type="date" class="form-control" disabled="" value="<?php echo $membro->getData_saida() != NULL ? $membro->getData_saida()->format('d/m/Y') : NULL; ?>"/>
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="form-group has-feedback">
-                                    <label>Áreas de Interesse:</label>
-                                    <textarea id="areas" class="form-control" placeholder="Escreva algo sobre você" rows="3">
-                                        <?php echo $membro->getArea_interesse() != NULL ? $membro->getArea_interesse() : NULL; ?>
-                                    </textarea>
-                                </div>
-                            </div>
-                        </div> <!-- Tab Acadêmico -->
-
-                    </div>
-                </div>
-            </div>
-            <button id="btnSalvar" type="button" class="btn btn-primary pull-left">Salvar</button>
+<div class="col-md-9">
+    <h1>Perfil</h1>
+    <hr>
+    <div class="col-md-4">
+        <input style="display: none" type="file" id="input-foto" onchange="previewFile('foto', 'input-foto')">
+        <img id="foto" src="<?php echo stream_get_contents($membro->getFoto()); ?>" class="img-responsive img-upload" alt="Capa Labarotório" style="height:200px"/>
+        <button id="btn-upload" type="button" class="btn btn-primary btn-block">
+            <i class="fa fa-cloud-upload"></i> Carregar imagem
+        </button>
+        <br>
+    </div>
+    <div class="col-md-7">
+        <div class="form-group has-feedback">
+            <label>Nome:</label>
+            <input id="nome" type="text" class="form-control" value="<?php echo $membro->getNome(); ?>"/>
         </div>
-
+        <div class="form-group has-feedback">
+            <label>Email:</label>
+            <input id="email" type="text" class="form-control" value="<?php echo $membro->getEmail(); ?>"/>
+        </div>
+        <div class="form-group has-feedback">
+            <label>Lattes:</label>
+            <input id="lattes" type="url" class="form-control" value="<?php echo $membro->getLattes() != NULL ? $membro->getLattes() : NULL; ?>"/>
+        </div>
+        <div class="form-group has-feedback">
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalSenha">Alterar Senha</button>
+        </div>
     </div>
 
+    <div class="col-md-11">
+        <ul class="nav nav-tabs">
+            <li id="tabelaDados" class="active"><a aria-expanded="true" href="#dados" data-toggle="tab">Dados</a></li>
+            <li id="tabelaLaboratorio" ><a aria-expanded="false" href="#laboratorio" data-toggle="tab">Laboratório</a></li>
+            <li id="tabelaSocial" ><a aria-expanded="false" href="#social" data-toggle="tab">Social</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="dados">
+                <br>
+                <div class="col-md-7 form-group">
+                    <label>Sobre:</label>
+                    <textarea id="sobre" class="form-control" placeholder="Escreva algo sobre você" rows="5"><?php echo $membro->getBiografia() != NULL ? $membro->getBiografia() : NULL; ?></textarea>
+                </div>
+                <div class="col-md-5">
+                    <label>Áreas de interesse:</label>
+                    <textarea id="areas" class="form-control" placeholder="Escreva algo sobre você" rows="5"><?php echo $membro->getArea_interesse() != NULL ? $membro->getArea_interesse() : NULL; ?></textarea>
+
+                </div>
+            </div>
+
+            <div class="tab-pane fade in" id="social">
+                <br>
+                <div class="col-md-5">
+                    <div class="form-group has-feedback">
+                        <label>Facebook:</label>
+                        <input id="facebook" type="url" class="form-control" value="<?php echo $membro->getFacebook() != NULL ? $membro->getFacebook() : NULL; ?>"/>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <label>Twitter:</label>
+                        <input id="twitter" type="url" class="form-control" value="<?php echo $membro->getTwitter() != NULL ? $membro->getTwitter() : NULL; ?>"/>
+                    </div>
+
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group has-feedback">
+                        <label>Linkdln:</label>
+                        <input id="linkdin" type="url" class="form-control" value="<?php echo $membro->getLinkdl() != NULL ? $membro->getLinkdl() : NULL; ?>"/>
+                    </div>
+                </div>
+            </div> <!-- Tab Social -->
+
+            <div class="tab-pane fade in" id="laboratorio">
+                <br>
+                <div class="col-md-12">
+                    <h4 class="text-center"><?php echo $membro->getLaboratorio()->getNome(); ?></h4>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group has-feedback">
+                        <label>Data de Entrada:</label>
+                        <input id="entrada" type="date" class="form-control" disabled="" value="<?php echo $membro->getData_entrada() != NULL ? $membro->getData_entrada()->format('d/m/Y') : NULL; ?>"/>
+                    </div>
+
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group has-feedback">
+                        <label>Data de Saída:</label>
+                        <input id="email" type="date" class="form-control" disabled="" value="<?php echo $membro->getData_saida() != NULL ? $membro->getData_saida()->format('d/m/Y') : NULL; ?>"/>
+                    </div>
+                </div>
+            </div> <!-- Tab Acadêmico -->
+
+        </div>
+    </div>
 </div>
 
 <div id="modalSenha" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -159,15 +127,14 @@
 </div>
 
 <script src="<?php echo base_url(); ?>assets/js/perfil.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/jquery-image-preview.js"></script>
 <script>
-    $(document).ready(function () {
-        $('.nav-sidebar > li.active').removeClass('active');
-        $('.nav-sidebar > li:contains("Perfil")').addClass('active');
-    });
-    var js_site_url = function (urlText) {
-        var url = "<?php echo base_url(); ?>" + urlText;
-        return url;
-    }
+            $(document).ready(function () {
+                $('.dashboard-options > li.active').removeClass('active');
+                $('.dashboard-options > li:contains("Perfil")').addClass('active');
+            });
+            var js_site_url = function (urlText) {
+                var url = "<?php echo base_url(); ?>" + urlText;
+                return url;
+            }
 </script>
 

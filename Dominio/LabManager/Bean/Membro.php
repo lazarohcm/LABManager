@@ -80,14 +80,12 @@ class Membro {
     private $linkdl;
     
     /**
-     * @ORM\Column(type="datetime", nullable=false)
-     * @var type 
+     * @ORM\Column(type="datetime")
      */
     private $data_entrada;
     
     /**
-     * @ORM\Column(type="datetime", nullable=false)
-     * @var type 
+     * @ORM\Column(type="datetime")
      */
     private $data_saida;
     
@@ -99,7 +97,6 @@ class Membro {
     
     /**
      * @ORM\Column(type="string", length=300)
-     * @var type 
      */
     private $area_interesse;
     
@@ -114,12 +111,6 @@ class Membro {
      * @var type 
      */
     private $senha;
-    
-    /**
-     * @ORM\Column(type="string", length=45)
-     * @var type 
-     */
-    private $usuario;
     
     /**
      * @ORM\Column(type="string", length=45, nullable=false)
@@ -151,7 +142,7 @@ class Membro {
     
     function __construct($id = NULL ,$laboratorio = NULL ,$nome = NULL ,$ativo = NULL ,$tipo = NULL ,$email = NULL ,$telefone = NULL ,
             $facebook = NULL ,$twitter = NULL ,$linkdl = NULL ,$data_entrada = NULL ,$data_saida = NULL ,$biografia = NULL ,
-            $area_interesse = NULL ,$admin = NULL ,$senha = NULL ,$usuario = NULL ,$lattes = NULL ,$foto = NULL ) {
+            $area_interesse = NULL ,$admin = NULL ,$senha = NULL ,$lattes = NULL ,$foto = NULL ) {
         $this->id = $id;
         $this->nome = $nome;
         $this->ativo = $ativo;
@@ -167,7 +158,6 @@ class Membro {
         $this->area_interesse = $area_interesse;
         $this->admin = $admin;
         $this->senha = $senha;
-        $this->usuario = $usuario;
         $this->lattes = $lattes;
         $this->foto = $foto;
         
@@ -242,10 +232,6 @@ class Membro {
         return $this->senha;
     }
 
-    function getUsuario() {
-        return $this->usuario;
-    }
-
     function getLattes() {
         return $this->lattes;
     }
@@ -316,10 +302,6 @@ class Membro {
 
     function setSenha($senha) {
         $this->senha = $senha;
-    }
-
-    function setUsuario($usuario) {
-        $this->usuario = $usuario;
     }
 
     function setLattes($lattes) {

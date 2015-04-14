@@ -36,7 +36,7 @@ class MembroNegocio extends AbstractNegocio{
     
     
     public function salvar($membroData){
-        $lab = $this->labNegocio->buscarPorID($membroData['idLab']);
+        $lab = $this->labNegocio->findById($membroData['idLab']);
         $membro = $membroData['membro'];
         $membro->setLaboratorio($lab);
         $membro->setBiografia('...');
@@ -69,18 +69,10 @@ class MembroNegocio extends AbstractNegocio{
         }
     }
     
-    public function buscarPorID($id){
-        try{
-            return $this->dao->findById(get_class(new Membro()), $id);
-        } catch (\Exception $ex) {
-            throw new \Exception($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
-        }
-    }
-    
     public function atualizar($membroData){
          $membro = $membroData['membro'];
         if(isset($membroData['idLab'])){
-            $lab = $this->labNegocio->buscarPorID($membroData['idLab']);
+            $lab = $this->labNegocio->findById($membroData['idLab']);
             $membro->setLaboratorio($lab);
         }
         
@@ -101,7 +93,7 @@ class MembroNegocio extends AbstractNegocio{
     }
     
     public function buscarPorUsuario($usuario){
-        $query = "SELECT membro FROM LabManager\Bean\Membro membro WHERE membro.usuario = :usuario";
+        $query = "SELECT membro FROM LabManager\Bean\Membro membro WHERE membro.email = :usuario";
         try{
             $membro = $this->dao->findByParam($query, array('usuario' => $usuario));
         } catch (\Exception $ex) {

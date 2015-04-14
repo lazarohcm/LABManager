@@ -21,10 +21,28 @@ class MembrosModel extends CI_Model {
         $facedeMembro = new MembroFacade();
         $membro = new Membro();
         $membro->setNome($arrayMembro['nome']);
-        $membro->setUsuario($arrayMembro['usuario']);
+        if ($arrayMembro['nome'] == NULL || strlen($arrayMembro['nome']) < 6) {
+            throw new Exception('O nome dado é muito pequeno');
+        }
+        if (!filter_var($arrayMembro['email'], FILTER_VALIDATE_EMAIL)) {
+            throw new Exception('O email fornecido é inválido');
+        }
+        if ($arrayMembro['laboratorio'] == NULL || $arrayMembro['laboratorio'] == 0) {
+            throw new Exception('Selecione um laboratório');
+        }
+        if ($arrayMembro['tipo'] == NULL || $arrayMembro['tipo'] == 0) {
+            throw new Exception('Selecione um tipo');
+        }
+        if (isset($arrayMembro['entrada']) && $arrayMembro['entrada'] != '') {
+            $membro->setData_entrada(DateTime::createFromFormat('d/m/Y', $arrayMembro['entrada']));
+        }
+        if (isset($arrayMembro['saida']) && $arrayMembro['saida'] != '') {
+            $membro->setData_saida(DateTime::createFromFormat('d/m/Y', $arrayMembro['saida']));
+        }
+
         $membro->setEmail($arrayMembro['email']);
         $membro->setSenha(md5('123456'));
-        $membro->setData_entrada(DateTime::createFromFormat('d/m/Y', $arrayMembro['entrada']));
+
 
         $membro->setAtivo($arrayMembro['ativo'] === 'true' ? true : false);
         $membro->setAdmin($arrayMembro['admin'] === 'true' ? true : false);
@@ -42,7 +60,7 @@ class MembrosModel extends CI_Model {
     public function buscarPorId($id) {
         $facade = new MembroFacade();
         try {
-            $arrayMembros = $facade->buscarPorId($id);
+            $arrayMembros = $facade->findById($id);
         } catch (Exception $ex) {
             throw new Exception($ex->getMessage());
         }
@@ -54,15 +72,14 @@ class MembrosModel extends CI_Model {
         $facade = new MembroFacade();
         try {
             $membro = $facade->buscarPorUsuario($usuario);
-            if (isset($membro[0])) {
-                if (md5($senha) == $membro[0]->getSenha()) {
-                    $dadosSessao['id'] = $membro[0]->getId();
-                    $dadosSessao['usuario'] = $membro[0]->getUsuario();
-                    $dadosSessao['admin'] = $membro[0]->getAdmin();
-                    $dadosSessao['nome'] = $membro[0]->getNome();
-                    $this->sessioncontrol->setVarSession('id_user_labmanager', $dadosSessao);
-                    return TRUE;
-                }
+            if (isset($membro[0]) && md5($senha) == $membro[0]->getSenha()) {
+
+                $dadosSessao['id'] = $membro[0]->getId();
+                $dadosSessao['email'] = $membro[0]->getEmail();
+                $dadosSessao['admin'] = $membro[0]->getAdmin();
+                $dadosSessao['nome'] = $membro[0]->getNome();
+                $this->sessioncontrol->setVarSession('id_user_labmanager', $dadosSessao);
+                return TRUE;
             }
         } catch (Exception $ex) {
             throw new Exception($ex->getMessage());
@@ -99,11 +116,12 @@ class MembrosModel extends CI_Model {
 
     public function atualizar($arrayMembro) {
         $facedeMembro = new MembroFacade();
-        $membro = $facedeMembro->buscarPorId($arrayMembro['id']);
+        $membro = $facedeMembro->findById($arrayMembro['id']);
         $membro->setNome($arrayMembro['nome']);
-        $membro->setUsuario($arrayMembro['usuario']);
         $membro->setEmail($arrayMembro['email']);
-        $membro->setData_entrada(DateTime::createFromFormat('d/m/Y', $arrayMembro['entrada']));
+        if (isset($arrayMembro['entrada']) && $arrayMembro['entrada'] != '') {
+            $membro->setData_entrada(DateTime::createFromFormat('d/m/Y', $arrayMembro['entrada']));
+        }
         $membro->setAtivo($arrayMembro['ativo'] === 'true' ? true : false);
         $membro->setAdmin($arrayMembro['admin'] === 'true' ? true : false);
         $membro->setFoto($arrayMembro['foto']);
@@ -136,13 +154,13 @@ class MembrosModel extends CI_Model {
             $membro->setData_saida(NULL);
         }
 
-        if (!isset($arrayMembro['biografia']) && $arrayMembro['biografia'] == '') {
+        if (!isset($arrayMembro['biografia']) || $arrayMembro['biografia'] == '') {
             $membro->setBiografia('...');
         } else {
             $membro->setBiografia($arrayMembro['biografia']);
         }
 
-        if (!isset($arrayMembro['lattes']) && $arrayMembro['lattes'] == '') {
+        if (!isset($arrayMembro['lattes']) || $arrayMembro['lattes'] == '') {
             $membro->setLattes('...');
         } else {
             $membro->setLattes($arrayMembro['lattes']);
@@ -189,7 +207,7 @@ class MembrosModel extends CI_Model {
         } else {
             return array('sucesso' => false, 'msg' => 'A senha atual não confere');
         }
-        
+
         try {
             $retorno = $facedeMembro->atualizar(array('membro' => $membro));
         } catch (Exception $ex) {
@@ -200,8 +218,9 @@ class MembrosModel extends CI_Model {
 
     public function remover($id) {
         $facade = new MembroFacade();
+        $membro = $facade->findById($id);
         try {
-            $retorno = $facade->excluir($id);
+            $retorno = $facade->delete($membro);
         } catch (Exception $ex) {
             throw new Exception($ex->getMessage());
         }

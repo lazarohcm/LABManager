@@ -65,13 +65,14 @@ class Membros extends CI_Controller {
         $arrayRequest = $this->input->post();
         $this->load->model('membrosmodel');
         try {
-            $membro = $this->membrosmodel->cadastrar($arrayRequest);
+            $this->membrosmodel->cadastrar($arrayRequest);
+            $retorno = array('sucesso' => false, 'msg' => 'O membro foi cadastrado');
         } catch (Exception $ex) {
-            throw new Exception($ex->getMessage());
+            $retorno = array('erro' => true, 'msg' => $ex->getMessage());
         }
         $this->output
                 ->set_content_type('application/json')
-                ->set_output(json_encode(array('sucesso' => true, 'membro' => $membro)));
+                ->set_output(json_encode($retorno));
     }
 
     public function atualizarperfil() {
@@ -127,13 +128,14 @@ class Membros extends CI_Controller {
         $arrayRequest = $this->input->post();
         $this->load->model('membrosmodel');
         try {
-            $membro = $this->membrosmodel->atualizar($arrayRequest);
+            $this->membrosmodel->atualizar($arrayRequest);
+            $retorno = array('sucesso' => true, 'msg' => 'Os dados foram atualizados');
         } catch (Exception $ex) {
-            throw new Exception($ex->getMessage());
+            $retorno = array('sucesso' => false, 'msg' => $ex->getMessage());
         }
         $this->output
                 ->set_content_type('application/json')
-                ->set_output(json_encode(array('sucesso' => true, 'membro' => $membro)));
+                ->set_output(json_encode($retorno));
     }
 
     public function buscarPorId() {
@@ -155,19 +157,23 @@ class Membros extends CI_Controller {
             $tipo = 1;
         if ($membro->getTipo() == 'Pesquisador')
             $tipo = 2;
-        if ($membro->getTipo() == 'Soutorando')
+        if ($membro->getTipo() == 'Doutorando')
             $tipo = 3;
         if ($membro->getTipo() == 'Mestrando')
             $tipo = 4;
         if ($membro->getTipo() == 'Graduando')
             $tipo = 5;
-        $saida = NULL;
+        $saida = NULL; $entrada = NULL;
+        
         if ($membro->getData_saida() != NULL) {
             $saida = $membro->getData_saida()->format('d/m/Y');
-        };
-        $arrayMembro = array('nome' => $membro->getNome(), 'email' => $membro->getEmail(), 'usuario' => $membro->getUsuario(),
-            'laboratorio' => $membro->getlaboratorio()->getId(), 'tipo' => $tipo, 'entrada' => $membro->getData_entrada()->format('d/m/Y'),
-            'saida' => $saida, 'ativo' => $membro->getAtivo(), 'admin' => $membro->getAdmin(), 'foto' => stream_get_contents($membro->getFoto()));
+        }
+        if ($membro->getData_entrada() != NULL) {
+            $entrada = $membro->getData_entrada()->format('d/m/Y');
+        }
+        $arrayMembro = array('nome' => $membro->getNome(), 'email' => $membro->getEmail(), 'laboratorio' => $membro->getlaboratorio()->getId(), 
+            'tipo' => $tipo, 'entrada' => $entrada, 'saida' => $saida, 'ativo' => $membro->getAtivo(), 
+            'admin' => $membro->getAdmin(), 'foto' => stream_get_contents($membro->getFoto()));
         $this->output
                 ->set_content_type('application/json')
                 ->set_output(json_encode(array('sucesso' => true, 'membro' => $arrayMembro)));
@@ -205,14 +211,15 @@ class Membros extends CI_Controller {
         $arrayRequest = $this->input->post();
         $this->load->model('membrosmodel');
         try {
-            $retorno = $this->membrosmodel->remover($arrayRequest['idUsuario']);
+            $this->membrosmodel->remover($arrayRequest['idUsuario']);
+            $retorno = array('sucesso' => true, 'msg' => 'O usuário foi removido');
         } catch (Exception $ex) {
-            throw new Exception($ex->getMessage());
+            $retorno = array('sucesso' => false, 'msg' => $ex->getMessage());
         }
 
         $this->output
                 ->set_content_type('application/json')
-                ->set_output(json_encode(array('sucesso' => true, 'retorno' => $retorno)));
+                ->set_output(json_encode($retorno));
     }
 
     public function visualizar($id) {

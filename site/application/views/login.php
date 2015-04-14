@@ -22,7 +22,7 @@
                 <form id="loginform" class="form-horizontal" role="form" method="POST" action="<?php echo site_url('/acesso/autentica'); ?>">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="usuario" type="text" class="form-control" name="usuario" value="" placeholder="Usuário">                                        
+                        <input id="usuario" type="text" class="form-control" name="usuario" value="" placeholder="Seu Email">                                        
                     </div>
                     <br>
                     <div class="input-group">

@@ -64,10 +64,10 @@ class Membro extends \LabManager\Bean\Membro implements \Doctrine\ORM\Proxy\Prox
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'id', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'laboratorio', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'nome', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'ativo', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'tipo', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'email', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'telefone', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'facebook', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'twitter', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'linkdl', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'data_entrada', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'data_saida', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'biografia', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'area_interesse', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'admin', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'senha', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'usuario', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'lattes', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'foto', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'chefeProjeto', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'membro_projeto');
+            return array('__isInitialized__', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'id', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'laboratorio', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'nome', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'ativo', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'tipo', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'email', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'telefone', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'facebook', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'twitter', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'linkdl', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'data_entrada', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'data_saida', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'biografia', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'area_interesse', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'admin', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'senha', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'lattes', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'foto', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'chefeProjeto', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'membro_projeto');
         }
 
-        return array('__isInitialized__', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'id', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'laboratorio', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'nome', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'ativo', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'tipo', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'email', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'telefone', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'facebook', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'twitter', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'linkdl', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'data_entrada', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'data_saida', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'biografia', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'area_interesse', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'admin', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'senha', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'usuario', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'lattes', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'foto', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'chefeProjeto', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'membro_projeto');
+        return array('__isInitialized__', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'id', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'laboratorio', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'nome', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'ativo', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'tipo', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'email', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'telefone', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'facebook', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'twitter', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'linkdl', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'data_entrada', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'data_saida', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'biografia', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'area_interesse', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'admin', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'senha', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'lattes', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'foto', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'chefeProjeto', '' . "\0" . 'LabManager\\Bean\\Membro' . "\0" . 'membro_projeto');
     }
 
     /**
@@ -367,17 +367,6 @@ class Membro extends \LabManager\Bean\Membro implements \Doctrine\ORM\Proxy\Prox
     /**
      * {@inheritDoc}
      */
-    public function getUsuario()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUsuario', array());
-
-        return parent::getUsuario();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function getLattes()
     {
 
@@ -571,17 +560,6 @@ class Membro extends \LabManager\Bean\Membro implements \Doctrine\ORM\Proxy\Prox
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setSenha', array($senha));
 
         return parent::setSenha($senha);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setUsuario($usuario)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUsuario', array($usuario));
-
-        return parent::setUsuario($usuario);
     }
 
     /**

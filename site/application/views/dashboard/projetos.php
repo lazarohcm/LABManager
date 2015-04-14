@@ -37,7 +37,7 @@
                         <?php echo $projeto->getLaboratorio()->getSigla(); ?> 
                     </td>
                     <td>
-                        <?php   $projeto->getData_inicio() != NULL ? printf($projeto->getData_inicio()->format('d/m/Y')) : printf('Sem data'); ?>
+                        <?php $projeto->getData_inicio() != NULL ? printf($projeto->getData_inicio()->format('d/m/Y')) : printf('Sem data'); ?>
                     </td>
                     <td>
                         <?php $projeto->getData_termino() != NULL ? printf($projeto->getData_termino()->format('d/m/Y')) : printf('Sem data'); ?>
@@ -110,6 +110,11 @@
                                 <label>Data de Termino:</label>
                                 <input id="termino" type="text" class="form-control"/>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <hr>
                         </div>
                     </div>
                     <div class="col-lg-12">
