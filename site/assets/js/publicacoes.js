@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $(document).ajaxStop($.unblockUI);
-    
+
     $('#tabela-publicacoes').DataTable({
         "language": {
             "url": "../../assets/DataTables/dataTables.portugues.json"
@@ -11,24 +11,24 @@ $(document).ready(function () {
     $('#btn-upload, #capa').on('click', function () {
         $('#input-capa').click();
     });
-    
-    $('.btn[data-target="#modalNewEdit"], .editar').on('click', function(){
-       clearModal(); 
+
+    $('.btn[data-target="#modalNewEdit"], .editar').on('click', function () {
+        clearModal();
     });
-    
+
     $('.editar, .remover').on('click', function () {
         $('#tabela-publicacoes').find('tr.selected').removeClass('selected');
         $(this).parents('tr').addClass('selected');
     });
-    
+
     $('#modalNewEdit').on('hide.bs.modal', function () {
-       $('#tabela-publicacoes').find('tr.selected').removeClass('selected');
+        $('#tabela-publicacoes').find('tr.selected').removeClass('selected');
     });
-    
-    $('.remover').on('click', function(){
-       $('.publicacao-name').text($(this).parents('tr.selected').find('.td-name a').text()); 
+
+    $('.remover').on('click', function () {
+        $('.publicacao-name').text($(this).parents('tr.selected').find('.td-name a').text());
     });
-    
+
     //Load de projetos
     ajaxMessage();
     $.post(js_site_url('index.php/projetos/buscartodosarray'), function (response) {
@@ -39,6 +39,24 @@ $(document).ready(function () {
             });
         }
     });
+
+    $('.editar').on('click', function () {
+        var id = id = $(this).parents('tr').data('id'), dataPost = {};
+        dataPost = {id:id};
+        ajaxMessage();
+        $.post(js_site_url('index.php/publicacoes/buscarporid'), dataPost, function (response) {
+            if (response.sucesso) {
+                var publicacao = response.publicacao;
+                $('#titulo').val(publicacao.titulo);
+                $('#autores').val(publicacao.autores);
+                $('#projetos').val(publicacao.projeto);
+                $('#link').val(publicacao.linkDownload);
+                $('#data').datepicker('update', publicacao.data);
+                $('#capa').attr('src', publicacao.imagem);
+                
+            }
+        });
+    })
 
     $('#btnSalvar').on('click', function () {
         var id, titulo, capa, data, autores, projeto, link, dataPost = {};
@@ -55,10 +73,10 @@ $(document).ready(function () {
             $.post(js_site_url('index.php/publicacoes/cadastrar'), dataPost, function (response) {
                 initNotification(response);
                 if (response.sucesso) {
-//                    disablePage();
-//                    setTimeout(function () {
-//                        location.reload();
-//                    }, 3000);
+                    disablePage();
+                    setTimeout(function () {
+                        location.reload();
+                    }, 3000);
                 }
 
             });
@@ -66,20 +84,20 @@ $(document).ready(function () {
             $.post(js_site_url('index.php/publicacoes/atualizar'), dataPost, function (response) {
                 initNotification(response);
                 if (response.sucesso) {
-//                    disablePage();
-//                    setTimeout(function () {
-//                        location.reload();
-//                    }, 3000);
+                    disablePage();
+                    setTimeout(function () {
+                        location.reload();
+                    }, 3000);
                 }
 
             });
         }
     });
-    
-    $('#btnRemover').on('click', function(){
+
+    $('#btnRemover').on('click', function () {
         var id = $('tr.selected').data('id');
-        
-        $.post(js_site_url('index.php/publicacoes/remover'), {id:id}, function (data) {
+
+        $.post(js_site_url('index.php/publicacoes/remover'), {id: id}, function (data) {
             initNotification(data);
             if (data.sucesso) {
 //                disablePage();
@@ -89,12 +107,12 @@ $(document).ready(function () {
             }
         });
     });
-    
-    function clearModal(){
+
+    function clearModal() {
         $('#titulo').val('');
         $('#autores').val('');
         $('#link').val('');
-        $('#capa').attr('src','http://placehold.it/700x300/81326D/ffffff&text=Publicação');
+        $('#capa').attr('src', 'http://placehold.it/700x300/81326D/ffffff&text=Publicação');
         $('#data').datepicker('update', '');
         $('#projetos').val($('#projetos option:first').val());
     }

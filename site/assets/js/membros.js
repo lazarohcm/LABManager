@@ -105,7 +105,6 @@ $(document).ready(function () {
         } else {
             $.post(js_site_url('index.php/membros/atualizar'), dataPost, function (response) {
                 initNotification(response);
-
             });
         }
         //location.reload();

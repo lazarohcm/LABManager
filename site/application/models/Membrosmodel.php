@@ -200,12 +200,12 @@ class MembrosModel extends CI_Model {
     public function atualizarSenha($arrayMembro) {
         $facedeMembro = new MembroFacade();
         $membro = new Membro();
-        $membro = $facedeMembro->buscarPorId($arrayMembro['id']);
+        $membro = $facedeMembro->findById($arrayMembro['id']);
         $senha = md5($arrayMembro['senhaAtual']);
         if ($membro->getSenha() == $senha) {
             $membro->setSenha(md5($arrayMembro['novaSenha']));
         } else {
-            return array('sucesso' => false, 'msg' => 'A senha atual não confere');
+            throw new Exception('A senha atual não confere');
         }
 
         try {

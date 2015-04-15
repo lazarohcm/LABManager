@@ -107,9 +107,10 @@ class Membros extends CI_Controller {
         $arrayRequest['id'] = $userData['id'];
         $this->load->model('membrosmodel');
         try {
-            $retorno = $this->membrosmodel->atualizarSenha($arrayRequest);
+            $this->membrosmodel->atualizarSenha($arrayRequest);
+            $retorno = array('sucesso' => true, 'msg' => 'Senha atualizada com sucesso');
         } catch (Exception $ex) {
-            throw new Exception($ex->getMessage());
+            $retorno = array('sucesso' => false, 'msg' => $ex->getMessage());
         }
         $this->output
                 ->set_content_type('application/json')

@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    
+    $(document).ajaxStop($.unblockUI);
+    
     $('#btn-upload, #foto').on('click', function () {
         $('#input-foto').click();
     });
@@ -36,20 +39,22 @@ $(document).ready(function () {
             $('#novaSenha').parent('div').removeClass('has-error');
             $('#novaSenha').parent('div').children('strong').remove();
         }
-        if (!cfmNovaSenha) {
-            $('#cfmNovaSenha').parent('div').addClass('has-error');
-            $('#cfmNovaSenha').parent('div').append('<strong class="alert-danger cfmNova">Não pode ser nula</strong>');
+        if (!cfmNovaSenha && !$('#cfmNovaSenha').parent('div').hasClass('has-error')) {
+            var parent = $('#cfmNovaSenha').parent('div');
+            $(parent).addClass('has-error');
+            $(parent).append('<strong class="alert-danger cfmNova">Não pode ser nula</strong>');
         } else {
             $('#cfmNovaSenha').parent('div').removeClass('has-error');
             $('#cfmNovaSenha').parent('div').children('strong').remove();
         }
 
 
-        if ((novaSenha !== cfmNovaSenha) && !novaSenha && !cfmNovaSenha) {
+        if (novaSenha !== cfmNovaSenha && cfmNovaSenha) {
+            
             $('#cfmNovaSenha').parent('div').addClass('has-error');
             $('#cfmNovaSenha').parent('div').append('<strong class="alert-danger">As senhas não conferem</strong>');
 
-        } else {
+        } else if(novaSenha === cfmNovaSenha && (novaSenha && cfmNovaSenha)){
             if (senhaAtual && novaSenha && cfmNovaSenha) {
                 ok = true;
             }
@@ -62,10 +67,7 @@ $(document).ready(function () {
         if (ok) {
             ajaxMessage();
             $.post(js_site_url('index.php/membros/atualizarsenha'), dataPost, function (response) {
-                if (!response.sucesso) {
-                    $('#senhaAtual').parent('div').addClass('has-error');
-                    $('#senhaAtual').parent('div').append('<strong class="alert-danger">' + response.msg + '</strong>');
-                }
+                initNotification(response);
             });
         }
 
