@@ -110,7 +110,7 @@ body {
 
 .navbar-default .navbar-collapse, .navbar-default .navbar-form {
     border-color: #325D81;
-}   
+}
 
 .navbar-default .navbar-brand:hover , .navbar-default .navbar-nav li a:hover  {
     color: #4682B4;
@@ -349,6 +349,17 @@ header .intro-text .skills {
     margin-bottom: 0;
 }
 
+.footer-right{
+  float: right;
+}
+
+.footer-right a{
+  color: #83A4BD;
+}
+.footer-right a:hover{
+  text-decoration: none;
+}
+
 
 /* Css para diferentes tipos de resoluções */
 @media(min-width:768px) {
@@ -478,7 +489,7 @@ Pagina inicial
 }
 
 .search-query:focus + button {
-    z-index: 3;   
+    z-index: 3;
 }
 /* Fim botão de busca */
 

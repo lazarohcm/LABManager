@@ -9,15 +9,15 @@
         <title><?php echo $title; ?></title>
         <!-- Bootstrap CSS-->
         <link href="<?php echo base_url(); ?>/assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
-        
+
         <!-- Bootstrap Datepicker -->
         <link href="<?php echo base_url(); ?>assets/datepicker/datepicker.css" rel="stylesheet" type="text/css">
-        
+
         <!-- NCA CSS-->
         <link href="<?php echo base_url(); ?>/assets/css/style.css" rel="stylesheet" type="text/css">
         <!-- Custom Fonts -->
         <link href="<?php echo base_url(); ?>/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        
+
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -31,20 +31,20 @@
 
         <!-- Bootstrap Core JavaScript -->
         <script src="<?php echo base_url(); ?>/assets/bootstrap/js/bootstrap.min.js"></script>
-        
+
         <link href="<?php echo base_url(); ?>/assets/bootstrap-notify/animate.min.css" rel="stylesheet">
-        
+
          <!-- Bootstrap Core JavaScript -->
         <script src="<?php echo base_url(); ?>/assets/bootstrap-notify/bootstrap-notify.min.js"></script>
-        
+
         <!-- Bootstrap Core JavaScript -->
         <script src="<?php echo base_url(); ?>/assets/js/nca.js"></script>
-        
+
         <!-- Bootstrap Core JavaScript -->
         <script src="<?php echo base_url(); ?>/assets/js/jquery.blockUI.js"></script>
-        
 
-        <!-- 
+
+        <!--
                 <script>
                     $(document).ready(function () {
                         $(document).ajaxStop($.unblockUI);
@@ -65,13 +65,13 @@
                             $(this).find('input:checkbox').each(function () {
                                 $(this).attr('checked', false);
                             });
-        
+
                             $(this).find('textarea').each(function () {
                                 $(this).val('');
                             });
                         });
                     });
-        
+
                 </script>-->
     </head>
 
@@ -84,7 +84,7 @@
                         <div class="col-lg-12">
                             <div class="col-md-2 col-sm-3 col-xs-6 pull-right">
                                 <a href="<?php echo site_url() . "/acesso/sair"; ?>"><button class="btn btn-danger navbar-btn">Sair</button></a>
-                            </div> 
+                            </div>
                             <div class="col-md-2 col-sm-3 col-xs-6 pull-right">
                                 <h4 class=""><a href="<?php echo site_url() . "/dashboard"; ?>">Administração</a></h4>
                             </div>
@@ -128,7 +128,7 @@
                                         echo strtolower($laboratorio->getSigla());
                                         ?>">
                                             <?php echo $laboratorio->getSigla(); ?></a>
-                                    </li> 
+                                    </li>
                                 <?php } ?>
                             </ul>
                         </li>
@@ -191,7 +191,7 @@
                             <p>
                                 Av. dos Portugueses, 1966
                                 Bacanga - CEP 65080-805
-                                São Luís - MA 
+                                São Luís - MA
                             </p>
                             <a class="btn btn-default" href="<?php echo site_url() . "/home/contato"; ?>">Mais</a>
                         </div>
@@ -219,13 +219,22 @@
             <div class="footer-below">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-12 copyright">
+                        <div class="col-lg-6 copyright">
                             <a href="http://www.lazarohenrique.com"> Copyright &copy; Núcleo de Computação Aplicada 2015 </a>
                         </div>
+                        <div class="footer-right">
+                          <a href="https://github.com/lazarohcm">
+                            <span class="fa fa-code"></span>
+                            with
+                            <span class="fa fa-heart"></span>
+                            by
+                            <span class="">Lázaro Marques</span>
+                          </a>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </footer>
     </body>
 </html>
-
