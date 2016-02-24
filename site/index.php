@@ -289,6 +289,7 @@ switch (ENVIRONMENT)
  *
  * And away we go...
  */
+date_default_timezone_set('America/Los_Angeles');
 require_once "../bootstrap.php";        
 require_once BASEPATH.'core/CodeIgniter.php';
 

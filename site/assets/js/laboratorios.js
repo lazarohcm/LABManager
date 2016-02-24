@@ -47,7 +47,7 @@ $(document).ready(function () {
                 initNotification(response);
                 if (response.sucesso) {
                     disablePage();
-                    lsetTimeout(function () {
+                    setTimeout(function () {
                         location.reload();
                     }, 3000);
                 }
